@@ -15,5 +15,27 @@
   "bugs": {
     "url": "https://github.com/yadex205/berkut/issues"
   },
-  "homepage": "https://github.com/yadex205/berkut#readme"
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "homepage": "https://github.com/yadex205/berkut#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-preset-es2015": "^6.9.0",
+    "electron-prebuilt": "^1.2.7",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-ejs": "^2.1.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "rimraf": "^2.5.3"
+  },
+  "dependencies": {
+    "jquery": "^2.2.4"
+  }
 }

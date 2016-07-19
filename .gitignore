@@ -2,10 +2,14 @@
 *~
 \#*\#
 .\#*
+.tern-port
 
 # node.js
 /node_modules
 npm-*.log
+
+# bower
+/bower_components
 
 # project
 /htdocs
