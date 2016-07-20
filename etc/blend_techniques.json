@@ -1,0 +1,21 @@
+{
+    "normal": "Normal",
+    "screen": "Screen",
+    "multiply": "Multiply",
+    "add": "Add",
+    "subtract": "Subtract",
+    "darken": "Darken",
+    "lighten": "Lighten",
+    "difference": "Difference",
+    "exclusion": "Exclusion",
+    "overlay": "Overlay",
+    "hardlight": "Hardlight",
+    "softlight": "Softlight",
+    "dodge": "Dodge",
+    "burn": "Burn",
+    "reflect": "Reflect",
+    "glow": "Glow",
+    "freeze": "Freeze",
+    "heat": "Heat",
+    "divide": "Divide"
+}

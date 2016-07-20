@@ -1,0 +1,45 @@
+// _finder.scss
+
+@import 'bootstrap';
+
+div#finder {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: calc(50% + 12px); right: 0;
+    box-sizing: border-box;
+    border: 2px solid $gray;
+
+    div.finder_search_box_wrapper {
+        height: 10%;
+        padding: 0 12px;
+
+        input {
+            position: relative;
+            top: 10%; height: 80%;
+            border-radius: 0; box-shadow: none; border: none;
+            background-color: $gray-darker;
+            color: dodgerblue;
+        }
+    }
+
+    div.finder_files_container {
+        position: absolute;
+        padding: 9px;
+        top: 10%; height: 90%; width: 100%;
+        overflow-y: auto;
+        div.thumbnail {
+            width: 120px; margin: 3px;
+            float: left;
+            border-radius: 0;
+            background-color: #111;
+            border: none;
+            img {
+                height: 64px;
+                background-color: $gray-dark;
+            }
+            div.caption {
+                color: $gray-light;
+            }
+        }
+    }
+}

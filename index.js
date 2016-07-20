@@ -8,7 +8,10 @@ const {BrowserWindow}= electron
 let mainWindow
 
 function createWindow () {
-    mainWindow = new BrowserWindow()
+    mainWindow = new BrowserWindow({
+        width: 1024,
+        minWidth: 1024
+    })
     mainWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
     app.on('closed', () => {
         mainWindow = null

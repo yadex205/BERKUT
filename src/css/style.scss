@@ -1,2 +1,38 @@
-@import "bootstrap"
+// style.scss
 
+@import "bootstrap";
+
+$header-height: 50px;
+
+body {
+    padding-top: $header-height;
+    color: $gray-light;
+    background-color: $gray-dark;
+    min-width: 780px;
+
+    div.whole {
+        $margin: 12px;
+
+        position: absolute;
+        top: #{$header-height + $margin}; bottom: $margin;
+        left: $margin; right: $margin;
+
+        @import "layers";
+        @import "finder";
+    }
+}
+
+nav.navbar {
+    background-color: $gray-darker;
+    border: none;
+
+    a {
+        color: $gray-light;
+    }
+}
+
+div.layers_container_wrapper {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}

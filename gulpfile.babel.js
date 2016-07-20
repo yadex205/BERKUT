@@ -41,7 +41,8 @@ gulp.task('html', () => {
     gulp.src(['src/html/**/*.ejs', '!src/html/**/_*.ejs'])
         .pipe(plumber(plumberOptions))
         .pipe(ejs({
-            isLive: false
+            isLive: false,
+            blendTechniques: require('./etc/blend_techniques.json')
         }, {
             ext: '.html'
         }))
@@ -53,7 +54,8 @@ gulp.task('html_live', () => {
     gulp.src(['src/html/**/*.ejs', '!src/html/**/_*.ejs'])
         .pipe(plumber(plumberOptions))
         .pipe(ejs({
-            isLive: true
+            isLive: true,
+            blendTechniques: require('./etc/blend_techniques.json')
         }, {
             ext: '.html'
         }))
@@ -62,11 +64,16 @@ gulp.task('html_live', () => {
 })
 
 gulp.task('css', () => {
-    gulp.src('src/css/**/*.scss')
+    gulp.src([
+        'src/css/**/*.scss',
+        'bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css'])
         .pipe(plumber(plumberOptions))
+        .pipe(sourcemaps.init())
         .pipe(sass({
             includePaths: ['bower_components/bootstrap-sass/assets/stylesheets']
         }))
+        .pipe(concat('style.css'))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(`${targetDir}/css`))
         .pipe(livereload())
 })
@@ -74,6 +81,7 @@ gulp.task('css', () => {
 gulp.task('js', () => {
     gulp.src([
         'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+        'bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.js',
         'src/js/class/**/*.js',
         'src/js/*.js'])
         .pipe(plumber(plumberOptions))
