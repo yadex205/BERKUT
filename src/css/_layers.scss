@@ -1,16 +1,14 @@
 // _layers.scss
 
-@import "bootstrap";
+@import "override_bootstrap";
 
-#layers_container {
+#berkut-layers-holder {
     height: 90%;
-    box-sizing: border-box;
     border: 2px solid $gray;
 
-    div.layer {
+    div.berkut-layer {
         height: calc(100% / 6);
         width: 100%;
-        box-sizing: border-box;
         padding: 6px; margin: 0;
         background-color: $gray-darker;
 
@@ -24,8 +22,7 @@
             height: 100%;
 
             &.layer-thumbnail {
-                background-color: $gray;
-                background-size: cover;
+                background-color: $gray; background-size: cover;
             }
 
             &.layer-controller-main {
@@ -33,22 +30,10 @@
                     height: 50%;
                     div.btn-group {
                         height: 100%;
-                        width: 50%;
                         label.btn {
                             height: 100%;
                             width: calc(100% / 3);
                             padding: 2px;
-                            border-radius: 0;
-                            box-shadow: none;
-                            color: $gray-light; background-color: $gray;
-                            border-color: transparent;
-                            background-clip: padding-box;
-                            border-width: 1px;
-
-                            &.active {
-                                color: $gray-lighter;
-                                background-color: dodgerblue;
-                            }
                         }
                     }
                 }
@@ -57,64 +42,26 @@
                     div.row, div.row > div.col-md-6 {
                         height: 100%;
                         div.slider {
-                            width: 100%; height: 80%;
-                            top: 20%;
-                            div {
-                                background-image: none;
-                                box-shadow: none;
-                                border-radius: 0;
-                            }
-                            .slider-track {
-                                height: 100%;
-                                margin: 0;
-                                top: 0;
-                                background-color: #111;
-                            }
-                            div.slider-selection { background-color: dodgerblue; }
+                            width: 100%; height: 80%; top: 20%;
                             div.slider-handle { display: none; }
                         }
-                        select.form-control {
+                        select {
                             position: relative;
-                            height: 80%;
-                            top: 20%;
-                            border-radius: 0;
-                            border: none;
-                            background-color: #111;
-                            color: $gray-light;
+                            height: 80%; top: 20%;
                         }
                     }
                 }
             }
             &.opacity-slider {
                 div.slider {
-                    // top: 10%;
                     height: 100%; width: 100%;
-                    div {
-                        background-image: none;
-                        box-shadow: none;
-                        border-radius: 0;
-                    }
                     .slider-track {
-                        width: 100%;
                         background-color: dodgerblue;
-                        margin: 0; left: 0;
                     }
                     .slider-selection { background-color: #111; }
                     .slider-handle { display: none; }
                 }
             }
         }
-    }
-}
-
-div#cross_fader_wrapper {
-    position: relative;
-    top: 2%; height: 8%;
-    background-color: red;
-    div#cross_fader {
-        width: 100%; height: 100%; overflow: hidden;
-        div { box-shadow: none; background-image: none; border-radius: 0; }
-        div.slider-track { height: 100%; margin: 0; top: 0; background-color: #111; }
-        div.slider-handle { height: 100%; }
     }
 }

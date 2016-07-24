@@ -2,11 +2,8 @@
 
 @import 'bootstrap';
 
-div#finder {
-    position: absolute;
-    top: 0; bottom: 0;
-    left: calc(50% + 12px); right: 0;
-    box-sizing: border-box;
+div#berkut-finder {
+    height: 100%; width: 100%;
     border: 2px solid $gray;
 
     div.finder_search_box_wrapper {
@@ -25,13 +22,13 @@ div#finder {
     div.finder_files_container {
         position: absolute;
         padding: 9px;
-        top: 10%; height: 90%; width: 100%;
+        top: 10%; bottom: 2px; left: 2px; right: 2px;
         overflow-y: auto;
         div.thumbnail {
             width: 120px; margin: 3px;
             float: left;
             border-radius: 0;
-            background-color: #111;
+            background-color: #222;
             border: none;
             img {
                 height: 64px;

@@ -1,42 +1,35 @@
 // style.scss
 
 @import "bootstrap";
-
-$header-height: 50px;
-
-* {
-    border-radius: 0;
-}
+@import "variables";
+@import "override_bootstrap";
+@import "override_webkit";
 
 body {
     padding-top: $header-height;
     color: $gray-light;
     background-color: $gray-dark;
     min-width: 780px;
+    user-select: none;
+
+    @import "header";
 
     div.whole {
-        $margin: 12px;
-
         position: absolute;
         top: #{$header-height + $margin}; bottom: $margin;
         left: $margin; right: $margin;
 
-        @import "layers";
-        @import "finder";
+        div.berkut-pane {
+            position: absolute;
+            width: calc(50% - #{$margin / 2}); height: 100%;
+            &.left {
+                @import "layers";
+                @import "crossfader";
+            }
+            &.right {
+                left: calc(50% + #{$margin / 2});
+                @import "finder";
+            }
+        }
     }
-}
-
-nav.navbar {
-    background-color: $gray-darker;
-    border: none;
-
-    a {
-        color: $gray-light;
-    }
-}
-
-div.layers_container_wrapper {
-    position: absolute;
-    width: 50%;
-    height: 100%;
 }

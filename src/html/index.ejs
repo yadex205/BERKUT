@@ -16,10 +16,15 @@
     <% } %>
   </head>
   <body>
-    <%- include('partial/_menubar') %>
+    <%- include('partial/_header') %>
     <div class="whole">
-      <%- include('partial/_layers') %>
-      <%- include('partial/_finder') %>
+      <div class="berkut-pane left">
+        <%- include('partial/_layers') %>
+        <%- include('partial/_crossfader') %>
+      </div>
+      <div class="berkut-pane right">
+        <%- include('partial/_finder') %>
+      </div>
     </div>
   </body>
 </html>

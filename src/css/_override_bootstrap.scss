@@ -1,0 +1,54 @@
+label.btn {
+    border-radius: 0;
+    box-shadow: none;
+    color: #aaa; background-color: #444;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+
+    &:hover {
+        background-color: #333;
+        box-shadow: none;
+        border: 1px solid transparent;
+    }
+
+    &.active {
+        color: #ddd;
+        background-color: dodgerblue;
+        border: 1px solid transparent;
+        box-shadow: none;
+
+        &:hover {
+            background-color: skyblue;
+            border: 1px solid transparent;
+        }
+    }
+}
+
+div.slider {
+    div {
+        box-shadow: none;
+        border-radius: 0;
+        background-image: none;
+    }
+
+    div.slider-track {
+        background-color: #111;
+        margin: 0;
+    }
+
+    div.slider-selection {
+        margin: 0;
+    }
+
+    &.slider-horizontal {
+        div.slider-track {
+            top: 0; height: 100%;
+        }
+    }
+
+    &.slider-vertical {
+        div.slider-track {
+            left: 0; width: 100%;
+        }
+    }
+}
