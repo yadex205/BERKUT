@@ -1,23 +1,5 @@
 // modal/_about.scss
 
-div.modal {
-    div.modal-dialog {
-        color: #888;
-        border: none;
-        div.modal-header, hr {
-            border-color: #444;
-        }
-        div.modal-header {
-            button.close > span {
-                color: white;
-            }
-        }
-        div.modal-content {
-            background-color: #222;
-        }
-    }
-}
-
 #modal-about-berkut {
     div.license-doc {
         overflow-y: scroll;
