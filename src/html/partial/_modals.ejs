@@ -5,9 +5,17 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">About BERKUT</h4>
+        <h4 class="modal-title">BERKUT</h4>
       </div>
       <div class="modal-body">
+        <div class="license-doc">
+          <dl class="dl-horizontal">
+            <dt>BERKUT</dt><dd><%- version %></dd>
+            <dt>Node.js</dt><dd><%- process.versions.node %></dd>
+          </dl>
+          <hr/>
+          <%- aboutDoc %>
+        </div>
       </div>
     </div>
   </div>
@@ -15,6 +23,6 @@
 
 <script>
  document.addEventListener("DOMContentLoaded", function() {
-     $('#modal-about-berkut').modal('show');
+     // xo$('#modal-about-berkut').modal('show');
  });
 </script>
