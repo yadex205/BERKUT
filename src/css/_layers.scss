@@ -55,10 +55,6 @@
             &.opacity-slider {
                 div.slider {
                     height: 100%; width: 100%;
-                    .slider-track {
-                        background-color: dodgerblue;
-                    }
-                    .slider-selection { background-color: #111; }
                     .slider-handle { display: none; }
                 }
             }
