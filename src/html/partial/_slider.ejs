@@ -1,0 +1,23 @@
+<%
+var orientation = orientation || "horizontal"
+var reversed = reversed || "false"
+var selection = selection || "before"
+var min = min || "0"
+var max = max || "1"
+var step = step || "0.01"
+var value = value || "0"
+var paramId = 'test' //id ? 'data-slider-id="' + id + '"' : ''
+var tooltip = tooltip || 'show'
+%>
+
+<input type="text"
+       data-provide="slider"
+       data-slider-orientation="<%- orientation %>"
+       data-slider-reversed="<%- reversed %>"
+       data-slider-selection="<%- selection %>"
+       data-slider-min="<%- min %>"
+       data-slider-max="<%- max %>"
+       data-slider-step="<%- step %>"
+       data-slider-value="<%- value %>"
+       data-slider-tooltip="<%= tooltip %>"
+       <%- paramId %>/>
