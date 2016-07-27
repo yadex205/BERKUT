@@ -1,42 +1,42 @@
 <div id="berkut-layers-holder">
-  <% for(i=0; i < 6; i = i + 1) { %>
-    <div class="berkut-layer row">
-      <div class="col-md-3 layer-thumbnail"></div>
-      <div class="col-md-7 layer-controller-main">
-        <div class="row layer-controller-buttons">
 
-          <div class="col-md-6 btn-group" data-toggle="buttons">
-            <label class="btn btn-default"><input type="radio" autocomplete="off" />A</label>
-            <label class="btn btn-default"><input type="radio" autocomplete="off" checked="checked" />N</label>
-            <label class="btn btn-default"><input type="radio" autocomplete="off" />B</label>
-          </div>
-          <div class="col-md-6 btn-group" data-toggle="buttons">
-            <label class="btn btn-default"><input type="checkbox" autocomplete="off" />Mut</label>
-            <label class="btn btn-default"><input type="checkbox" autocomplete="off" />Sol</label>
-            <label class="btn btn-default"><input type="checkbox" autocomplete="off" />Rtm</label>
-          </div>
+  <div class="berkut-layer row" v-for="layer in layers" track-by="$index">
+    <div class="col-md-3 layer-thumbnail"></div>
+    <div class="col-md-7 layer-controller-main">
+      <div class="row layer-controller-buttons">
 
+        <div class="col-md-6 btn-group" data-toggle="buttons">
+          <label class="btn btn-default"><input type="radio" autocomplete="off" />A</label>
+          <label class="btn btn-default"><input type="radio" autocomplete="off" checked="checked" />N</label>
+          <label class="btn btn-default"><input type="radio" autocomplete="off" />B</label>
         </div>
-        <div class="layer-controller-seekbar">
-          <div class="row">
-            <div class="col-md-6">
-              <%- include('_slider', {tooltip: 'hide'}) %>
-            </div>
-            <div class="col-md-6">
-              <select class="form-control">
-                <% Object.keys(blendTechniques).forEach((key) => { %>
-                  <option value="<%= key %>"><%= blendTechniques[key] %></option>
-                <% }) %>
-              </select>
-            </div>
-          </div>
+        <div class="col-md-6 btn-group" data-toggle="buttons">
+          <label class="btn"><input type="checkbox" v-model="layer.mute" />Mut</label>
+          <label class="btn"><input type="checkbox" v-model="layer.solo" />Sol</label>
+          <label class="btn"><input type="checkbox" v-model="layer.rhythm" />Rtm</label>
         </div>
+
       </div>
-      <div class="col-md-2 opacity-slider">
-        <%- include('_slider', {
-            orientation: 'vertical', reversed: true, selection: 'after', tooltip: 'hide'
-        }) %>
+      <div class="layer-controller-seekbar">
+        <div class="row">
+          <div class="col-md-6">
+            <%- include('_slider', {tooltip: 'hide'}) %>
+          </div>
+          <div class="col-md-6">
+            <select class="form-control">
+              <% Object.keys(blendTechniques).forEach((key) => { %>
+                <option value="<%= key %>"><%= blendTechniques[key] %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
-  <% } %>
+    <div class="col-md-2 opacity-slider">
+      <%- include('_slider', {
+          orientation: 'vertical', reversed: true, selection: 'after', tooltip: 'hide'
+      }) %>
+    </div>
+  </div>
+
 </div>
