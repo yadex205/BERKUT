@@ -75,8 +75,7 @@ gulp.task('js', () => {
     gulp.src([
         'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
         'bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.js',
-        'src/js/class/**/*.js',
-        'src/js/*.js'])
+        'src/js/**/*.js'])
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(concat('index.js'))
