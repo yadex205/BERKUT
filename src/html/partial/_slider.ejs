@@ -6,11 +6,11 @@ var min = min || "0"
 var max = max || "1"
 var step = step || "0.01"
 var value = value || "0"
-var paramId = 'test' //id ? 'data-slider-id="' + id + '"' : ''
+var id = id || ''
 var tooltip = tooltip || 'show'
 %>
 
-<input type="text"
+<input type="number"
        data-provide="slider"
        data-slider-orientation="<%- orientation %>"
        data-slider-reversed="<%- reversed %>"
@@ -20,4 +20,4 @@ var tooltip = tooltip || 'show'
        data-slider-step="<%- step %>"
        data-slider-value="<%- value %>"
        data-slider-tooltip="<%= tooltip %>"
-       <%- paramId %>/>
+       />
