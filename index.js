@@ -1,5 +1,12 @@
 // index.js
 
+if (process.platform === 'win32') {
+    process.env['VLC_PLUGIN_PATH'] = require('path').join(
+        __dirname,
+        'node_modules/wcjs-prebuilt/bin/plugins'
+    )
+}
+
 const electron = require('electron')
 
 const {app} = electron
