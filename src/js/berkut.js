@@ -31,6 +31,7 @@ BERKUT.Layer = function() {
     this.mute = false
     this.solo = false
     this.rhythm = false
+    this.player = WebChimera.createPlayer()
 }
 
 BERKUT.Finder = Vue.extend({
