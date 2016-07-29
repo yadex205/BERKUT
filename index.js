@@ -5,16 +5,16 @@ const electron = require('electron')
 const {app} = electron
 const {BrowserWindow}= electron
 
-let mainWindow
+let dashboardWindow
 
 function createWindow () {
-    mainWindow = new BrowserWindow({
+    dashboardWindow = new BrowserWindow({
         width: 1024,
         minWidth: 1024
     })
-    mainWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
+    dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
     app.on('closed', () => {
-        mainWindow = null
+        dashboardWindow = null
     })
 }
 
@@ -26,4 +26,4 @@ app.on('window-all-closed', () => {
     }
 })
 
-app.on('activate', (mainWindow === null) ? createWindow : ()=>{})
+app.on('activate', (dashboardWindow === null) ? createWindow : ()=>{})
