@@ -8,11 +8,11 @@ var BERKUT = function() {
 }
 
 BERKUT.Layers = Vue.extend({
-    el: () => { return '#berkut-layers-holder' },
-    data: () => { return {
-        layers: new Array(6).fill(new BERKUT.Layer())
+    el: function () { return '#berkut-layers-holder' },
+    data: function () { return {
+        layers: new Array(6).fill(null).map(() => { return new BERKUT.Layer() })
     } },
-    ready: () => {
+    ready: function () {
         $('div.layer-controller-seekbar input.seekbar').slider({
             min: 0, max: 1, step: 0.01, value: 0, tooltip: 'hide'
         })
@@ -20,6 +20,10 @@ BERKUT.Layers = Vue.extend({
             min: 0, max: 1, step: 0.01, value: 0, tooltip_position: 'right',
             orientation: 'vertical', reversed: true, selection: 'after'
         })
+        canvases = $('div.berkut-layer canvas.layer-thumbnail')
+        for (i = 0; i < canvases.length; i++) {
+            WebChimera.Renderer.bind(canvases[i], this.layers[i].player, {})
+        }
     }
 })
 
@@ -31,7 +35,10 @@ BERKUT.Layer = function() {
     this.mute = false
     this.solo = false
     this.rhythm = false
-    this.player = WebChimera.createPlayer()
+    this.player = new WebChimera.VlcPlayer(['-vvv'])
+
+    this.player.mute = true
+    this.player.playlist.mode = 2
 }
 
 BERKUT.Finder = Vue.extend({
