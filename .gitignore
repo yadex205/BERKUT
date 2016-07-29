@@ -13,3 +13,6 @@ npm-*.log
 
 # project
 /htdocs
+
+# vscode
+/.vscode
