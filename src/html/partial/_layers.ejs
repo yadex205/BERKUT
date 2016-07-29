@@ -19,8 +19,8 @@
       </div>
       <div class="layer-controller-seekbar">
         <div class="row">
-          <div class="col-md-6">
-            <%- include('_slider', {tooltip: 'hide'}) %>
+          <div class="col-md-6" v-pre>
+            <input type="text" class="seekbar">
           </div>
           <div class="col-md-6">
             <select class="form-control">
@@ -33,9 +33,7 @@
       </div>
     </div>
     <div class="col-md-2 opacity-slider">
-      <%- include('_slider', {
-          orientation: 'vertical', reversed: true, selection: 'after', tooltip: 'hide'
-      }) %>
+      <input type="text" class="opacity">
     </div>
   </div>
 
