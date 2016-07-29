@@ -18,12 +18,13 @@
             font-size: 11px;
         }
 
+        canvas.layer-thumbnail {
+            height: 100%;
+            background-color: $gray;
+        }
+
         &>div {
             height: 100%;
-
-            &.layer-thumbnail {
-                background-color: $gray; background-size: cover;
-            }
 
             &.layer-controller-main {
                 div.layer-controller-buttons {
