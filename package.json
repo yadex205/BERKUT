@@ -40,6 +40,7 @@
     "canvas": "^1.4.0",
     "jquery": "^2.2.4",
     "vue": "^1.0.26",
+    "wcjs-renderer": "^1.0.2",
     "webchimera.js": "^0.2.5"
   }
 }
