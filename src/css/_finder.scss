@@ -8,21 +8,19 @@ div#berkut-finder {
 
     div.finder_search_box_wrapper {
         height: 10%;
-        padding: 0 12px;
+        background-color: $gray-darker;
 
         input {
-            position: relative;
-            top: 10%; height: 80%;
+            width: 100%; height: 100%;
             border-radius: 0; box-shadow: none; border: none;
-            background-color: $gray-darker;
-            color: dodgerblue;
+            color: dodgerblue; background-color: transparent;
         }
     }
 
     div.finder_files_container {
         position: absolute;
         padding: 9px;
-        top: 10%; bottom: 2px; left: 2px; right: 2px;
+        top: calc(10% + 2px); bottom: 2px; left: 2px; right: 2px;
         overflow-y: auto;
         div.thumbnail {
             width: 120px; margin: 3px;

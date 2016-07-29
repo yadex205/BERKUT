@@ -6,8 +6,12 @@
     <link href="css/style.css" rel="stylesheet"/>
     <script>
      window.jQuery = window.$ = require('jQuery')
+     window.Vue = require('vue')
     </script>
     <script src="js/index.js"></script>
+    <script>
+     window.berkut = new BERKUT()
+    </script>
 
     <title>BERKUT</title>
 
@@ -26,5 +30,7 @@
         <%- include('partial/_finder') %>
       </div>
     </div>
+
+    <%- include('partial/_modals') %>
   </body>
 </html>

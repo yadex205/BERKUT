@@ -5,10 +5,9 @@ select.form-control {
     border: none;
     background-color: #111;
     color: #aaa;
-    box-shadow: none;
     cursor: pointer;
-}
+    box-shadow: 0 0 transparent;
 
-img {
-    
+    &:hover { box-shadow: 0 0 transparent; }
+    &:active { box-shadow: 0 0 transparent; }
 }

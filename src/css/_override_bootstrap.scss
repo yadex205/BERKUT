@@ -38,7 +38,10 @@ div.slider {
 
     div.slider-selection {
         margin: 0;
+        background-color: dodgerblue;
     }
+
+    div.tooltip { z-index: 1; }
 
     &.slider-horizontal {
         div.slider-track {
@@ -49,6 +52,24 @@ div.slider {
     &.slider-vertical {
         div.slider-track {
             left: 0; width: 100%;
+        }
+    }
+}
+
+div.modal {
+    div.modal-dialog {
+        color: #888;
+        border: none;
+        div.modal-header, hr {
+            border-color: #444;
+        }
+        div.modal-header {
+            button.close > span {
+                color: white;
+            }
+        }
+        div.modal-content {
+            background-color: #222;
         }
     }
 }
