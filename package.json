@@ -41,6 +41,7 @@
     "jquery": "^2.2.4",
     "vue": "^1.0.26",
     "wcjs-prebuilt": "^3.0.0",
-    "wcjs-renderer": "^1.0.2"
+    "wcjs-renderer": "^1.0.2",
+    "webgl-video-renderer": "^0.2.0"
   }
 }
