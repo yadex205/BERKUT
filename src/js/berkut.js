@@ -3,7 +3,7 @@
 var BERKUT = function() {
     document.addEventListener('DOMContentLoaded', () => {
         this.layers = new BERKUT.Layers()
-        this.mixer = new BERKUT.Mixer(this.layers.getCanvases())
+        this.mixer = new BERKUT.Mixer(this.layers)
         this.finder = new BERKUT.Finder()
     })
 }
@@ -49,7 +49,7 @@ BERKUT.Layer = function() {
     this.texture = null
     this.position = 0.0
     this.duration = 5.0
-    this.blendTechnique = 'normal'
+    this.blend = "NORMAL"
     this.mute = false
     this.solo = false
     this.rhythm = false
@@ -59,16 +59,17 @@ BERKUT.Layer = function() {
     this.player.playlist.mode = 2
 }
 
-BERKUT.Mixer = function (canvases) {
+BERKUT.Mixer = function (layerManager) {
     this.renderer = new PIXI.WebGLRenderer(480, 270, {
         preserveDrawingBuffer: true
     })
     $('#blendtest')[0].appendChild(this.renderer.view)
     this.stage = new PIXI.Container()
     this._blendTask = null
+    this._layerManager = layerManager
     this.size = { x: 480, y: 270 }
 
-    canvases.forEach((canvas) => {
+    Array.from(layerManager.getCanvases()).forEach((canvas) => {
         this._addPlayer(canvas)
     })
 }
@@ -78,7 +79,7 @@ BERKUT.Mixer.prototype = {
         let quad = new PIXI.Sprite(
             PIXI.Texture.fromCanvas(canvas, PIXI.SCALE_MODES.LINEAR)
         )
-        this.stage.addChild(quad)
+        this.stage.addChildAt(quad, 0)
     },
     enable: function () {
         this._blendTask = setInterval(() => {
@@ -96,7 +97,7 @@ BERKUT.Mixer.prototype = {
             quad.texture.update()
             quad.width = this.size.x
             quad.height = this.size.y
-            quad.blendMode = PIXI.BLEND_MODES.SCREEN
+            quad.blendMode = PIXI.BLEND_MODES[this._layerManager.layers[5 - i].blend]
         }
         this.renderer.render(this.stage)
     }
