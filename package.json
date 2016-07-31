@@ -37,11 +37,10 @@
     "rimraf": "^2.5.3"
   },
   "dependencies": {
-    "canvas": "^1.4.0",
     "jquery": "^2.2.4",
+    "pixi.js": "^3.0.11",
     "vue": "^1.0.26",
     "wcjs-prebuilt": "^3.0.0",
-    "wcjs-renderer": "^1.0.2",
-    "webgl-video-renderer": "^0.2.0"
+    "wcjs-renderer": "^1.0.2"
   }
 }

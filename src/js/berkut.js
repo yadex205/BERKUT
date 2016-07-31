@@ -10,7 +10,8 @@ var BERKUT = function() {
 BERKUT.Layers = Vue.extend({
     el: function () { return '#berkut-layers-holder' },
     data: function () { return {
-        layers: new Array(6).fill(null).map(() => { return new BERKUT.Layer() })
+        layers: new Array(6).fill(null).map(() => { return new BERKUT.Layer() }),
+        targetcanvas: $('#blendtest')[0]
     } },
     ready: function () {
         $('div.layer-controller-seekbar input.seekbar').slider({
@@ -22,7 +23,20 @@ BERKUT.Layers = Vue.extend({
         })
         canvases = $('div.berkut-layer canvas.layer-thumbnail')
         for (i = 0; i < canvases.length; i++) {
-            WebChimera.Renderer.bind(canvases[i], this.layers[i].player, {})
+            WebChimera.Renderer.bind(canvases[i], this.layers[i].player, {
+                preserveDrawingBuffer: true
+            })
+        }
+    },
+    methods: {
+        render: function () {
+            let ctx = this.targetcanvas.getContext('2d')
+            ctx.clearRect(0,0,320,240)
+            ctx.globalCompositeOperation = 'lighter'
+            let canvases = $('canvas')
+            for (i = 0, l = 6; i < l; i = (i + 1) | 0) {
+                ctx.drawImage(canvases[i], 0, 0, 320, 240)
+            }
         }
     }
 })
