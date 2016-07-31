@@ -18,9 +18,11 @@ BERKUT.Layers = Vue.extend({
         $('div.layer-controller-seekbar input.seekbar').slider({
             min: 0, max: 1, step: 0.01, value: 0, tooltip: 'hide'
         })
-        $('div.opacity-slider input.opacity').slider({
+        Array.from($('div.opacity-slider input.opacity').slider({
             min: 0, max: 1, step: 0.01, value: 0, tooltip_position: 'right',
             orientation: 'vertical', reversed: true, selection: 'after'
+        })).forEach((slider, index) => {
+            slider.on('slide', (slide) => { this.layers[index].opacity = slide.value })
         })
         let canvases = this.getCanvases()
         for (i = 0; i < canvases.length; i++) {
@@ -46,7 +48,6 @@ BERKUT.Layers = Vue.extend({
 })
 
 BERKUT.Layer = function() {
-    this.texture = null
     this.position = 0.0
     this.duration = 5.0
     this.blend = "NORMAL"
@@ -54,6 +55,7 @@ BERKUT.Layer = function() {
     this.solo = false
     this.rhythm = false
     this.player = new WebChimera.VlcPlayer(['-vvv'])
+    this.opacity = 0
 
     this.player.mute = true
     this.player.playlist.mode = 2
@@ -98,6 +100,7 @@ BERKUT.Mixer.prototype = {
             quad.width = this.size.x
             quad.height = this.size.y
             quad.blendMode = PIXI.BLEND_MODES[this._layerManager.layers[5 - i].blend]
+            quad.alpha = this._layerManager.layers[5 - i].opacity
         }
         this.renderer.render(this.stage)
     }
