@@ -1,27 +1,7 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8"/>
+  <%- include ('_head') %>
 
-    <link href="css/style.css" rel="stylesheet"/>
-    <script>
-     window.jQuery = window.$ = require('jQuery')
-     window.Vue = require('vue')
-     window.WebChimera = require('wcjs-prebuilt')
-     window.WebChimera.Renderer = require('wcjs-renderer')
-     window.PIXI = require('pixi.js')
-    </script>
-    <script src="js/index.js"></script>
-    <script>
-     window.berkut = new BERKUT()
-    </script>
-
-    <title>BERKUT</title>
-
-    <% if(isLive) { %>
-      <script src="http://localhost:35729/livereload.js"></script>
-    <% } %>
-  </head>
   <body>
     <%- include('partial/_header') %>
     <div class="whole">
