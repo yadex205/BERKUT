@@ -1,17 +1,34 @@
 .modal {
-  .modal-dialog {
-    color: #888;
-    border: 0;
-    .modal-header, hr {
-      border-color: #444;
+  @mixin modal-content-detail {
+    .close {
+      color: $foreground-normal;
+      text-shadow: none;
+      opacity: 1;
     }
+
     .modal-header {
-      .close > span {
-        color: white;
-      }
+      border: 0;
+      background-color: $background-normal;
+      color: $foreground-light;
     }
+
+    hr {
+      border-color: $foreground-darker;
+    }
+  }
+
+  background-color: rgba($background-darker, .8);
+
+  .modal-dialog {
+    border: 0;
+    color: $foreground-normal;
+
     .modal-content {
-      background-color: #222;
+      @include modal-content-detail;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background-color: $background-dark;
     }
   }
 }
