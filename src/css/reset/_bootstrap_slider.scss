@@ -1,31 +1,44 @@
 .slider {
-  div {
+  @mixin slider-reset {
     box-shadow: none;
     border-radius: 0;
     background-image: none;
   }
 
+  @mixin slider-track-reset {
+    .slider-track-high {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   .slider-track {
+    @include slider-reset;
     background-color: $background-darker;
   }
 
   .slider-selection {
+    @include slider-reset;
     margin: 0;
-    background-color: dodgerblue;
+    background-color: $highlight-normal;
   }
 
   .tooltip { z-index: 1; }
 
   &.slider-horizontal {
-    div.slider-track {
-      top: 0; height: 100%;
+    .slider-track {
+      @include slider-track-reset;
+      top: 0;
+      height: 100%;
       margin: 0;
     }
   }
 
   &.slider-vertical {
-    div.slider-track {
-      left: 0; width: 100%;
+    .slider-track {
+      @include slider-track-reset;
+      left: 0;
+      width: 100%;
     }
   }
 }
