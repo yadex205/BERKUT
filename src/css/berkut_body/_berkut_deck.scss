@@ -1,60 +1,38 @@
-#berkut-deck {
-    height: 90%;
-    border: 2px solid $gray;
+.berkut-deck {
+  height: 90%;
+  border: 2px solid $gray;
 
-    div.berkut-layer {
-        height: calc(100% / 6);
-        width: 100%;
-        padding: 6px; margin: 0;
-        background-color: $gray-darker;
+  .berkut-layer {
+    height: calc(100% / 6);
+    width: 100%;
+    padding: 6px;
+    margin: 0;
+    background-color: $gray-darker;
 
-        &:nth-child(2n) { background-color: $gray-dark; }
+    &:nth-child(2n) { background-color: $gray-dark; }
 
-        * {
-            font-size: 11px;
-        }
-
-        canvas.layer-thumbnail {
-            height: 100%;
-            background-color: $gray;
-        }
-
-        &>div {
-            height: 100%;
-
-            &.layer-controller-main {
-                div.layer-controller-buttons {
-                    height: 50%;
-                    div.btn-group {
-                        height: 100%;
-                        label.btn {
-                            height: 100%;
-                            width: calc(100% / 3);
-                            padding: 2px;
-                        }
-                    }
-                }
-                div.layer-controller-seekbar {
-                    height: 50%;
-                    div.row, div.row > div.col-md-6 {
-                        height: 100%;
-                        div.slider {
-                            width: 100%; height: 80%; top: 20%;
-                            div.slider-handle { display: none; }
-                        }
-                        select {
-                            position: relative;
-                            height: 80%; top: 20%;
-                        }
-                    }
-                }
-            }
-            &.opacity-slider {
-                div.slider {
-                    height: 100%; width: 100%;
-                    .slider-handle { display: none; }
-                }
-            }
-        }
+    * {
+      font-size: 11px;
     }
+
+    @mixin berkut-layer-component {
+      height: 100%;
+      padding: 0;
+    }
+
+    @mixin berkut-layer-half-component {
+      height: 50%;
+      width: 100%;
+    }
+
+    @mixin berkut-layer-serial-button {
+      width: calc((100% + 2px) / 3);
+      height: 100%;
+    }
+
+    @import 'berkut_layer/berkut_layer_preview';
+    @import 'berkut_layer/berkut_layer_deck_selector_and_seekbar';
+    @import 'berkut_layer/berkut_layer_behavior_and_blend_technique';
+    @import 'berkut_layer/berkut_layer_opacity_slider';
+  }
 }

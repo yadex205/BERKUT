@@ -1,18 +1,23 @@
 #berkut-body {
   position: absolute;
-  top: #{$header-height + $margin}; bottom: $margin;
-  left: $margin; right: $margin;
+  top: #{$header-height + $margin};
+  bottom: $margin;
+  left: $margin;
+  right: $margin;
 
-  div.berkut-pane {
+  .berkut-pane {
     position: absolute;
-    width: calc(50% - #{$margin / 2}); height: 100%;
+    width: calc(50% - #{$margin / 2});
+    height: 100%;
+
     &.left {
-      @import "berkut_body/berkut_deck";
-      @import "berkut_body/berkut_crossfader";
+      @import 'berkut_body/berkut_deck';
+      @import 'berkut_body/berkut_crossfader';
     }
+
     &.right {
       left: calc(50% + #{$margin / 2});
-      @import "berkut_body/berkut_finder";
+      @import 'berkut_body/berkut_finder';
     }
   }
 }

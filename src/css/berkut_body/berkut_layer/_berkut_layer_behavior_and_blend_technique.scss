@@ -1,0 +1,24 @@
+.berkut-layer-behavior-and-blend-technique {
+  @include berkut-layer-component;
+
+  .berkut-layer-behavior {
+    @include berkut-layer-half-component;
+
+    .btn {
+      @include berkut-layer-serial-button;
+    }
+  }
+
+  .berkut-layer-blend-technique-wrapper {
+    @include berkut-layer-half-component;
+    border: 1px solid transparent;
+
+    .berkut-layer-blend-technique {
+      height: 100%;
+      border-radius: 0;
+      outline: none;
+      box-shadow: none;
+      -webkit-appearance: none;
+    }
+  }
+}

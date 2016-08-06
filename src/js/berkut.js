@@ -15,10 +15,10 @@ BERKUT.Layers = Vue.extend({
         targetcanvas: $('#blendtest')[0]
     } },
     ready: function () {
-        $('div.layer-controller-seekbar input.seekbar').slider({
+        $('input.berkut-layer-seekbar').slider({
             min: 0, max: 1, step: 0.01, value: 0, tooltip: 'hide'
         })
-        Array.from($('div.opacity-slider input.opacity').slider({
+        Array.from($('input.berkut-layer-opacity-slider').slider({
             min: 0, max: 1, step: 0.01, value: 0, tooltip_position: 'right',
             orientation: 'vertical', reversed: true, selection: 'after'
         })).forEach((slider, index) => {
@@ -33,7 +33,7 @@ BERKUT.Layers = Vue.extend({
     },
     methods: {
         getCanvases: function () {
-            return Array.from($('div.berkut-layer canvas.layer-thumbnail'))
+            return Array.from($('.berkut-layer-preview'))
         },
         render: function () {
             let ctx = this.targetcanvas.getContext('2d')

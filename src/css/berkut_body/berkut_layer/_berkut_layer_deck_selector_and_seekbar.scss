@@ -1,0 +1,22 @@
+.berkut-layer-deck-selector-and-seekbar {
+  @include berkut-layer-component;
+
+  .berkut-layer-deck-selector {
+    @include berkut-layer-half-component;
+
+    .btn {
+      @include berkut-layer-serial-button;
+    }
+  }
+
+  .berkut-layer-seekbar-wrapper {
+    @include berkut-layer-half-component;
+
+    .slider {
+      @include bootstrap-slider-without-handle;
+      width: 100%;
+      height: 100%;
+      border: 1px solid transparent;
+    }
+  }
+}
