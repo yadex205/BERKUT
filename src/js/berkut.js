@@ -1,9 +1,10 @@
-// berkut.js
+/* global
+ $, Vue
+*/
 
 var BERKUT = function() {
     document.addEventListener('DOMContentLoaded', () => {
         this.layers = new BERKUT.Layers()
-        this.mixer = new BERKUT.Mixer(this.layers)
         this.finder = new BERKUT.Finder()
     })
 }
@@ -11,89 +12,53 @@ var BERKUT = function() {
 BERKUT.Layers = Vue.extend({
     el: function () { return '#berkut-deck' },
     data: function () { return {
-        layers: new Array(6).fill(null).map(() => { return new BERKUT.Layer() })
+        layers: new Array(6).fill(null).map(() => {
+            return new BERKUT.Player()
+        }),
+        mixer: new BERKUT.Mixer(),
+        _mixTask: null
     } },
     ready: function () {
-        $('input.berkut-layer-seekbar').slider({
-            min: 0, max: 1, step: 0.01, value: 0, tooltip: 'hide'
-        })
-        Array.from($('input.berkut-layer-opacity-slider').slider({
-            min: 0, max: 1, step: 0.01, value: 0, tooltip_position: 'right',
-            orientation: 'vertical', reversed: true, selection: 'after'
-        })).forEach((slider, index) => {
+        this._registerSlider('.berkut-layer-seekbar', { tooltip: 'hide' })
+        this._registerSlider('input.berkut-layer-opacity-slider', {
+            tooltip_position: 'right',
+            orientation: 'vertical',
+            reversed: true,
+            selection: 'after'
+        }, (slider, index) => {
             slider.on('slide', (slide) => { this.layers[index].opacity = slide.value })
         })
-        let canvases = this.getCanvases()
-        for (i = 0; i < canvases.length; i++) {
-            WebChimera.Renderer.bind(canvases[i], this.layers[i].player, {
-                preserveDrawingBuffer: true
-            })
-        }
+        this.$el.querySelectorAll('.berkut-layer-preview').forEach((view, index) => {
+            this.layers[index].bind(view)
+            this.mixer.registerPlayer(this.layers[index])
+        })
+        this.enableMix()
     },
     methods: {
-        getCanvases: function () {
-            return Array.from($('.berkut-layer-preview'))
-        }    }
-})
+        _registerSlider: function (query, option, callback) {
+            option.min = option.min || 0
+            option.max = option.max || 1
+            option.step = option.step || 0.01
+            option.value = option.value || 0
 
-BERKUT.Layer = function() {
-    this.position = 0.0
-    this.duration = 5.0
-    this.blend = "NORMAL"
-    this.mute = false
-    this.solo = false
-    this.rhythm = false
-    this.player = new WebChimera.VlcPlayer(['-vvv'])
-    this.opacity = 0
-
-    this.player.mute = true
-    this.player.playlist.mode = 2
-}
-
-BERKUT.Mixer = function (layerManager) {
-    this.renderer = new PIXI.WebGLRenderer(480, 270, {
-        view: $('#berkut-output-preview')[0],
-        preserveDrawingBuffer: true
-    })
-    this.stage = new PIXI.Container()
-    this._blendTask = null
-    this._layerManager = layerManager
-    this.size = { x: 480, y: 270 }
-
-    Array.from(layerManager.getCanvases()).forEach((canvas) => {
-        this._addPlayer(canvas)
-    })
-}
-
-BERKUT.Mixer.prototype = {
-    _addPlayer: function (canvas) {
-        let quad = new PIXI.Sprite(
-            PIXI.Texture.fromCanvas(canvas, PIXI.SCALE_MODES.LINEAR)
-        )
-        this.stage.addChildAt(quad, 0)
-    },
-    enable: function () {
-        this._blendTask = setInterval(() => {
-            requestAnimationFrame(this.__blend.bind(this))
-        }, 1000/30)
-    },
-    disable: function () {
-        clearInterval(this._blendTask)
-    },
-    __blend: function () {
-        let i
-        let quad
-        for (i = 0; i < 6; i = (i + 1) | 0) {
-            quad = this.stage.children[i]
-            quad.texture.update()
-            quad.width = this.size.x
-            quad.height = this.size.y
-            quad.blendMode = PIXI.BLEND_MODES[this._layerManager.layers[5 - i].blend]
-            quad.alpha = this._layerManager.layers[5 - i].opacity
+            const sliders = $(query).slider(option)
+            Array.from(sliders).forEach((slider, index) => {
+                if (callback) { callback(slider, index) }
+            })
+        },
+        enableMix: function() {
+            this._mixTask = setInterval(() => {
+                requestAnimationFrame(() => {
+                    this.mixer.blend()
+                })
+            }, 1000 / 60)
+        },
+        disableMix: function() {
+            clearInterval(this._mixTask)
+            this._mixTask = null
         }
-        this.renderer.render(this.stage)
     }
-}
+})
 
 BERKUT.Finder = Vue.extend({
     el: () => { return '#berkut-finder' },

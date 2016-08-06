@@ -8,10 +8,10 @@
     const WebChimera = require('wcjs-prebuilt')
     WebChimera.Renderer = require('wcjs-renderer')
 
-    function Player(view) {
+    function Player() {
         this._player = null
 
-        this.view = view
+        this.view = null
         this.blend = 'NORMAL'
         this.mute = false
         this.solo = false
@@ -28,6 +28,7 @@
                 preserveDrawingBuffer: true
             })
             this._player = player
+            this.view = view
         },
         play: function(filepath) {
             if (!this.isBound()) { return }
@@ -66,4 +67,4 @@
     }
 
     BERKUT.Player = Player
-}())
+}());
