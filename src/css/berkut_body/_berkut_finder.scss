@@ -1,5 +1,6 @@
 .berkut-finder {
-  height: 100%;
+  position: relative;
+  height: calc(100% - #{$preview-output-height});
   width: 100%;
   border: 2px solid $foreground-darker;
 }

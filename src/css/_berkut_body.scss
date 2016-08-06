@@ -17,6 +17,7 @@
 
     &.right {
       left: calc(50% + #{$margin / 2});
+      @import 'berkut_body/berkut_output_preview';
       @import 'berkut_body/berkut_finder';
     }
   }

@@ -1,0 +1,10 @@
+.berkut-output-preview-wrapper {
+  height: $preview-output-height;
+  padding-bottom: 12px;
+
+  .berkut-output-preview {
+    height: 100%;
+    width: 240px;
+    background-color: $background-darker;
+  }
+}
