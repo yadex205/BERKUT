@@ -1,0 +1,17 @@
+.modal {
+  .modal-dialog {
+    color: #888;
+    border: 0;
+    .modal-header, hr {
+      border-color: #444;
+    }
+    .modal-header {
+      .close > span {
+        color: white;
+      }
+    }
+    .modal-content {
+      background-color: #222;
+    }
+  }
+}

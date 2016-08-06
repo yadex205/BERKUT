@@ -19,8 +19,8 @@
       border-radius: 0;
       box-shadow: none;
       -webkit-appearance: none;
-      background-color: #111;
-      color: #aaa;
+      background-color: $background-darker;
+      color: $foreground-normal;
       cursor: pointer;
     }
   }
