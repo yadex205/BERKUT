@@ -1,38 +1,19 @@
-// style.scss
-
-@import "bootstrap";
-@import "variables";
-@import "override_bootstrap";
-@import "override_webkit";
+@import 'bootstrap';
+@import 'variables';
+@import 'reset';
+@import 'mixins';
 
 body {
-    padding-top: $header-height;
-    color: $gray-light;
-    background-color: $gray-dark;
-    min-width: 780px;
-    user-select: none;
+  padding-top: $header-height;
+  min-width: 780px;
+  user-select: none;
+  background-color: $background-normal;
+  color: $foreground-dark;
 
-    @import "header";
+  @import 'berkut_header';
+  @import 'berkut_body';
+}
 
-    div.whole {
-        position: absolute;
-        top: #{$header-height + $margin}; bottom: $margin;
-        left: $margin; right: $margin;
-
-        div.berkut-pane {
-            position: absolute;
-            width: calc(50% - #{$margin / 2}); height: 100%;
-            &.left {
-                @import "layers";
-                @import "crossfader";
-            }
-            &.right {
-                left: calc(50% + #{$margin / 2});
-                @import "finder";
-            }
-        }
-    }
-
-    // modals
-    @import "modal/about";
+.bootstrap-slider-target {
+  display: none;
 }

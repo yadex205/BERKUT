@@ -1,0 +1,61 @@
+.berkut-finder {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border: 2px solid $foreground-darker;
+}
+
+.berkut-finder-search-box-wrapper {
+  height: 48px;
+  background-color: $background-dark;
+
+  input {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+    color: $highlight-normal;
+
+    &::-webkit-input-placeholder {
+      color: $foreground-darker;
+    }
+  }
+}
+
+.berkut-finder-files-container {
+  position: absolute;
+  padding: 3px;
+  top: 48px + 2px;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  overflow-y: auto;
+
+  .berkut-finder-file {
+    width: 108px;
+    margin: 3px;
+    float: left;
+    border: 0;
+    border-radius: 0;
+    background-color: $background-dark;
+
+    .berkut-finder-file-thumbnail {
+      display: block;
+      height: 64px;
+      width: 100%;
+      background-color: $background-darker;
+    }
+
+    .berkut-finder-file-caption {
+      min-height: 28px;
+      padding: 4px 6px;
+      color: $foreground-normal;
+      font-size: 12px;
+      line-height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

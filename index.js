@@ -17,7 +17,9 @@ let dashboardWindow
 function createWindow () {
     dashboardWindow = new BrowserWindow({
         width: 1024,
-        minWidth: 1024
+        minWidth: 1024,
+        height: 700,
+        minHeight: 700
     })
     dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
     app.on('closed', () => {

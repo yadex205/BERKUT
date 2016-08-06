@@ -32,6 +32,14 @@ gulp.task('live', ['build'], () => {
     gulp.watch('src/css/**/*.scss', ['css'])
     gulp.watch('src/js/**/*.js', ['js'])
 
+    app.stdout.on('data', (buffer) => {
+        console.log(`${buffer}`)
+    })
+
+    app.stderr.on('data', (buffer) => {
+        console.log(`${buffer}`)
+    })
+
     app.on('close', () => {
         process.exit(1)
     })
@@ -58,8 +66,8 @@ gulp.task('html', () => {
 
 gulp.task('css', () => {
     gulp.src([
-        'src/css/**/*.scss',
-        'bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css'])
+        'bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
+        'src/css/**/*.scss'])
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(sass({

@@ -1,0 +1,39 @@
+<div id="berkut-deck" class="berkut-deck">
+
+  <div class="berkut-layer row" v-for="layer in layers" track-by="$index">
+    <canvas class="berkut-layer-preview col-md-3"></canvas>
+
+    <div class="berkut-layer-deck-selector-and-seekbar col-md-4">
+      <div class="berkut-layer-deck-selector btn-group" data-toggle="buttons">
+        <label class="btn btn-default"><input type="radio" autocomplete="off" />A</label>
+        <label class="btn btn-default"><input type="radio" autocomplete="off" checked="checked" />N</label>
+        <label class="btn btn-default"><input type="radio" autocomplete="off" />B</label>
+      </div>
+
+      <div class="berkut-layer-seekbar-wrapper">
+        <input type="text" class="berkut-layer-seekbar bootstrap-slider-target">
+      </div>
+    </div>
+
+    <div class="berkut-layer-behavior-and-blend-technique col-md-4">
+      <div class="berkut-layer-behavior btn-group" data-toggle="buttons">
+        <label class="btn"><input type="checkbox" v-model="layer.mute" />Mut</label>
+        <label class="btn"><input type="checkbox" v-model="layer.solo" />Sol</label>
+        <label class="btn"><input type="checkbox" v-model="layer.rhythm" />Rtm</label>
+      </div>
+
+      <div class="berkut-layer-blend-technique-wrapper">
+        <select class="berkut-layer-blend-technique form-control" v-model="layer.blend">
+          <% Object.keys(blendTechniques).forEach((key) => { %>
+            <option value="<%= key %>"><%= blendTechniques[key] %></option>
+          <% }) %>
+        </select>
+      </div>
+    </div>
+
+    <div class="berkut-layer-opacity-slider-wrapper col-md-1">
+      <input type="text" class="berkut-layer-opacity-slider bootstrap-slider-target">
+    </div>
+  </div>
+
+</div>
