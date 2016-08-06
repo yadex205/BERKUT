@@ -1,8 +1,15 @@
-div#cross_fader_wrapper {
-    position: relative;
-    top: 2%; height: 8%;
-    div#cross_fader {
-        width: 100%; height: 100%; overflow: hidden;
-        div.slider-handle { height: 100%; }
+.berkut-crossfader-wrapper {
+  position: relative;
+  top: 2%;
+  height: 8%;
+
+  .slider {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .slider-handle {
+      height: 100%;
     }
+  }
 }
