@@ -1,8 +1,8 @@
-#berkut-header {
-    background-color: $gray-darker;
-    border: none;
+.berkut-header {
+  background-color: $background-dark;
+  border: 0;
 
-    a {
-        color: $gray-light;
-    }
+  a {
+    color: $foreground-dark;
+  }
 }
