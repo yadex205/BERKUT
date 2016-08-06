@@ -66,8 +66,8 @@ gulp.task('html', () => {
 
 gulp.task('css', () => {
     gulp.src([
-        'src/css/**/*.scss',
-        'bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css'])
+        'bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
+        'src/css/**/*.scss'])
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(sass({
