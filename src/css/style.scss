@@ -1,5 +1,3 @@
-// style.scss
-
 @import "bootstrap";
 @import "variables";
 @import "override_bootstrap";
@@ -13,26 +11,6 @@ body {
     user-select: none;
 
     @import "berkut_header";
-
-    div.whole {
-        position: absolute;
-        top: #{$header-height + $margin}; bottom: $margin;
-        left: $margin; right: $margin;
-
-        div.berkut-pane {
-            position: absolute;
-            width: calc(50% - #{$margin / 2}); height: 100%;
-            &.left {
-                @import "layers";
-                @import "crossfader";
-            }
-            &.right {
-                left: calc(50% + #{$margin / 2});
-                @import "finder";
-            }
-        }
-    }
-
-    // modals
+    @import "berkut_body";
     @import "modal/about";
 }
