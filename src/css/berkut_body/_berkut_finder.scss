@@ -1,12 +1,12 @@
 .berkut-finder {
   position: relative;
-  height: calc(100% - #{$preview-output-height});
+  height: 100%;
   width: 100%;
   border: 2px solid $foreground-darker;
 }
 
 .berkut-finder-search-box-wrapper {
-  height: 10%;
+  height: 48px;
   background-color: $background-dark;
 
   input {
@@ -27,7 +27,7 @@
 .berkut-finder-files-container {
   position: absolute;
   padding: 3px;
-  top: calc(10% + 2px);
+  top: 48px + 2px;
   bottom: 2px;
   left: 2px;
   right: 2px;

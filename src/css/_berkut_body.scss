@@ -7,17 +7,18 @@
 
   .berkut-pane {
     position: absolute;
-    width: calc(50% - #{$margin / 2});
     height: 100%;
 
     &.left {
       @import 'berkut_body/berkut_deck';
+      @import 'berkut_body/berkut_output_preview';
       @import 'berkut_body/berkut_crossfader';
+      width: $deck-width;
     }
 
     &.right {
-      left: calc(50% + #{$margin / 2});
-      @import 'berkut_body/berkut_output_preview';
+      left: $deck-width + $margin;
+      width: calc(100% - #{$deck-width + $margin});
       @import 'berkut_body/berkut_finder';
     }
   }

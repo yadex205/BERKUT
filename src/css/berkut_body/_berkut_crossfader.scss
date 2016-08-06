@@ -1,7 +1,6 @@
 .berkut-crossfader-wrapper {
   position: relative;
-  top: 2%;
-  height: 8%;
+  height: $crossfader-height;
 
   .slider {
     width: 100%;

@@ -1,10 +1,10 @@
 .berkut-output-preview-wrapper {
-  height: $preview-output-height;
-  padding-bottom: 12px;
+  height: calc(100% - #{$crossfader-height + $deck-height});
+  padding: 12px 0;
 
   .berkut-output-preview {
     height: 100%;
-    width: 240px;
+    width: 100%;
     background-color: $background-darker;
   }
 }
