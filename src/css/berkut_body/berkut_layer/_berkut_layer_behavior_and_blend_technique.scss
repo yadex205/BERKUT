@@ -15,10 +15,13 @@
 
     .berkut-layer-blend-technique {
       height: 100%;
+      border: 0;
       border-radius: 0;
-      outline: none;
       box-shadow: none;
       -webkit-appearance: none;
+      background-color: #111;
+      color: #aaa;
+      cursor: pointer;
     }
   }
 }
