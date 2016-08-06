@@ -32,6 +32,14 @@ gulp.task('live', ['build'], () => {
     gulp.watch('src/css/**/*.scss', ['css'])
     gulp.watch('src/js/**/*.js', ['js'])
 
+    app.stdout.on('data', (buffer) => {
+        console.log(`${buffer}`)
+    })
+
+    app.stderr.on('data', (buffer) => {
+        console.log(`${buffer}`)
+    })
+
     app.on('close', () => {
         process.exit(1)
     })
