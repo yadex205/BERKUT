@@ -1,21 +1,16 @@
-<div id="berkut-finder">
-  <div class="finder_search_box_wrapper form-group">
+<div id="berkut-finder" class="berkut-finder">
+  <div class="berkut-finder-search-box-wrapper form-group">
     <input
         class="form-control"
         type="text"
         placeholder="Search media file..."
         v-model="query" />
   </div>
-  <div class="finder_files_container">
 
-    <div id="blendtest"></div>
-    
-    <div class="thumbnail" v-for="result in results" track-by="$index">
-      <img alt="loading" src=""/>
-      <div class="caption">{{result.name}}</div>
+  <div class="berkut-finder-files-container" class="berkut-finder-files-container">
+    <div class="berkut-finder-file" v-for="result in results" track-by="$index">
+      <canvas class="berkut-finder-file-thumbnail"></canvas>
+      <div class="berkut-finder-file-caption"></div>
     </div>
-    
-    <div style="clear: both"></div>
   </div>
-</div>
 </div>
