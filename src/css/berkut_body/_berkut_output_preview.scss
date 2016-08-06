@@ -1,6 +1,6 @@
 .berkut-output-preview-wrapper {
   height: calc(100% - #{$crossfader-height + $deck-height});
-  padding: 12px 0;
+  padding: $margin 0;
 
   .berkut-output-preview {
     height: 100%;
