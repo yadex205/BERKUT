@@ -9,7 +9,7 @@ var BERKUT = function() {
 }
 
 BERKUT.Layers = Vue.extend({
-    el: function () { return '#berkut-layers-holder' },
+    el: function () { return '#berkut-deck' },
     data: function () { return {
         layers: new Array(6).fill(null).map(() => { return new BERKUT.Layer() }),
         targetcanvas: $('#blendtest')[0]

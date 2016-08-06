@@ -1,0 +1,40 @@
+<div id="berkut-deck">
+
+  <div class="berkut-layer row" v-for="layer in layers" track-by="$index">
+    <canvas class="col-md-3 layer-thumbnail"></canvas>
+    <div class="col-md-7 layer-controller-main">
+      <div class="row layer-controller-buttons">
+
+        <div class="col-md-6 btn-group" data-toggle="buttons">
+          <label class="btn btn-default"><input type="radio" autocomplete="off" />A</label>
+          <label class="btn btn-default"><input type="radio" autocomplete="off" checked="checked" />N</label>
+          <label class="btn btn-default"><input type="radio" autocomplete="off" />B</label>
+        </div>
+        <div class="col-md-6 btn-group" data-toggle="buttons">
+          <label class="btn"><input type="checkbox" v-model="layer.mute" />Mut</label>
+          <label class="btn"><input type="checkbox" v-model="layer.solo" />Sol</label>
+          <label class="btn"><input type="checkbox" v-model="layer.rhythm" />Rtm</label>
+        </div>
+
+      </div>
+      <div class="layer-controller-seekbar">
+        <div class="row">
+          <div class="col-md-6" v-pre>
+            <input type="text" class="seekbar">
+          </div>
+          <div class="col-md-6">
+            <select class="form-control" v-model="layer.blend">
+              <% Object.keys(blendTechniques).forEach((key) => { %>
+                <option value="<%= key %>"><%= blendTechniques[key] %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 opacity-slider">
+      <input type="text" class="opacity">
+    </div>
+  </div>
+
+</div>
