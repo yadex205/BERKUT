@@ -11,8 +11,7 @@ var BERKUT = function() {
 BERKUT.Layers = Vue.extend({
     el: function () { return '#berkut-deck' },
     data: function () { return {
-        layers: new Array(6).fill(null).map(() => { return new BERKUT.Layer() }),
-        targetcanvas: $('#blendtest')[0]
+        layers: new Array(6).fill(null).map(() => { return new BERKUT.Layer() })
     } },
     ready: function () {
         $('input.berkut-layer-seekbar').slider({
@@ -34,17 +33,7 @@ BERKUT.Layers = Vue.extend({
     methods: {
         getCanvases: function () {
             return Array.from($('.berkut-layer-preview'))
-        },
-        render: function () {
-            let ctx = this.targetcanvas.getContext('2d')
-            ctx.clearRect(0,0,320,240)
-            ctx.globalCompositeOperation = 'lighter'
-            let canvases = $('canvas')
-            for (i = 0, l = 6; i < l; i = (i + 1) | 0) {
-                ctx.drawImage(canvases[i], 0, 0, 320, 240)
-            }
-        }
-    }
+        }    }
 })
 
 BERKUT.Layer = function() {
@@ -63,9 +52,9 @@ BERKUT.Layer = function() {
 
 BERKUT.Mixer = function (layerManager) {
     this.renderer = new PIXI.WebGLRenderer(480, 270, {
+        view: $('#berkut-output-preview')[0],
         preserveDrawingBuffer: true
     })
-    $('#blendtest')[0].appendChild(this.renderer.view)
     this.stage = new PIXI.Container()
     this._blendTask = null
     this._layerManager = layerManager
