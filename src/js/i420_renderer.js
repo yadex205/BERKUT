@@ -83,7 +83,7 @@ I420Renderer.prototype = {
                   videoFrame.subarray(videoFrame.vOffset, videoFrame.length))
     },
     _setupCanvas: function() {
-        this.canvas.gl = this.canvas.getContext('webgl', {
+        this.canvas.gl = this.canvas.getContext('webgl2', {
             preserveDrawingBuffer: true
         })
 
@@ -116,8 +116,9 @@ I420Renderer.prototype = {
             ' 1.1643828125, 2.017234375, 0, -1.081390625,',
             ' 0, 0, 0, 1',
             ');',
+            'vec4 OPACITY = vec4(alpha, alpha, alpha, alpha);',
             'void main(void) {',
-            ' gl_FragColor = vec4( texture2D(YTexture, vTextureCoord).x, texture2D(UTexture, vTextureCoord).x, texture2D(VTexture, vTextureCoord).x, 1) * YUV2RGB * vec4(1,1,1,alpha);',
+            ' gl_FragColor = vec4( texture2D(YTexture, vTextureCoord).x, texture2D(UTexture, vTextureCoord).x, texture2D(VTexture, vTextureCoord).x, 1) * YUV2RGB * OPACITY;',
             '}'
         ].join('\n')
 
@@ -162,12 +163,32 @@ I420Renderer.prototype = {
 }
 
 I420Renderer.Blend = {
-    normal: function (gl) {
+    normal: function(gl) {
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
         gl.blendEquation(gl.FUNC_ADD)
     },
-    add: function (gl) {
+    add: function(gl) {
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE)
         gl.blendEquation(gl.FUNC_ADD)
+    },
+    multiply: function(gl) {
+        gl.blendFunc(gl.DST_COLOR, gl.ONE_MINUS_SRC_ALPHA)
+        gl.blendEquation(gl.FUNC_ADD)
+    },
+    subtract: function(gl) {
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE)
+        gl.blendEquation(gl.FUNC_REVERSE_SUBTRACT)
+    },
+    darken: function(gl) {
+        gl.blendFunc(gl.ONE, gl.ONE)
+        gl.blendEquation(gl.MIN)
+    },
+    lighten: function(gl) {
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE)
+        gl.blendEquation(gl.MAX)
+    },
+    difference: function(gl) {
+        gl.blendFunc(gl.ONE, gl.ONE)
+        gl.blendEquation(gl.FUNC_SUBTRACT)
     }
 };

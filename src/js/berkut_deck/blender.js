@@ -16,6 +16,7 @@
         bind: function(view) {
             this._renderer = new I420Renderer()
             this._renderer.bind(view, 480, 640)
+            this.enable();
         },
         addPlayer: function(player) {
             this._players.unshift(player)

@@ -12,7 +12,7 @@
         this._player = null
 
         this.view = null
-        this.blend = 'NORMAL'
+        this.blend = 'normal'
         this.mute = false
         this.solo = false
         this.rhythm = false

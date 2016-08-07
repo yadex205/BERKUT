@@ -17,6 +17,7 @@ const {ipcMain} = electron
 let dashboardWindow
 
 global.output = null
+app.commandLine.appendSwitch('enable-unsafe-es3-apis')
 
 ipcMain.on('output-updated', function (event, url) {
     global.output = url
@@ -27,7 +28,10 @@ function createWindow () {
         width: 1024,
         minWidth: 1024,
         height: 700,
-        minHeight: 700
+        minHeight: 700,
+        webPreferences: {
+            experimentalCanvasFeatures: true
+        }
     })
     dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
     app.on('closed', () => {

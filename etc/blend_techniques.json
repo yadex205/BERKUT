@@ -2,18 +2,8 @@
     "normal": "Normal",
     "add": "Add",
     "multiply": "Multiply",
-    "screen": "Screen",
-    "overlay": "Overlay",
+    "subtract": "Subtract",
     "darken": "Darken",
     "lighten": "Lighten",
-    "color_dodge": "Dodge",
-    "color_burn": "Burn",
-    "hard_light": "Hardlight",
-    "soft_light": "Softlight",
-    "difference": "Difference",
-    "exclusion": "Exclusion",
-    "hue": "Hue",
-    "saturation": "Saturation",
-    "color": "Color",
-    "luminosity": "Luminosity"
+    "difference": "Difference"
 }
