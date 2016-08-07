@@ -26,6 +26,7 @@ I420Texture.prototype = {
 
 const I420Renderer = function() {
     this.canvas = null
+    this._program = null
     this._drawLoop = null
     this._newFrame = false
 }
@@ -44,8 +45,11 @@ I420Renderer.prototype = {
             }
         })(width, height), false)
     },
-    draw: function (i420Frame) {
-        this._render(i420Frame)
+    draw: function (i420Frame, blend, opacity) {
+        const gl = this.canvas.gl
+        if (!blend) { blend = 'normal' }
+        I420Renderer.Blend[blend](gl)
+        this._render(i420Frame, opacity)
         this._newFrame = true
     },
     clear: function() {
@@ -57,7 +61,9 @@ I420Renderer.prototype = {
         gl.y.fill(1,1,arr1)
         gl.u.fill(1,1,arr2)
         gl.v.fill(1,1,arr2)
+        gl.disable(gl.BLEND)
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+        gl.enable(gl.BLEND)
     },
     _frameSetup(width, height) {
         const gl = this.canvas.gl
@@ -80,8 +86,9 @@ I420Renderer.prototype = {
         clearInterval(this._drawLoop)
         this._drawLoop = null
     },
-    _render: function(videoFrame) {
+    _render: function(videoFrame, opacity) {
         const gl = this.canvas.gl
+        gl.uniform1f(gl.getUniformLocation(this._program, 'alpha'), opacity)
         gl.y.fill(videoFrame.width, videoFrame.height,
                   videoFrame.subarray(0, videoFrame.uOffset))
         gl.u.fill(videoFrame.width >> 1, videoFrame.height >> 1,
@@ -115,6 +122,7 @@ I420Renderer.prototype = {
             'uniform sampler2D YTexture;',
             'uniform sampler2D UTexture;',
             'uniform sampler2D VTexture;',
+            'uniform float alpha;',
             'const mat4 YUV2RGB = mat4',
             '(',
             ' 1.1643828125, 0, 1.59602734375, -.87078515625,',
@@ -123,7 +131,7 @@ I420Renderer.prototype = {
             ' 0, 0, 0, 1',
             ');',
             'void main(void) {',
-            ' gl_FragColor = vec4( texture2D(YTexture, vTextureCoord).x, texture2D(UTexture, vTextureCoord).x, texture2D(VTexture, vTextureCoord).x, 1) * YUV2RGB;',
+            ' gl_FragColor = vec4( texture2D(YTexture, vTextureCoord).x, texture2D(UTexture, vTextureCoord).x, texture2D(VTexture, vTextureCoord).x, 1) * YUV2RGB * vec4(1,1,1,alpha);',
             '}'
         ].join('\n')
 
@@ -134,8 +142,10 @@ I420Renderer.prototype = {
         gl.attachShader(program, fragmentShader)
         gl.linkProgram(program)
         gl.useProgram(program)
+        this._program = program
         if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-            console.log('Shader link failed.')
+            console.log(gl.getProgramInfoLog(program))
+            console.log(gl.getShaderInfoLog(fragmentShader))
         }
         var vertexPositionAttribute = gl.getAttribLocation(program, 'aVertexPosition')
         gl.enableVertexAttribArray(vertexPositionAttribute)
@@ -154,6 +164,7 @@ I420Renderer.prototype = {
                       new Float32Array([1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0]),
                       gl.STATIC_DRAW)
         gl.vertexAttribPointer(textureCoordAttribute, 2, gl.FLOAT, false, 0, 0)
+        gl.enable(gl.BLEND)
 
         gl.y = new I420Texture(gl)
         gl.u = new I420Texture(gl)
@@ -162,4 +173,16 @@ I420Renderer.prototype = {
         gl.u.bind(1, program, 'UTexture')
         gl.v.bind(2, program, 'VTexture')
     }
+}
+
+I420Renderer.Blend = {
+    normal: function (gl) {
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+        gl.blendEquation(gl.FUNC_ADD)
+    },
+    add: function (gl) {
+        gl.blendFunc(gl.ONE, gl.ONE)
+        gl.blendEquation(gl.FUNC_ADD)
+    }
+
 };
