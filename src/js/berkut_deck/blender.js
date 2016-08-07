@@ -26,14 +26,17 @@
                     this._renderer.clear()
                     let i = 0
                     let player = null
-                    let frame = null
                     let state = 0
                     for(;i < this._players.length; i = (i + 1) | 0) {
                         player = this._players[i]
-                        frame = player.getVideoFrame()
                         state = player.getState()
-                        if (!frame || !(state === 3 || state === 4)) { continue }
-                        this._renderer.draw(player.getVideoFrame(), 'normal', player.opacity)
+                        if (state === 3 || state === 4) {
+                            this._renderer.draw(
+                                player.getVideoFrame(),
+                                player.blend,
+                                player.opacity
+                            )
+                        }
                     }
                     this._renderer.flush()
                 })

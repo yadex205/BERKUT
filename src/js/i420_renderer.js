@@ -44,14 +44,14 @@ I420Renderer.prototype = {
     },
     draw: function (i420Frame, blend, opacity) {
         const gl = this.canvas.gl
-        if (!blend) { blend = 'normal' }
+        if (!blend || !I420Renderer.Blend[blend]) { blend = 'normal' }
         I420Renderer.Blend[blend](gl)
         this._render(i420Frame, opacity)
-        this._newFrame = true
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
     },
     flush: function() {
         const gl = this.canvas.gl
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+        gl.flush()
     },
     clear: function() {
         const gl = this.canvas.gl
