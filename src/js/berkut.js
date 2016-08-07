@@ -18,6 +18,10 @@ BERKUT.Layers = Vue.extend({
         blender: new BERKUT.Blender()
     } },
     ready: function () {
+        document.ondrop = document.ondragover = function(event) {
+            event.preventDefault()
+            return false
+        }
         this._registerSlider('.berkut-layer-seekbar', { tooltip: 'hide' })
         this._registerSlider('input.berkut-layer-opacity-slider', {
             tooltip_position: 'right',
@@ -46,6 +50,14 @@ BERKUT.Layers = Vue.extend({
             Array.from(sliders).forEach((slider, index) => {
                 if (callback) { callback(slider, index) }
             })
+        },
+        _dropped: function(index, event) {
+            event.stopPropagation()
+            event.preventDefault()
+            const file = event.dataTransfer.files[0]
+            if (!file) { return false }
+            this.layers[index].play('file://' + file.path)
+            return true;
         }
     }
 })

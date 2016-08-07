@@ -1,6 +1,10 @@
 <div id="berkut-deck" class="berkut-deck">
 
-  <div class="berkut-layer row" v-for="layer in layers" track-by="$index">
+  <div
+      class="berkut-layer row"
+      v-for="layer in layers"
+      track-by="$index"
+      v-on:drop="_dropped($index, $event)">
     <canvas class="berkut-layer-preview col-md-3"></canvas>
 
     <div class="berkut-layer-deck-selector-and-seekbar col-md-4">
