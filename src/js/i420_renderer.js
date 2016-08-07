@@ -27,8 +27,6 @@ I420Texture.prototype = {
 const I420Renderer = function() {
     this.canvas = null
     this._program = null
-    this._drawLoop = null
-    this._newFrame = false
 }
 
 I420Renderer.prototype = {
@@ -36,7 +34,6 @@ I420Renderer.prototype = {
         this.canvas = canvas
         this._setupCanvas()
         this._frameSetup(width, height)
-        this._startDraw()
         canvas.addEventListener('webglcontextlost', function(e) { e.preventDefault() }, false)
         canvas.addEventListener('webglcontextrestored', ((w, h) => {
             return () => {
@@ -51,6 +48,10 @@ I420Renderer.prototype = {
         I420Renderer.Blend[blend](gl)
         this._render(i420Frame, opacity)
         this._newFrame = true
+    },
+    flush: function() {
+        const gl = this.canvas.gl
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
     },
     clear: function() {
         const gl = this.canvas.gl
@@ -70,21 +71,6 @@ I420Renderer.prototype = {
         this.canvas.width = width
         this.canvas.height = height
         gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight)
-    },
-    _startDraw: function() {
-        const gl = this.canvas.gl
-        this._drawLoop = setInterval(() => {
-            requestAnimationFrame(() => {
-                if (this._newFrame) {
-                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-                    this._newFrame = false
-                }
-            })
-        }, 1000 / 60)
-    },
-    _stopDraw: function() {
-        clearInterval(this._drawLoop)
-        this._drawLoop = null
     },
     _render: function(videoFrame, opacity) {
         const gl = this.canvas.gl
@@ -181,8 +167,7 @@ I420Renderer.Blend = {
         gl.blendEquation(gl.FUNC_ADD)
     },
     add: function (gl) {
-        gl.blendFunc(gl.ONE, gl.ONE)
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE)
         gl.blendEquation(gl.FUNC_ADD)
     }
-
 };

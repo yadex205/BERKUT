@@ -16,7 +16,7 @@
         this.mute = false
         this.solo = false
         this.rhythm = false
-        this.opacity = false
+        this.opacity = 0
     }
 
     Player.prototype = {
@@ -60,6 +60,13 @@
         positionRatio: function() {
             if (!this.isBound()) { return }
             return this.position
+        },
+        getVideoFrame: function() {
+            if (!this.isBound()) { return }
+            return this._player.videoFrame
+        },
+        getState: function() {
+            return this._player.state
         },
         isBound: function() {
             return this._player !== null || this._player !== undefined

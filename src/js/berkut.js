@@ -15,8 +15,7 @@ BERKUT.Layers = Vue.extend({
         layers: new Array(6).fill(null).map(() => {
             return new BERKUT.Player()
         }),
-        mixer: new BERKUT.Mixer(),
-        _mixTask: null
+        blender: new BERKUT.Blender()
     } },
     ready: function () {
         this._registerSlider('.berkut-layer-seekbar', { tooltip: 'hide' })
@@ -30,9 +29,11 @@ BERKUT.Layers = Vue.extend({
         })
         this.$el.querySelectorAll('.berkut-layer-preview').forEach((view, index) => {
             this.layers[index].bind(view)
-            this.mixer.registerPlayer(this.layers[index])
         })
-        this.mixer.start()
+        this.layers.forEach((player) => {
+            this.blender.addPlayer(player)
+        })
+        this.blender.bind(document.querySelector('#berkut-output-preview'))
     },
     methods: {
         _registerSlider: function (query, option, callback) {
