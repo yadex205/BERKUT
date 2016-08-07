@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "jquery": "^2.2.4",
-    "pixi.js": "^3.0.11",
     "vue": "^1.0.26",
     "wcjs-prebuilt": "^3.0.0",
     "wcjs-renderer": "^1.0.2"
