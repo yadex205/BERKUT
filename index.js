@@ -10,9 +10,17 @@ if (process.platform === 'win32') {
 const electron = require('electron')
 
 const {app} = electron
-const {BrowserWindow}= electron
+const {BrowserWindow} = electron
+
+const {ipcMain} = electron
 
 let dashboardWindow
+
+global.output = null
+
+ipcMain.on('output-updated', function (event, url) {
+    global.output = url
+})
 
 function createWindow () {
     dashboardWindow = new BrowserWindow({

@@ -14,12 +14,13 @@
             view: document.querySelector('#berkut-output-preview')
         })
         this._pixiContainer = new PIXI.Container()
+        this._mixerTask = null
     }
 
     Mixer.prototype = {
         registerPlayer: function(player) {
             this._pixiContainer.addChildAt(new PIXI.Sprite(
-                PIXI.Texture.fromCanvas(player.view, PIXI.SCALE_MODES.LINEAR)
+                PIXI.Texture.fromCanvas(player.view, PIXI.SCALE_MODES.NEAREST)
             ), 0)
             this._players.unshift(player)
         },
@@ -41,6 +42,16 @@
                 quad.alpha = player.opacity
             }
             this._pixiRenderer.render(this._pixiContainer)
+        },
+        start: function() {
+            if (this._mixerTask) { this.stop() }
+            this._mixerTask = setInterval(() => {
+                requestAnimationFrame(this.blend.bind(this))
+            }, 1000 / 60)
+        },
+        stop: function() {
+            clearInterval(this._mixerTask)
+            this._mixTask = null
         }
     }
 

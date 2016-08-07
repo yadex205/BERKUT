@@ -32,7 +32,7 @@ BERKUT.Layers = Vue.extend({
             this.layers[index].bind(view)
             this.mixer.registerPlayer(this.layers[index])
         })
-        this.enableMix()
+        this.mixer.start()
     },
     methods: {
         _registerSlider: function (query, option, callback) {
@@ -45,17 +45,6 @@ BERKUT.Layers = Vue.extend({
             Array.from(sliders).forEach((slider, index) => {
                 if (callback) { callback(slider, index) }
             })
-        },
-        enableMix: function() {
-            this._mixTask = setInterval(() => {
-                requestAnimationFrame(() => {
-                    this.mixer.blend()
-                })
-            }, 1000 / 60)
-        },
-        disableMix: function() {
-            clearInterval(this._mixTask)
-            this._mixTask = null
         }
     }
 })
