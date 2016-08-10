@@ -14,7 +14,7 @@ const PlayerManager = require('./lib/player_manager')
 
 app.commandLine.appendSwitch('enable-unsafe-es3-apis')
 
-let playerManager = new PlayerManager()
+global.playerManager = new PlayerManager()
 let dashboardWindow
 
 function createWindow () {
