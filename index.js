@@ -8,20 +8,14 @@ if (process.platform === 'win32') {
 }
 
 const electron = require('electron')
-
 const {app} = electron
 const {BrowserWindow} = electron
+const PlayerManager = require('./lib/player_manager')
 
-const {ipcMain} = electron
-
-let dashboardWindow
-
-global.output = null
 app.commandLine.appendSwitch('enable-unsafe-es3-apis')
 
-ipcMain.on('output-updated', function (event, url) {
-    global.output = url
-})
+let playerManager = new PlayerManager()
+let dashboardWindow
 
 function createWindow () {
     dashboardWindow = new BrowserWindow({
@@ -36,6 +30,7 @@ function createWindow () {
     dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
     app.on('closed', () => {
         dashboardWindow = null
+        app.quit()
     })
 }
 
