@@ -7,7 +7,7 @@ import livereload from 'gulp-livereload'
 import concat from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
 import markdown from 'marked'
-import electron from 'electron-prebuilt'
+import electron from 'electron'
 import rimraf from 'rimraf'
 
 var spawn = require('child_process').spawn

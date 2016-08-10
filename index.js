@@ -27,18 +27,25 @@ function createWindow () {
             experimentalCanvasFeatures: true
         }
     })
+    global.playerManager.registerListenWindow(dashboardWindow)
+
     dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
     app.on('closed', () => {
         dashboardWindow = null
-        app.quit()
+        quit()
     })
+}
+
+function quit() {
+    global.playerManager.reset(true)
+    app.quit()
 }
 
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
     switch(process.platform) {
-    case 'darwin': app.quit()
+    case 'darwin': quit()
     }
 })
 

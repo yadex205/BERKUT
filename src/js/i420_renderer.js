@@ -30,9 +30,13 @@ const I420Renderer = function() {
 }
 
 I420Renderer.prototype = {
-    bind: function (canvas, height, width) {
+    bind: function (canvas) {
         this.canvas = canvas
         this._setupCanvas()
+        this.setSize(128, 128)
+    },
+    setSize: function(width, height) {
+        const canvas = this.canvas
         this._frameSetup(width, height)
         canvas.addEventListener('webglcontextlost', function(e) { e.preventDefault() }, false)
         canvas.addEventListener('webglcontextrestored', ((w, h) => {
@@ -41,6 +45,10 @@ I420Renderer.prototype = {
                 this._frameSetup(w, h)
             }
         })(width, height), false)
+    },
+    getSize: function() {
+        const gl = this.canvas.gl
+        return { width: gl.drawingBufferWidth, height: gl.drawingBufferHeight }
     },
     draw: function (i420Frame, blend, opacity) {
         const gl = this.canvas.gl
@@ -65,6 +73,12 @@ I420Renderer.prototype = {
         gl.disable(gl.BLEND)
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
         gl.enable(gl.BLEND)
+    },
+    readPixels: function(pixels) {
+        const gl = this.canvas.gl
+        if (!pixels) { pixels = new Uint8Array(gl.drawingBufferWidth * gl.drawingBufferHeight * 4) }
+        gl.readPixels(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
+        return pixels
     },
     _frameSetup(width, height) {
         const gl = this.canvas.gl
@@ -191,4 +205,4 @@ I420Renderer.Blend = {
         gl.blendFunc(gl.ONE, gl.ONE)
         gl.blendEquation(gl.FUNC_SUBTRACT)
     }
-};
+}
