@@ -1,4 +1,4 @@
-// index.js
+'use strict'
 
 if (process.platform === 'win32') {
     process.env['VLC_PLUGIN_PATH'] = require('path').join(
