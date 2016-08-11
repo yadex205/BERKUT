@@ -8,6 +8,8 @@
    window.WebChimera = require('wcjs-prebuilt')
    const em = require('events')
    window.EventEmitter = new em()
+   window.remote = require('electron').remote
+   window.ipc = require('electron').ipcRenderer
   </script>
   <script src="js/index.js"></script>
   <script>

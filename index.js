@@ -10,15 +10,15 @@ if (process.platform === 'win32') {
 const electron = require('electron')
 const {app} = electron
 const {BrowserWindow} = electron
-const PlayerManager = require('./lib/player_manager')
+const {ipcMain} = electron
 
 app.commandLine.appendSwitch('enable-unsafe-es3-apis')
 
-global.playerManager = new PlayerManager()
-let dashboardWindow
+global.dashboardWindow
+let outputWindow
 
 function createWindow () {
-    dashboardWindow = new BrowserWindow({
+    global.dashboardWindow = new BrowserWindow({
         width: 1024,
         minWidth: 1024,
         height: 700,
@@ -27,11 +27,21 @@ function createWindow () {
             experimentalCanvasFeatures: true
         }
     })
-    global.playerManager.registerListenWindow(dashboardWindow)
+    outputWindow = new BrowserWindow({
+        width: 960,
+        height: 540,
+        webPreferences: {
+            experimentalCanvasFeatures: true
+        }
+    })
 
-    dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
+    global.dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
+    outputWindow.loadURL(`file://${__dirname}/htdocs/output.html`)
+    ipcMain.on('berkut-output:updated', (event, pixels, width, height) => {
+        outputWindow.webContents.send('berkut-output:updated', pixels, width, height)
+    })
     app.on('closed', () => {
-        dashboardWindow = null
+        global.dashboardWindow = null
         quit()
     })
 }
@@ -49,4 +59,4 @@ app.on('window-all-closed', () => {
     }
 })
 
-app.on('activate', (dashboardWindow === null) ? createWindow : ()=>{})
+app.on('activate', (global.dashboardWindow === null) ? createWindow : ()=>{})

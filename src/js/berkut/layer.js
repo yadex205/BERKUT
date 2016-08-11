@@ -17,13 +17,15 @@ BERKUT.Deck = Vue.extend({
                     _frame: null
                 }
             }),
-            output: (() => {
+            preview: (() => {
                 const renderer = new I420Renderer()
                 renderer.bind(document.querySelector('#berkut-output-preview'))
-                renderer.setSize(960, 540)
+                renderer.setSize(480, 270)
                 return renderer
             })(),
-            blendTask: null
+            output: new BERKUT.OutputWindow(),
+            blendTask: null,
+            blendedFrame: null
         }
     },
     ready: function () {
@@ -49,7 +51,7 @@ BERKUT.Deck = Vue.extend({
                 }
             })
         })
-        this.blendTask = setInterval(() => { this.blend() }, 1000 / 60)
+        this.blendTask = setInterval(() => { this.blend() }, 1000 / 30)
     },
     methods: {
         play: function(index, filepath) {
@@ -57,14 +59,16 @@ BERKUT.Deck = Vue.extend({
         },
         blend: function() {
             requestAnimationFrame(() => {
-                this.output.clear()
+                this.preview.clear()
                 let layer = null
                 for(let i = this.layers.length - 1; i >= 0; i = (i - 1) | 0) {
                     layer = this.layers[i]
                     if (!layer._frame) { continue }
-                    this.output.draw(layer._frame, layer.blend, layer.opacity)
+                    this.preview.draw(layer._frame, layer.blend, layer.opacity)
                 }
-                this.output.flush()
+                this.preview.flush()
+                this.blendedFrame = this.preview.readPixels(this.blendedFrame)
+                requestAnimationFrame(() => { this.output.sendFrame(this.blendedFrame, 480, 270) })
             })
         },
         _dropped: function(index, event) {
