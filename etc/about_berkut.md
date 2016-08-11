@@ -17,15 +17,11 @@ GNU Lesser General Public License 2.1
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Sergey Radionov  
-Copyright (c) 2015 Ivo Georgiev  
+Copyright (c) 2015 Sergey Radionov
+
+Copyright (c) 2015 Ivo Georgiev
+
 Copyright (c) 2015 Alexandru Branza
-
-### Pixi.js
-
-The MIT License (MIT)
-
-Copyright (c) 2013-2015 Mathew Groves
 
 ### Vue.js
 

@@ -7,7 +7,7 @@ import livereload from 'gulp-livereload'
 import concat from 'gulp-concat'
 import sourcemaps from 'gulp-sourcemaps'
 import markdown from 'marked'
-import electron from 'electron-prebuilt'
+import electron from 'electron'
 import rimraf from 'rimraf'
 
 var spawn = require('child_process').spawn
@@ -20,28 +20,46 @@ var plumberOptions = {
 var isLive = process.argv[2] === 'live'
 var aboutDoc = markdown(fs.readFileSync('etc/about_berkut.md').toString())
 
+let isReload = false
+
 gulp.task('default')
 
 gulp.task('build', ['html', 'css', 'js'])
 
 gulp.task('live', ['build'], () => {
     livereload.listen()
-    let app = spawn(electron, ['.'])
+
+    let appProcess
+
+    const createApp = function () {
+        const app = spawn(electron, ['.'])
+        app.stdout.on('data', (buffer) => {
+            console.log(`${buffer}`)
+        })
+
+        app.stderr.on('data', (buffer) => {
+            console.log(`${buffer}`)
+        })
+
+        app.on('close', () => {
+            if (!isReload) {
+                process.exit(1)
+            } else {
+                isReload = false
+                appProcess = createApp()
+            }
+        })
+        return app
+    }
+
+    appProcess = createApp()
 
     gulp.watch('src/html/**/*.ejs', ['html'])
     gulp.watch('src/css/**/*.scss', ['css'])
     gulp.watch('src/js/**/*.js', ['js'])
-
-    app.stdout.on('data', (buffer) => {
-        console.log(`${buffer}`)
-    })
-
-    app.stderr.on('data', (buffer) => {
-        console.log(`${buffer}`)
-    })
-
-    app.on('close', () => {
-        process.exit(1)
+    gulp.watch(['index.js', 'lib/**/*.js'], () => {
+        isReload = true
+        appProcess.kill()
     })
 })
 

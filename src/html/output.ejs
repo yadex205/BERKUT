@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Output</title>
+    <style>
+     body { background-color: black; padding: 0; margin: 0 }
+     .output {
+         position: absolute;
+         top: 0; left: 0;
+         width: 100%; height: 100%;
+         padding: 0; margin: 0
+     }
+    </style>
+    <script>
+     window.jQuery = window.$ = require('jquery')
+     window.Vue = require('vue')
+     window.ipc = require('electron').ipcRenderer
+     window.remote = require('electron').remote
+    </script>
+    <script src="js/index.js"></script>
+    <script>
+     document.addEventListener('DOMContentLoaded', () => {
+         window.bOutput = new BERKUT.Output(document.querySelector('#output'))
+         ipc.on('berkut-output:updated', (event, pixels, width, height) => {
+             bOutput.draw(pixels, width, height)
+         })
+     })
+    </script>
+  </head>
+  <body>
+    <canvas id="output" class="output"></canvas>
+  </body>
+</html>

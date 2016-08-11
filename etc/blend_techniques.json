@@ -1,19 +1,9 @@
 {
-    "NORMAL": "Normal",
-    "ADD": "Add",
-    "MULTIPLY": "Multiply",
-    "SCREEN": "Screen",
-    "OVERLAY": "Overlay",
-    "DARKEN": "Darken",
-    "LIGHTEN": "Lighten",
-    "COLOR_DODGE": "Dodge",
-    "COLOR_BURN": "Burn",
-    "HARD_LIGHT": "Hardlight",
-    "SOFT_LIGHT": "Softlight",
-    "DIFFERENCE": "Difference",
-    "EXCLUSION": "Exclusion",
-    "HUE": "Hue",
-    "SATURATION": "Saturation",
-    "COLOR": "Color",
-    "LUMINOSITY": "Luminosity"
+    "normal": "Normal",
+    "add": "Add",
+    "multiply": "Multiply",
+    "subtract": "Subtract",
+    "darken": "Darken",
+    "lighten": "Lighten",
+    "difference": "Difference"
 }

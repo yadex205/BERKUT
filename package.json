@@ -24,7 +24,7 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-preset-es2015": "^6.9.0",
-    "electron-prebuilt": "^1.2.7",
+    "electron": "^1.3.3",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-ejs": "^2.1.2",
@@ -38,9 +38,7 @@
   },
   "dependencies": {
     "jquery": "^2.2.4",
-    "pixi.js": "^3.0.11",
     "vue": "^1.0.26",
-    "wcjs-prebuilt": "^3.0.0",
-    "wcjs-renderer": "^1.0.2"
+    "wcjs-prebuilt": "^3.0.0"
   }
 }
