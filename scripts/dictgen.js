@@ -76,7 +76,7 @@ const makeDict = function(rawDict) {
                 )
             })
         } else {
-            register(yomi, kanji)
+            register(yomi, kanji.map((single) => { return single.split(';')[0] }))
         }
     })
 
@@ -87,7 +87,7 @@ const makeDict = function(rawDict) {
     fs.writeFileSync(target, JSON.stringify(dictTable))
 }
 
-Promise.all(require(root + '/package.json').skkDictUrl.map((url) => {
+Promise.all(require(root + '/package.json').skkDictGzUrl.map((url) => {
     console.log('Downloading: ' + url)
     return download(url).then((data) => {
         return converter.convert(zlib.gunzipSync(data))

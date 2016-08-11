@@ -20,12 +20,13 @@
       "es2015"
     ]
   },
-  "skkDictUrl": [
+  "skkDictGzUrl": [
     "http://openlab.jp/skk/dic/SKK-JISYO.L.gz",
     "http://openlab.jp/skk/dic/SKK-JISYO.jinmei.gz",
     "http://openlab.jp/skk/dic/SKK-JISYO.geo.gz",
     "http://openlab.jp/skk/dic/SKK-JISYO.propernoun.gz",
-    "http://openlab.jp/skk/dic/SKK-JISYO.station.gz"
+    "http://openlab.jp/skk/dic/SKK-JISYO.station.gz",
+    "http://openlab.jp/skk/dic/SKK-JISYO.assoc.gz"
   ],
   "homepage": "https://github.com/yadex205/berkut#readme",
   "devDependencies": {
