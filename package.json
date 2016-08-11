@@ -20,6 +20,13 @@
       "es2015"
     ]
   },
+  "skkDictUrl": [
+    "http://openlab.jp/skk/dic/SKK-JISYO.L.gz",
+    "http://openlab.jp/skk/dic/SKK-JISYO.jinmei.gz",
+    "http://openlab.jp/skk/dic/SKK-JISYO.geo.gz",
+    "http://openlab.jp/skk/dic/SKK-JISYO.propernoun.gz",
+    "http://openlab.jp/skk/dic/SKK-JISYO.station.gz"
+  ],
   "homepage": "https://github.com/yadex205/berkut#readme",
   "devDependencies": {
     "babel": "^6.5.2",
@@ -37,7 +44,10 @@
     "rimraf": "^2.5.3"
   },
   "dependencies": {
+    "download": "^5.0.2",
+    "iconv": "^2.2.1",
     "jquery": "^2.2.4",
+    "promise": "^7.1.1",
     "vue": "^1.0.26",
     "wcjs-prebuilt": "^3.0.0"
   }
