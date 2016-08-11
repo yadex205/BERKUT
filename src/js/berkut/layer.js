@@ -68,7 +68,11 @@ BERKUT.Deck = Vue.extend({
                 }
                 this.preview.flush()
                 this.blendedFrame = this.preview.readPixels(this.blendedFrame)
-                requestAnimationFrame(() => { this.output.sendFrame(this.blendedFrame, 480, 270) })
+                requestAnimationFrame(() => {
+                    const width = this.preview.canvas.width
+                    const height = this.preview.canvas.height
+                    this.output.sendFrame(this.blendedFrame, width, height)
+                })
             })
         },
         _dropped: function(index, event) {
