@@ -55,7 +55,6 @@ BERKUT.Deck = Vue.extend({
     },
     methods: {
         play: function (index, filepath) {
-            console.log(filepath)
             EventEmitter.emit(BERKUT.PlayerManager.Event.DO_PLAY, index, filepath)
         },
         blend: function() {
@@ -79,15 +78,14 @@ BERKUT.Deck = Vue.extend({
         _dropped: function(index, event) {
             event.stopPropagation()
             event.preventDefault()
-            console.log(event.dataTransfer)
             let file
             if (event.dataTransfer.files.length > 0) {
-                file = event.dataTransfer.files[0]
+                file = event.dataTransfer.files[0].path
             } else {
                 file = event.dataTransfer.getData('text/plain')
             }
             if (!file) { return false }
-            this.play(index, `${file.path}`)
+            this.play(index, file)
             return true
         }
     }

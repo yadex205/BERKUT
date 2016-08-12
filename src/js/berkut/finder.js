@@ -6,7 +6,7 @@
     const migemo = require('migemo')
     const Path = require('path')
     const crawl = require('../lib/crawl')
-    
+
     const Search = function() {
         this._data = []
         this._cache = []
@@ -91,7 +91,7 @@
                 })
             },
             beginDrag: function(index, event) {
-                event.dataTransfer.setData('text/plain', this.results[index].path)
+                event.dataTransfer.setData('text', this.results[index].path)
             }
         }
     })
