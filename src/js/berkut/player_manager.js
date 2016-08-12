@@ -42,7 +42,7 @@
         },
         play: function(index, filepath) {
             const prefix = process.platform === 'win32' ? 'file:///' : 'file://'
-            this._players[index].play(prefix + filepath)
+            this._players[index].play(prefix + filepath.trim())
         },
         pause: function(index) {
             this._players[index].pause()

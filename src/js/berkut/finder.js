@@ -91,7 +91,7 @@
                 })
             },
             beginDrag: function(index, event) {
-                event.dataTransfer.setData('text', this.results[index].path)
+                event.dataTransfer.setData('text/plain', this.results[index].path)
             }
         }
     })
