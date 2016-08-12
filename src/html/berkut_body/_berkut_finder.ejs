@@ -14,7 +14,9 @@
       track-by="$index"
       draggable="true"
       v-on:dragstart="beginDrag($index, $event)">
-      <canvas class="berkut-finder-file-thumbnail"></canvas>
+      <img
+        class="berkut-finder-file-thumbnail"
+        v-bind:src="result.src"/>
       <div class="berkut-finder-file-caption">{{result.name}}</div>
     </div>
   </div>

@@ -5,6 +5,7 @@
 
     const migemo = require('migemo')
     const Path = require('path')
+    const UUID = require('uuid')
     const crawl = require('../lib/crawl')
 
     const Search = function() {
@@ -61,8 +62,10 @@
         data: () => { return {
             query: '',
             results: [],
-            _thumbnailCache: [],
-            _searcher: null
+            _searcher: null,
+            _thumbnail: null,
+            _thumbnailCache: {},
+            _resultId: null
         } },
         watch: {
             'query': function (val, prevVal) {
@@ -75,6 +78,8 @@
         },
         ready: function () {
             this._searcher = new Search()
+            this._thumbnail = require('../lib/thumbnail')
+            this._thumbnailCache = {}
             this.crawl()
         },
         methods: {
@@ -86,8 +91,21 @@
                 })
             },
             updateResult: function (results) {
+                const resultId = UUID.v4()
                 this.results = results.map((filepath) => {
-                    return { name: Path.basename(filepath), path: filepath }
+                    return {
+                        path: filepath,
+                        name: Path.basename(filepath),
+                        src: this._thumbnailCache[filepath]
+                    }
+                })
+                this._resultId = resultId
+                this.results.forEach((result, index) => {
+                    if(result.src || resultId !== this._resultId) { return }
+                    this._thumbnail.findOrCreate(result.path, (thumbPath) => {
+                        if(resultId !== this._resultId) { return }
+                        this.$set(`results[${index}].src`, thumbPath)
+                    })
                 })
             },
             beginDrag: function(index, event) {
