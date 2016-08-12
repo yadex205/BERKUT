@@ -5,16 +5,31 @@
 
     const migemo = require('migemo')
     const Path = require('path')
+    const crawl = require('../lib/crawl')
 
     const Finder = Vue.extend({
         el: () => { return document.querySelector('#berkut-finder') },
         data: () => { return {
             query: '',
             results: [],
-            thumbnailCache: []
+            _thumbnailCache: [],
+            _cache: []
         } },
-        methods: {
+        watch: {
+            'query': function(val, prevVal) {
 
+            }
+        },
+        ready: function() {
+            this.crawl()
+        },
+        methods: {
+            crawl: function() {
+                crawl((files) => {
+                    this._cache = files
+                    console.log(files)
+                })
+            }
         }
     })
 
