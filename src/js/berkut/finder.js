@@ -21,7 +21,7 @@
             }
         },
         ready: function() {
-            this.crawl()
+            // this.crawl()
         },
         methods: {
             crawl: function() {

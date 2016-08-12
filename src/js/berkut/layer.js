@@ -80,7 +80,7 @@ BERKUT.Deck = Vue.extend({
             event.preventDefault()
             const file = event.dataTransfer.files[0]
             if (!file) { return false }
-            this.play(index, `file://${file.path}`)
+            this.play(index, `${file.path}`)
             return true
         }
     }
