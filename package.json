@@ -25,8 +25,7 @@
     "http://openlab.jp/skk/dic/SKK-JISYO.jinmei.gz",
     "http://openlab.jp/skk/dic/SKK-JISYO.geo.gz",
     "http://openlab.jp/skk/dic/SKK-JISYO.propernoun.gz",
-    "http://openlab.jp/skk/dic/SKK-JISYO.station.gz",
-    "http://openlab.jp/skk/dic/SKK-JISYO.assoc.gz"
+    "http://openlab.jp/skk/dic/SKK-JISYO.station.gz"
   ],
   "homepage": "https://github.com/yadex205/berkut#readme",
   "devDependencies": {
@@ -47,7 +46,7 @@
   "dependencies": {
     "download": "^5.0.2",
     "find": "^0.2.7",
-    "iconv": "^2.2.1",
+    "iconv-lite": "^0.4.13",
     "jquery": "^2.2.4",
     "migemo": "^0.1.7",
     "mime-db": "^1.23.0",

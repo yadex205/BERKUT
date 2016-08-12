@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
-const Iconv = require('iconv').Iconv
+const Iconv = require('iconv-lite')
 const download = require('download')
 const path = require('path')
 const Promise = require('promise')
 const zlib = require('zlib')
 
 const root = path.join(path.dirname(process.argv[1]), '..')
-const converter = new Iconv('EUC-JP', 'UTF-8')
 
 const okuriTable = {
     a: ['あ'],
@@ -34,7 +33,7 @@ const okuriTable = {
 
 const dictTable = {}
 
-const register = function(yomi, kanji) {
+const register = function (yomi, kanji) {
     const yomiArray = Array.from(yomi)
     let singleYomi = null
     let target = dictTable
@@ -43,7 +42,7 @@ const register = function(yomi, kanji) {
         if (!target[singleYomi]) { target[singleYomi] = {} }
         target = target[singleYomi]
     }
-    if(!target.w) {
+    if(!target.w || !Array.isArray(target.w)) {
         target.w = kanji
     } else {
         target.w.concat(kanji)
@@ -90,8 +89,10 @@ const makeDict = function(rawDict) {
 Promise.all(require(root + '/package.json').skkDictGzUrl.map((url) => {
     console.log('Downloading: ' + url)
     return download(url).then((data) => {
-        return converter.convert(zlib.gunzipSync(data))
+        return Iconv.decode(zlib.gunzipSync(data), 'euc-jp')
     })
 })).then((raws) => {
     makeDict(raws.join('\n'))
+}).catch((error) => {
+    console.error(error)
 })
