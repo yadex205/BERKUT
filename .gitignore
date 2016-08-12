@@ -13,6 +13,9 @@ npm-*.log
 
 # project
 /htdocs
+/vendor
+/tmp
+/cache
 
 # vscode
 /.vscode

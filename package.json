@@ -45,12 +45,14 @@
   },
   "dependencies": {
     "download": "^5.0.2",
+    "ffmpeg": "0.0.4",
     "find": "^0.2.7",
     "iconv-lite": "^0.4.13",
     "jquery": "^2.2.4",
     "migemo": "^0.1.7",
     "mime-db": "^1.23.0",
     "promise": "^7.1.1",
+    "unzip": "^0.1.11",
     "vue": "^1.0.26",
     "wcjs-prebuilt": "^3.0.0"
   }
