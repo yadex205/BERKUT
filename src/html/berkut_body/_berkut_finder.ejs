@@ -8,9 +8,16 @@
   </div>
 
   <div class="berkut-finder-files-container" class="berkut-finder-files-container">
-    <div class="berkut-finder-file" v-for="result in results" track-by="$index">
-      <canvas class="berkut-finder-file-thumbnail"></canvas>
-      <div class="berkut-finder-file-caption"></div>
+    <div
+      class="berkut-finder-file"
+      v-for="result in results"
+      track-by="$index"
+      draggable="true"
+      v-on:dragstart="beginDrag($index, $event)">
+      <img
+        class="berkut-finder-file-thumbnail"
+        v-bind:src="result.src"/>
+      <div class="berkut-finder-file-caption">{{result.name}}</div>
     </div>
   </div>
 </div>

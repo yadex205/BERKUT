@@ -11,8 +11,11 @@ const electron = require('electron')
 const {app} = electron
 const {BrowserWindow} = electron
 const {ipcMain} = electron
+const useExperimentalCanvasFeature = false
 
-app.commandLine.appendSwitch('enable-unsafe-es3-apis')
+if (process.platform === 'darwin') {
+    app.commandLine.appendSwitch('enable-unsafe-es3-apis')
+}
 
 global.dashboardWindow
 let outputWindow
@@ -24,14 +27,14 @@ function createWindow () {
         height: 700,
         minHeight: 700,
         webPreferences: {
-            experimentalCanvasFeatures: true
+            experimentalCanvasFeatures: useExperimentalCanvasFeature
         }
     })
     outputWindow = new BrowserWindow({
         width: 960,
         height: 540,
         webPreferences: {
-            experimentalCanvasFeatures: true
+            experimentalCanvasFeatures: useExperimentalCanvasFeature
         }
     })
 

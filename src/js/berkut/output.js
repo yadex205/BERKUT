@@ -40,8 +40,9 @@
             this._texture = this.__bindTexture(gl, this._program)
             this.gl = gl
         },
-        __initGl: function() {
-            const gl = this.canvas.getContext('webgl2')
+        __initGl: function () {
+            const ctxName = window.WebGL2RenderingContext ? 'webgl2' : 'webgl'
+            const gl = this.canvas.getContext(ctxName)
             gl.clearColor(0.0, 0.0, 0.0, 1.0)
             return gl
         },

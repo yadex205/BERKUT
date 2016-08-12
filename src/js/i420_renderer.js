@@ -96,8 +96,9 @@ I420Renderer.prototype = {
         gl.v.fill(videoFrame.width >> 1, videoFrame.height >> 1,
                   videoFrame.subarray(videoFrame.vOffset, videoFrame.length))
     },
-    _setupCanvas: function() {
-        this.canvas.gl = this.canvas.getContext('webgl2', {
+    _setupCanvas: function () {
+        const ctxName = window.WebGL2RenderingContext ? 'webgl2' : 'webgl'
+        this.canvas.gl = this.canvas.getContext(ctxName, {
             preserveDrawingBuffer: true
         })
 

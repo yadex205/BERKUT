@@ -41,7 +41,9 @@
             this._bindCallbacks(index)
         },
         play: function(index, filepath) {
-            this._players[index].play(filepath)
+            const prefix = process.platform === 'win32' ? 'file:///' : 'file://'
+            console.log(filepath)
+            this._players[index].play(prefix + filepath.trim())
         },
         pause: function(index) {
             this._players[index].pause()
