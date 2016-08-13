@@ -1,6 +1,6 @@
 BERKUT.Deck.Seekbar = function() {
     BERKUT.createSliders(
-        '.berkut-slider-seekbar',
+        '.berkut-layer-seekbar',
         { tooltip: 'hide' },
         (slider, index) => {
             this.layers[index]._seekbar = slider

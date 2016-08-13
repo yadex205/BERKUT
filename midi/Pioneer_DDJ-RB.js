@@ -55,10 +55,10 @@ module.exports = new MidiController({
 			if (value > 64) { this.emit(In.JOG_SEARCH_FWD_B, value - 64) }
 			else { this.emit(In.JOG_SEARCH_REV_B, 64 - value) }
 		})
-		this.onMax(0xB0, 0x36, In.PAUSE_A)
-		this.onZero(0xB0, 0x36, In.PLAY_A)
-		this.onMax(0xB1, 0x36, In.PAUSE_B)
-		this.onZero(0xB1, 0x36, In.PLAY_B)
+		this.onMax(0x90, 0x36, In.PAUSE_A)
+		this.onZero(0x90, 0x36, In.PLAY_A)
+		this.onMax(0x91, 0x36, In.PAUSE_B)
+		this.onZero(0x91, 0x36, In.PLAY_B)
 		this.onValue(0xB0, 0x00, In.SPEED_A)
 		this.onValue(0xB1, 0x00, In.SPEED_B)
 

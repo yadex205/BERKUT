@@ -11,7 +11,8 @@ BERKUT.Deck = Vue.extend({
                     opacity: 0, blend: 'normal',
                     time: 0, duration: 5,
                     _renderer: new I420Renderer(),
-                    _frame: null, _seekbar: null, _isSeeking : false
+                    _frame: null, _seekbar: null, _isSeeking : false,
+                    deckA: -1, deckB: -1
                 }
             }),
             preview: (() => {
@@ -29,6 +30,7 @@ BERKUT.Deck = Vue.extend({
         BERKUT.Deck.Seekbar.bind(this)()
         BERKUT.Deck.OpacitySlider.bind(this)()
         BERKUT.Deck.LayerPreview.bind(this)()
+        BERKUT.Deck.Midi.bind(this)()
         this.blendTask = setInterval(() => { this.blend() }, 1000 / 30)
     },
     watch: {
