@@ -40,21 +40,25 @@ BERKUT.Deck = Vue.extend({
         },
         blend: function() {
             requestAnimationFrame(() => {
-                this.preview.clear()
-                let layer = null
-                for(let i = this.layers.length - 1; i >= 0; i = (i - 1) | 0) {
-                    layer = this.layers[i]
-                    if (!layer._frame) { continue }
-                    this.preview.draw(layer._frame, layer.blend, layer.opacity)
-                }
-                this.preview.flush()
-                this.blendedFrame = this.preview.readPixels(this.blendedFrame)
-                requestAnimationFrame(() => {
-                    const width = this.preview.canvas.width
-                    const height = this.preview.canvas.height
-                    this.output.sendFrame(this.blendedFrame, width, height)
-                })
+                this._blendLayers()
+                this._sendToOutput()
             })
+        },
+        _blendLayers: function() {
+            this.preview.clear()
+            let layer = null
+            for(let i = this.layers.length - 1; i >= 0; i = (i - 1) | 0) {
+                layer = this.layers[i]
+                if (!layer._frame) { continue }
+                this.preview.draw(layer._frame, layer.blend, layer.opacity)
+            }
+            this.preview.flush()
+            this.blendedFrame = this.preview.readPixels(this.blendedFrame)
+        },
+        _sendToOutput: function () {
+            const width = this.preview.canvas.width
+            const height = this.preview.canvas.height
+            this.output.sendFrame(this.blendedFrame, width, height)
         },
         _dropped: function(index, event) {
             event.stopPropagation()
