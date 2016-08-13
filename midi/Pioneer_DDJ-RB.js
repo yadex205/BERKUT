@@ -1,9 +1,9 @@
 const MidiController = require('../lib/midi/controller')
-const Event = require('../lib/event')
+const Event = require('../lib/midi/event')
 const In = Event.In
 
 module.exports = new MidiController({
-	in: () => {
+	in: function () {
 		// Browser
 		this.on(0xB6, 0x40, (value) => {
 			if (value <= 30) { this.emit(In.SELECT_MEDIA_FWD, value) }
@@ -14,9 +14,9 @@ module.exports = new MidiController({
 			else { this.emit(In.SELECT_LAYER_REV, 128 - value) }
 		})
 		this.onMax(0x96, 0x46, In.LOAD_MEDIA_A)
-		this.onMax(0x96, 0x58, In.SELECT_LAYER_A)
-		this.onMax(0x96, 0x47, In.LOAD_MEDIA_A)
-		this.onMax(0x96, 0x98, In.SELECT_LAYER_B)
+		this.onMax(0x96, 0x58, In.SET_LAYER_A)
+		this.onMax(0x96, 0x47, In.LOAD_MEDIA_B)
+		this.onMax(0x96, 0x59, In.SET_LAYER_B)
 
 		// Deck
 		this.onMax(0x90, 0x0B, In.PLAY_PAUSE_A)
@@ -59,12 +59,12 @@ module.exports = new MidiController({
 		this.onZero(0xB0, 0x36, In.PLAY_A)
 		this.onMax(0xB1, 0x36, In.PAUSE_B)
 		this.onZero(0xB1, 0x36, In.PLAY_B)
-		this.onValue(0xB0, 0x00, this.emit(In.SPEED_A))
-		this.onValue(0xB1, 0x00, this.emit(In.SPEED_B))
+		this.onValue(0xB0, 0x00, In.SPEED_A)
+		this.onValue(0xB1, 0x00, In.SPEED_B)
 
 		// Blender
-		this.onValue(0xB6, 0x1F, this.emit(In.CROSSFADER))
-		this.onValue(0xB0, 0x13, this.emit(In.OPACITY_A))
-		this.onValue(0xB1, 0x13, this.emit(In.OPACITY_B))
+		this.onValue(0xB6, 0x1F, In.CROSSFADER)
+		this.onValue(0xB0, 0x13, In.OPACITY_A)
+		this.onValue(0xB1, 0x13, In.OPACITY_B)
 	}
 })
