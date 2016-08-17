@@ -1,3 +1,3 @@
-BERKUT.DECK.Event = {
-	SET_OPACITY = 'berkut-deck:set-opacity'
+BERKUT.Deck.Event = {
+	SET_OPACITY: 'berkut-deck:set-opacity'
 }
