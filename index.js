@@ -40,8 +40,8 @@ function createWindow () {
 
     global.dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
     outputWindow.loadURL(`file://${__dirname}/htdocs/output.html`)
-    ipcMain.on('berkut-output:updated', (event, pixels, width, height) => {
-        outputWindow.webContents.send('berkut-output:updated', pixels, width, height)
+    ipcMain.on('berkut-output:updated', (event, pid, address, width, height) => {
+        outputWindow.webContents.send('berkut-output:updated', pid, address, width, height)
     })
     app.on('closed', () => {
         global.dashboardWindow = null

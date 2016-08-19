@@ -18,7 +18,7 @@ BERKUT.Deck = Vue.extend({
             preview: (() => {
                 const renderer = new I420Renderer()
                 renderer.bind(document.querySelector('#berkut-output-preview'))
-                renderer.setSize(480, 270)
+                renderer.setSize(1280, 720)
                 return renderer
             })(),
             output: new BERKUT.OutputWindow(),

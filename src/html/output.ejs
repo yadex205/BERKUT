@@ -18,13 +18,26 @@
       window.ipc = require('electron').ipcRenderer
       window.remote = require('electron').remote
       window.MemoryReader = require('../lib/pointer_tunnel').Reader
+      window.dashboardPid = null
+      window.pixelsLength = 4
+      window.pixelsCache = new Uint8Array(4)
     </script>
     <script src="js/index.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
+        window.reader = new MemoryReader()
         window.bOutput = new BERKUT.Output(document.querySelector('#output'))
-        ipc.on('berkut-output:updated', (event, pixels, width, height) => {
-          bOutput.draw(pixels, width, height)
+        ipc.on('berkut-output:updated', (event, pid, address, width, height) => {
+          if (dashboardPid !== pid) {
+            reader.connect(pid)
+            dashboardPid = pid
+          }
+          if (pixelsLength !== width * height * 4) {
+            pixelsLength = width * height * 4
+            pixelsCache = new Uint8Array(pixelsLength)
+          }
+          if (dashboardPid) { reader.read(address, pixelsCache) }
+          bOutput.draw(pixelsCache, width, height)
         })
       })
     </script>
