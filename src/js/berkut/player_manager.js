@@ -7,6 +7,7 @@
         CREATE:        'berkut-player-manager:create',
         PLAY:          'berkut-player-manager:play',
         PAUSE:         'berkut-player-manager:pause',
+        TOGGLE_PAUSE:  'berkut-player-manager:toggle-pause',
         STOP:          'berkut-player-manager:stop',
         DESTROY:       'berkut-player-manager:destroy',
         FRAME_SETUP:   'berkut-player-manager:frame-setup',
@@ -17,7 +18,9 @@
         DO_PAUSE:      'berkut-player-manager:do-pause',
         DO_STOP:       'berkut-player-manager:do-stop',
         DO_DESTROY:    'berkut-player-manager:do-destroy',
-        SEEK_POS:      'berkut-player-manager:seek-pos'
+        SEEK_POS:      'berkut-player-manager:seek-pos',
+        SEEK_DIFF:     'berkut-player-manager:seek-diff',
+        SET_RATE:      'berkut-player-manager:rate'
     }
 
     const PlayerManager = function () {
@@ -34,6 +37,9 @@
         EventEmitter.on(Event.DO_STOP, (index) => { this.stop(index) })
         EventEmitter.on(Event.DO_DESTROY, (index) => { this.destroy(index) })
         EventEmitter.on(Event.SEEK_POS, (index, pos) => { this.seek(index, pos) })
+        EventEmitter.on(Event.SEEK_DIFF, (index, diff) => { this.seekDiff(index, diff) })
+        EventEmitter.on(Event.TOGGLE_PAUSE, (index) => { this.togglePause(index) })
+        EventEmitter.on(Event.SET_RATE, (index, rate) => { this.setRate(index, rate) })
     }
 
     PlayerManager.prototype = {
@@ -53,8 +59,17 @@
         pause: function(index) {
             this._players[index].pause()
         },
+        togglePause: function(index) {
+            this._players[index].togglePause()
+        },
         seek: function (index, pos) {
             this._players[index].position = pos
+        },
+        seekDiff: function (index, diff) {
+            this._players[index].time = this._players[index].time + diff
+        },
+        setRate: function(index, rate) {
+            this._players[index].input.rate = rate
         },
         stop: function(index) {
             this._players[index].stop()
@@ -81,6 +96,7 @@
             player.onStopped =    () => { EventEmitter.emit(Event.STOP, index) }
             player.onFrameSetup = (width, height, pixelFormat, videoFrame) => {
                 EventEmitter.emit(Event.FRAME_SETUP, index, width, height, player)
+                EventEmitter.emit(Event.FRAME_UPDATED, index, player, videoFrame)
             }
             player.onFrameReady = (videoFrame) => {
                 EventEmitter.emit(

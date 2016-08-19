@@ -9,9 +9,18 @@
 
     <div class="berkut-layer-deck-selector-and-seekbar col-md-4">
       <div class="berkut-layer-deck-selector btn-group" data-toggle="buttons">
-        <label class="btn btn-default"><input type="radio" autocomplete="off" />A</label>
-        <label class="btn btn-default"><input type="radio" autocomplete="off" checked="checked" />N</label>
-        <label class="btn btn-default"><input type="radio" autocomplete="off" />B</label>
+        <label
+          class="btn"
+          :class="layers[$index].switch === 'a' ? 'active' : ''" 
+          v-on:click="selectDeck($index, 'a')">A</label>
+        <label
+          class="btn"
+          :class="layers[$index].switch === 'n' ? 'active' : ''" 
+          v-on:click="selectDeck($index, 'n')">N</label>
+        <label
+          class="btn"
+          :class="layers[$index].switch === 'b' ? 'active' : ''" 
+          v-on:click="selectDeck($index, 'b')">B</label>
       </div>
 
       <div class="berkut-layer-seekbar-wrapper">

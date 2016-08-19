@@ -7,7 +7,9 @@ BERKUT.Deck.OpacitySlider = function () {
 	}, (slider, index) => {
 		slider.on('slide', (slide) => { this.layers[index].opacity = slide.value })
 		EventEmitter.on(BERKUT.Deck.Event.SET_OPACITY, (sliderIndex, opacity) => {
-			if (index === sliderIndex) { slider.setValue(opacity, true) }
+			if (index === sliderIndex) {
+				slider.slider('setValue', opacity, true)
+			}
 		})
 	})
 }
