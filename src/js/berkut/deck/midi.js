@@ -3,12 +3,38 @@ BERKUT.Deck.Midi = function() {
     const PlayerEvent = BERKUT.PlayerManager.Event
     const DeckEvent = BERKUT.Deck.Event
 
+    const jogDiff = 60.0 / (35 * 720) * 1000
+
     const register = function (midiEventName, callback) {
         EventEmitter.on(
             MidiEvent[midiEventName],
             callback
         )
     }
+
+    register('JOG_ROTATE_REV_A', (value) => {
+        if (this.deck.a !== null) {
+            EventEmitter.emit(PlayerEvent.SEEK_DIFF, this.deck.a, -1.0 * value * jogDiff)
+        }
+    })
+
+    register('JOG_ROTATE_FWD_A', (value) => {
+        if (this.deck.a !== null) {
+            EventEmitter.emit(PlayerEvent.SEEK_DIFF, this.deck.a, 1.5 * value * jogDiff)
+        }
+    })
+
+    register('JOG_ROTATE_REV_B', (value) => {
+        if (this.deck.a !== null) {
+            EventEmitter.emit(PlayerEvent.SEEK_DIFF, this.deck.b, -1.0 * value * jogDiff)
+        }
+    })
+
+    register('JOG_ROTATE_FWD_B', (value) => {
+        if (this.deck.a !== null) {
+            EventEmitter.emit(PlayerEvent.SEEK_DIFF, this.deck.b, 1.5 * value * jogDiff)
+        }
+    })
 
     register('PLAY_A', () => {
         if (this.deck.a !== null) { EventEmitter.emit(PlayerEvent.DO_PLAY, this.deck.a) }
@@ -24,6 +50,14 @@ BERKUT.Deck.Midi = function() {
 
     register('PAUSE_B', () => {
         if (this.deck.b !== null) { EventEmitter.emit(PlayerEvent.DO_PAUSE, this.deck.b) }
+    })
+
+    register('PLAY_PAUSE_A', () => {
+        if (this.deck.a !== null) { EventEmitter.emit(PlayerEvent.TOGGLE_PAUSE, this.deck.a)}
+    })
+
+    register('PLAY_PAUSE_B', () => {
+        if (this.deck.b !== null) { EventEmitter.emit(PlayerEvent.TOGGLE_PAUSE, this.deck.b)}
     })
 
     register('OPACITY_1', (value) => {
@@ -60,5 +94,21 @@ BERKUT.Deck.Midi = function() {
         if (this.deck.b !== null) {
             EventEmitter.emit(DeckEvent.SET_OPACITY, this.deck.b, value / 127.0)
         }
+    })
+
+    register('SPEED_A', (value) => {
+        if (this.deck.a !== null) {
+            EventEmitter.emit(PlayerEvent.SET_RATE, this.deck.a, Math.max(0.3, value / 127 * 2))
+        }
+    })
+
+    register('SPEED_B', (value) => {
+        if (this.deck.b !== null) {
+            EventEmitter.emit(PlayerEvent.SET_RATE, this.deck.b, Math.max(0.3, value / 127 * 2))
+        }
+    })
+
+    register('CROSSFADER', (value) => {
+        EventEmitter.emit(BERKUT.Deck.Event.SET_CROSSFADER, (value / 127.0 - 0.5) * 2)
     })
 }

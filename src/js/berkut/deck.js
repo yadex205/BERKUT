@@ -16,6 +16,7 @@ BERKUT.Deck = Vue.extend({
                 }
             }),
             deck: { a: null, b: null },
+            crossfader: 0,
             preview: (() => {
                 const renderer = new I420Renderer()
                 renderer.bind(document.querySelector('#berkut-output-preview'))
@@ -32,6 +33,7 @@ BERKUT.Deck = Vue.extend({
         BERKUT.Deck.OpacitySlider.bind(this)()
         BERKUT.Deck.LayerPreview.bind(this)()
         BERKUT.Deck.Midi.bind(this)()
+        BERKUT.Deck.setupCrossfader.bind(this)()
         this.blendTask = setInterval(() => { this.blend() }, 1000 / 30)
     },
     watch: {
@@ -65,10 +67,19 @@ BERKUT.Deck = Vue.extend({
         _blendLayers: function() {
             this.preview.clear()
             let layer = null
+            let opacity = 0
+            let xfader = (this.crossfader + 1) / 2
+            let abboth = this.deck.a !== null && this.deck.b !== null
             for(let i = this.layers.length - 1; i >= 0; i = (i - 1) | 0) {
                 layer = this.layers[i]
+                opacity = layer.opacity
                 if (!layer._frame) { continue }
-                this.preview.draw(layer._frame, layer.blend, layer.opacity)
+                if (layer.switch === 'a' && abboth && this.deck.a < this.deck.b) {
+                    opacity = opacity * (1 - xfader)
+                } else if (layer.switch === 'b' && abboth && this.deck.a > this.deck.b) {
+                    opacity = opacity * xfader
+                }
+                this.preview.draw(layer._frame, layer.blend, opacity)
             }
             this.preview.flush()
             this.blendedFrame = this.preview.readPixels(this.blendedFrame)
