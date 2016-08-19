@@ -16,7 +16,8 @@
         DO_PLAY:       'berkut-player-manager:do-play',
         DO_PAUSE:      'berkut-player-manager:do-pause',
         DO_STOP:       'berkut-player-manager:do-stop',
-        DO_DESTROY:    'berkut-player-manager:do-destroy'
+        DO_DESTROY:    'berkut-player-manager:do-destroy',
+        SEEK_POS:      'berkut-player-manager:seek-pos'
     }
 
     const PlayerManager = function () {
@@ -32,6 +33,7 @@
         EventEmitter.on(Event.DO_PAUSE, (index) => { this.pause(index) })
         EventEmitter.on(Event.DO_STOP, (index) => { this.stop(index) })
         EventEmitter.on(Event.DO_DESTROY, (index) => { this.destroy(index) })
+        EventEmitter.on(Event.SEEK_POS, (index, pos) => { this.seek(index, pos) })
     }
 
     PlayerManager.prototype = {
@@ -41,12 +43,18 @@
             this._bindCallbacks(index)
         },
         play: function(index, filepath) {
-            const prefix = process.platform === 'win32' ? 'file:///' : 'file://'
-            console.log(filepath)
-            this._players[index].play(prefix + filepath.trim())
+            if (filepath) {
+                const prefix = process.platform === 'win32' ? 'file:///' : 'file://'
+                this._players[index].play(prefix + filepath.trim())
+            } else {
+                this._players[index].play()
+            }
         },
         pause: function(index) {
             this._players[index].pause()
+        },
+        seek: function (index, pos) {
+            this._players[index].position = pos
         },
         stop: function(index) {
             this._players[index].stop()
@@ -72,13 +80,13 @@
             player.onPaused =     () => { EventEmitter.emit(Event.PAUSE, index) }
             player.onStopped =    () => { EventEmitter.emit(Event.STOP, index) }
             player.onFrameSetup = (width, height, pixelFormat, videoFrame) => {
-                EventEmitter.emit(Event.FRAME_SETUP, index, width, height, videoFrame)
+                EventEmitter.emit(Event.FRAME_SETUP, index, width, height, player)
             }
             player.onFrameReady = (videoFrame) => {
                 EventEmitter.emit(
                     Event.FRAME_UPDATED,
                     index,
-                    player.time,
+                    player,
                     videoFrame
                 )
             }
