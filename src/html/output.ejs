@@ -13,10 +13,11 @@
      }
     </style>
     <script>
-     window.jQuery = window.$ = require('jquery')
-     window.Vue = require('vue')
-     window.ipc = require('electron').ipcRenderer
-     window.remote = require('electron').remote
+      window.jQuery = window.$ = require('jquery')
+      window.Vue = require('vue')
+      window.ipc = require('electron').ipcRenderer
+      window.remote = require('electron').remote
+      window.MemoryReader = require('../lib/pointer_tunnel').Reader
     </script>
     <script src="js/index.js"></script>
     <script>
