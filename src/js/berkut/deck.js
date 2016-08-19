@@ -15,6 +15,7 @@ BERKUT.Deck = Vue.extend({
                     deckA: -1, deckB: -1
                 }
             }),
+            deck: { a: null, b: null },
             preview: (() => {
                 const renderer = new I420Renderer()
                 renderer.bind(document.querySelector('#berkut-output-preview'))
@@ -45,6 +46,21 @@ BERKUT.Deck = Vue.extend({
                 this._blendLayers()
                 this._sendToOutput()
             })
+        },
+        selectDeck: function(index, deck) {
+            switch (deck) {
+                case 'a': this._resetDeckAtLayer(this.deck.a); this.deck.a = index; break;
+                case 'b': this._resetDeckAtLayer(this.deck.b); this.deck.b = index; break;
+                case 'n':
+                    if (this.deck.a === index) { this.deck.a = null }
+                    else if (this.deck - b === index) { this.deck.b = null }
+                    break
+            }
+            this.layers[index].switch = deck
+        },
+        _resetDeckAtLayer(index) {
+            if (index === null) { return }
+            this.layers[index].switch = 'n'
         },
         _blendLayers: function() {
             this.preview.clear()
