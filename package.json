@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "download": "^5.0.2",
+    "ffi": "^2.1.0",
     "ffmpeg": "0.0.4",
     "find": "^0.2.7",
     "iconv-lite": "^0.4.13",
