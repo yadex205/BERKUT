@@ -9,7 +9,7 @@
         this.texture = null
 
         this._setupCanvas()
-        this.setSize(480, 270)
+        this.setSize(1280, 720)
     }
 
     Output.prototype = {

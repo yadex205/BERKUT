@@ -35,6 +35,7 @@
           if (pixelsLength !== width * height * 4) {
             pixelsLength = width * height * 4
             pixelsCache = new Uint8Array(pixelsLength)
+            bOutput.setSizse(width, height)
           }
           if (dashboardPid) { reader.read(address, pixelsCache) }
           bOutput.draw(pixelsCache, width, height)

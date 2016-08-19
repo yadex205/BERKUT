@@ -33,6 +33,7 @@ function createWindow () {
     outputWindow = new BrowserWindow({
         width: 960,
         height: 540,
+        autoHideMenuBar: true,
         webPreferences: {
             experimentalCanvasFeatures: useExperimentalCanvasFeature
         }
