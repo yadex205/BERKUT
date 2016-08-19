@@ -53,7 +53,7 @@ BERKUT.Deck = Vue.extend({
                 case 'b': this._resetDeckAtLayer(this.deck.b); this.deck.b = index; break;
                 case 'n':
                     if (this.deck.a === index) { this.deck.a = null }
-                    else if (this.deck - b === index) { this.deck.b = null }
+                    else if (this.deck.b === index) { this.deck.b = null }
                     break
             }
             this.layers[index].switch = deck
