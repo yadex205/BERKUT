@@ -21,7 +21,7 @@ let appProcess = null
 
 gulp.task('default')
 
-gulp.task('live', ['html', 'css'], () => {
+gulp.task('live', ['html', 'css', 'electron'], () => {
     livereload.listen()
     gulp.watch('app/views/**/*.ejs', ['html'])
     gulp.watch('app/assets/styles/**/*.s+(a|c)ss', ['css'])
