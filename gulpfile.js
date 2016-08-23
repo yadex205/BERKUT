@@ -51,7 +51,7 @@ gulp.task('electron', () => {
 })
 
 gulp.task('html', () => {
-    return gulp.src(['app/views/**/*.ejs', '!app/view/**/_*.ejs'])
+    return gulp.src(['app/views/**/*.ejs', '!app/views/**/_*.ejs'])
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(ejs(ejsOptions, ejsSettings))
