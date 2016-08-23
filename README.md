@@ -2,3 +2,29 @@ BERKUT
 ===
 
 BERKUT VJ Software
+
+
+Developing
+---
+
+### Preparing
+
+1. Install requirements for each platforms
+    - `Windows`: **Visual Studio Community 2015** with **Visual C++**  
+      (When installing, enable `Select Features` > `Programming Languages` > `Visual C++`)
+    - `macOS`: **Xcode** and **Command Line Tools for Xcode**
+    - `Ubuntu`: **build-essentials** via `apt-get`
+2. Install Git, Node.js(>=6.0.0) and Python(2.7.x)
+3. Execute following
+
+```
+$ npm install -g gulp bower cross-env eslint sass-lint
+$ git clone https://github.com/yadex205/berkut.git
+$ cd berkut
+$ npm bootstrap
+```
+
+#### Attention
+
+`npm install` may results that some npm modules don't work correctly because of [this](https://github.com/electron/electron/blob/master/docs/tutorial/using-native-node-modules.md),
+so please use `npm bootstrap` insted.
