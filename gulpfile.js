@@ -11,6 +11,10 @@ const ejsSetting = { ext: '.html' }
 
 gulp.task('default')
 
+gulp.task('watch', ['html'], () => {
+    gulp.watch('app/view/**/*.ejs', ['html'])
+})
+
 gulp.task('html', () => {
     gulp.src(['app/view/**/*.ejs', '!app/view/**/_*.ejs'])
         .pipe(plumber(plumberOption))
