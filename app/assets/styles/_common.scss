@@ -9,3 +9,9 @@ $fg-color-dark: #999;
 $fg-color-normal: #aaa;
 $fg-color-light: #bbb;
 $fg-color-lighter: #ccc;
+body {
+  background-color: $bg-color-normal;
+  color: $fg-color-normal;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
