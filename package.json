@@ -33,6 +33,7 @@
       "gulpfile.js", "app", "bower.json", "README.md", "LICENSE", "dist"
      ],
      "prune": true,
+     "overwrite": true,
      "out": "dist"
   },
   "devDependencies": {
