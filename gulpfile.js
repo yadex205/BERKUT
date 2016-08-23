@@ -11,10 +11,12 @@ const log = require('gulp-util').log
 const electron = require('electron')
 const spawn = require('child_process').spawn
 
-const plumberOption = {
+const isLiveTask = process.argv[2] === 'live'
+const plumberOptions = {
     errorHandler: notify.onError('Error: <%= error.message %>')
 }
-const ejsSetting = { ext: '.html' }
+const ejsOptions = { isLivereload: isLiveTask }
+const ejsSettings = { ext: '.html' }
 
 let isReload = false
 let appProcess = null
@@ -50,9 +52,9 @@ gulp.task('electron', () => {
 
 gulp.task('html', () => {
     return gulp.src(['app/views/**/*.ejs', '!app/view/**/_*.ejs'])
-        .pipe(plumber(plumberOption))
+        .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
-        .pipe(ejs({}, ejsSetting))
+        .pipe(ejs(ejsOptions, ejsSettings))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('htdocs'))
         .pipe(livereload())
@@ -60,7 +62,7 @@ gulp.task('html', () => {
 
 gulp.task('css', () => {
     return gulp.src('app/assets/styles/**/*.s+(a|c)ss')
-        .pipe(plumber(plumberOption))
+        .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(sourcemaps.write())
