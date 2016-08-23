@@ -1,0 +1,22 @@
+{
+  "name": "berkut",
+  "description": "BERKUT vj software",
+  "main": "index.js",
+  "authors": [
+    "Kanon Kakuno <yadex205@outlook.jp>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "bootstrap-sass-official#^3.3.6",
+    "seiyria-bootstrap-slider": "^9.1.1"
+  }
+}

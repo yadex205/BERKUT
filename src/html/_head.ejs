@@ -1,0 +1,30 @@
+<head>
+  <meta charset="UTF-8"/>
+
+  <link href="css/style.css" rel="stylesheet"/>
+  <script>
+   window.jQuery = window.$ = require('jQuery')
+   window.Vue = require('vue')
+   window.WebChimera = require('wcjs-prebuilt')
+   window.Ref = require('ref')
+   window.FFI = require('ffi')
+   window.EventEmitter = new (require('events'))()
+   window.remote = require('electron').remote
+   window.ipc = require('electron').ipcRenderer
+   window.MidiManager = require('../lib/midi')
+  </script>
+  <script src="js/index.js"></script>
+  <script>
+   document.ondrop = document.ondragover = (event) => {
+       event.preventDefault()
+       return false
+   }
+   window.berkut = new BERKUT()
+  </script>
+
+  <title>BERKUT</title>
+
+  <% if(isLive) { %>
+    <script src="http://localhost:35729/livereload.js"></script>
+  <% } %>
+</head>

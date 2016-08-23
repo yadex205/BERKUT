@@ -1,0 +1,25 @@
+.berkut-body {
+  position: absolute;
+  top: #{$header-height + $margin};
+  bottom: $margin;
+  left: $margin;
+  right: $margin;
+
+  .berkut-pane {
+    position: absolute;
+    height: 100%;
+
+    &.left {
+      @import 'berkut_body/berkut_deck';
+      @import 'berkut_body/berkut_output_preview';
+      @import 'berkut_body/berkut_crossfader';
+      width: $deck-width;
+    }
+
+    &.right {
+      left: $deck-width + $margin;
+      width: calc(100% - #{$deck-width + $margin});
+      @import 'berkut_body/berkut_finder';
+    }
+  }
+}

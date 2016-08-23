@@ -1,0 +1,9 @@
+scss_files:
+  'src/css/**/*.scss'
+
+linters:
+  DeclarationOrder:
+    enabled: false
+
+  PropertySortOrder:
+    enabled: false
