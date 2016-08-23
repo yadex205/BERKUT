@@ -16,5 +16,11 @@
     "url": "https://github.com/yadex205/berkut/issues"
   },
   "homepage": "https://github.com/yadex205/berkut#readme",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "graceful-fs": "^4.1.6",
+    "gulp": "^3.9.1",
+    "lodash": "^4.15.0",
+    "minimatch": "^3.0.3"
+  }
 }
