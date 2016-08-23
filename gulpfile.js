@@ -11,8 +11,6 @@ const log = require('gulp-util').log
 const electron = require('electron')
 const spawn = require('child_process').spawn
 
-
-
 const isLiveTask = Array.from(process.argv).pop() === 'live'
 const plumberOptions = {
     errorHandler: notify.onError('Error: <%= error.message %>')
