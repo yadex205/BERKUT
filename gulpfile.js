@@ -26,6 +26,13 @@ let appProcess = null
 
 gulp.task('default')
 
+gulp.task('deploy_bower', () => {
+    gulp.src('bower_components/font-awesome/css/font-awesome.min.css')
+        .pipe(gulp.dest('htdocs/vendor/font-awesome/css'))
+    gulp.src('bower_components/font-awesome/fonts/*')
+        .pipe(gulp.dest('htdocs/vendor/font-awesome/fonts'))
+})
+
 gulp.task('live', ['html', 'css', 'md', 'electron'], () => {
     livereload.listen()
     gulp.watch('app/views/**/*.ejs', ['html'])
