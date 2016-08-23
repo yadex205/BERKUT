@@ -23,6 +23,8 @@
     "gulp-ejs": "^2.1.3",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
     "lodash": "^4.15.0",
     "minimatch": "^3.0.3"
   }
