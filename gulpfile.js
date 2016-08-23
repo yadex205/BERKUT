@@ -12,6 +12,7 @@ const cached = require('gulp-cached')
 const log = require('gulp-util').log
 
 const electron = require('electron')
+const packager = require('electron-packager')
 const spawn = require('child_process').spawn
 
 const isLiveTask = Array.from(process.argv).pop() === 'live'
@@ -24,7 +25,14 @@ const ejsSettings = { ext: '.html' }
 let isReload = false
 let appProcess = null
 
-gulp.task('default')
+gulp.task('default', ['html', 'css', 'md'], (cb) => {
+    const opts = require('./package.json').packagingOptions
+    opts.platform = process.platform
+    packager(opts, (err) => {
+        if (err) { log(err) }
+        cb()
+    })
+})
 
 gulp.task('deploy_bower', () => {
     gulp.src('bower_components/font-awesome/css/font-awesome.min.css')
