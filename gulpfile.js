@@ -56,7 +56,6 @@ gulp.task('electron', () => {
 
 gulp.task('html', () => {
     return gulp.src(['app/views/**/*.ejs', '!app/views/**/_*.ejs'])
-        .pipe(cached('html'))
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(ejs(ejsOptions, ejsSettings))
@@ -67,7 +66,6 @@ gulp.task('html', () => {
 
 gulp.task('css', () => {
     return gulp.src('app/assets/styles/**/*.s+(a|c)ss')
-        .pipe(cached('css'))
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(sass())
