@@ -5,4 +5,45 @@
   right: 4px;
   height: 36px;
   background-color: $bg-color-light;
+
+  .search-bar-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 2px;
+    box-sizing: border-box;
+    line-height: 34px;
+    transition: color 0.5s, background-color 0.5s;
+
+    &.active {
+      background-color: $bg-inverse-normal;
+      color: $fg-inverse-normal;
+    }
+
+    .search-bar-icon {
+      margin: 0 10px;
+      font-size: 20px;
+    }
+
+    .search-bar-input {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0px;
+      right: 0px;
+      bottom: 0;
+      margin: 0;
+      padding: 0 0 0 40px;
+      border: 0;
+      outline: 0;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      background: none;
+      -webkit-appearance: none;
+      color: inherit;
+      font-weight: bold;
+    }
+  }
 }

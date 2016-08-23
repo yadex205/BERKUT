@@ -9,6 +9,10 @@ $fg-color-dark: #999;
 $fg-color-normal: #aaa;
 $fg-color-light: #bbb;
 $fg-color-lighter: #ccc;
+
+$bg-inverse-normal: aquamarine;
+$fg-inverse-normal: #333;
+
 body {
   background-color: $bg-color-normal;
   color: $fg-color-normal;
