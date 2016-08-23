@@ -2,6 +2,8 @@ const gulp = require('gulp')
 const ejs = require('gulp-ejs')
 const sass = require('gulp-sass')
 const sourcemaps = require('gulp-sourcemaps')
+const markdown = require('gulp-markdown')
+const change = require('gulp-change')
 
 const livereload = require('gulp-livereload')
 const plumber = require('gulp-plumber')
@@ -23,10 +25,11 @@ let appProcess = null
 
 gulp.task('default')
 
-gulp.task('live', ['html', 'css', 'electron'], () => {
+gulp.task('live', ['html', 'css', 'md', 'electron'], () => {
     livereload.listen()
     gulp.watch('app/views/**/*.ejs', ['html'])
     gulp.watch('app/assets/styles/**/*.s+(a|c)ss', ['css'])
+    gulp.watch('app/articles/**/*.md', ['md'])
     gulp.watch('lib/**/*.js', () => { livereload() })
     gulp.watch('index.js', () => {
         isReload = true
@@ -68,4 +71,17 @@ gulp.task('css', () => {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('htdocs/assets/styles'))
         .pipe(livereload())
+})
+
+gulp.task('md', () => {
+    return gulp.src('app/articles/**/*.md')
+        .pipe(plumber(plumberOptions))
+        .pipe(markdown())
+        .pipe(change((content, done) => {
+            const prefix = '<%- include("../views/article/_prefix") %>'
+            const suffix = '<%- include("../views/article/_suffix") %>'
+            done(null, `${prefix}\n${content}\n${suffix}`)
+        }))
+        .pipe(ejs({}, ejsSettings))
+        .pipe(gulp.dest('htdocs/articles'))
 })
