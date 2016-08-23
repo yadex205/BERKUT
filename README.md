@@ -21,10 +21,5 @@ Developing
 $ npm install -g gulp bower cross-env eslint sass-lint
 $ git clone https://github.com/yadex205/berkut.git
 $ cd berkut
-$ npm bootstrap
+$ npm install
 ```
-
-#### Attention
-
-`npm install` may results that some npm modules don't work correctly because of [this](https://github.com/electron/electron/blob/master/docs/tutorial/using-native-node-modules.md),
-so please use `npm bootstrap` insted.
