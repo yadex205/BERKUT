@@ -8,6 +8,7 @@ const change = require('gulp-change')
 const livereload = require('gulp-livereload')
 const plumber = require('gulp-plumber')
 const notify = require('gulp-notify')
+const cached = require('gulp-cached')
 const log = require('gulp-util').log
 
 const electron = require('electron')
@@ -55,6 +56,7 @@ gulp.task('electron', () => {
 
 gulp.task('html', () => {
     return gulp.src(['app/views/**/*.ejs', '!app/views/**/_*.ejs'])
+        .pipe(cached('html'))
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(ejs(ejsOptions, ejsSettings))
@@ -65,6 +67,7 @@ gulp.task('html', () => {
 
 gulp.task('css', () => {
     return gulp.src('app/assets/styles/**/*.s+(a|c)ss')
+        .pipe(cached('css'))
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(sass())
@@ -75,6 +78,7 @@ gulp.task('css', () => {
 
 gulp.task('md', () => {
     return gulp.src('app/articles/**/*.md')
+        .pipe(cached('md'))
         .pipe(plumber(plumberOptions))
         .pipe(markdown())
         .pipe(change((content, done) => {
