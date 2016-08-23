@@ -84,4 +84,5 @@ gulp.task('md', () => {
         }))
         .pipe(ejs(ejsOptions, ejsSettings))
         .pipe(gulp.dest('htdocs/articles'))
+        .pipe(livereload())
 })
