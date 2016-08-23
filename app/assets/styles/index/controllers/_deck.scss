@@ -1,0 +1,8 @@
+.deck {
+  position: absolute;
+  top: 4px;
+  left: $left-pane-width + 8px;
+  right: 4px;
+  height: 288px;
+  background-color: $bg-color-light;
+}

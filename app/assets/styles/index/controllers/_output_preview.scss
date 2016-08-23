@@ -1,0 +1,8 @@
+.output-preview {
+  position: absolute;
+  top: 288px + 8px;
+  left: $left-pane-width + 8px;
+  width: 200px;
+  height: 432px - (288px + 4px);
+  background-color: $bg-color-light;
+}
