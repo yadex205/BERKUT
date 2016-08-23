@@ -82,6 +82,6 @@ gulp.task('md', () => {
             const suffix = '<%- include("../views/article/_suffix") %>'
             done(null, `${prefix}\n${content}\n${suffix}`)
         }))
-        .pipe(ejs({}, ejsSettings))
+        .pipe(ejs(ejsOptions, ejsSettings))
         .pipe(gulp.dest('htdocs/articles'))
 })
