@@ -13,6 +13,7 @@ const log = require('gulp-util').log
 
 const electron = require('electron')
 const packager = require('electron-packager')
+const rimraf = require('rimraf')
 const spawn = require('child_process').spawn
 
 const isLiveTask = Array.from(process.argv).pop() === 'live'
@@ -32,6 +33,13 @@ gulp.task('default', ['html', 'css', 'md'], (cb) => {
         if (err) { log(err) }
         cb()
     })
+})
+
+gulp.task('clean', (callback) => {
+    ['node_modules', 'bower_components', 'htdocs', 'dist'].forEach((folder_name) => {
+        rimraf.sync(folder_name)
+    })
+    callback()
 })
 
 gulp.task('deploy_bower', () => {
