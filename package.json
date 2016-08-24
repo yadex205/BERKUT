@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "npm install && bower install && gulp deploy_bower",
+    "scss-lint": "sass-lint -c .sass-lint.yml 'app/assets/styles/**/*.scss' -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
