@@ -10,7 +10,7 @@ Developing
 ### Preparing
 
 1. Install requirements for each platforms
-    - `Windows`: **Visual Studio Community 2015** with **Visual C++**  
+    - `Windows`: **Visual Studio Community 2015** with **Visual C++**
       (When installing, enable `Select Features` > `Programming Languages` > `Visual C++`)
     - `macOS`: **Xcode** and **Command Line Tools for Xcode**
     - `Ubuntu`: **build-essentials** via `apt-get`
@@ -18,7 +18,7 @@ Developing
 3. Execute following
 
 ```
-$ npm install -g gulp bower cross-env eslint sass-lint
+$ npm install -g gulp bower eslint
 $ git clone https://github.com/yadex205/berkut.git
 $ cd berkut
 $ npm install
