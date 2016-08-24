@@ -21,5 +21,5 @@ Developing
 $ npm install -g gulp bower eslint
 $ git clone https://github.com/yadex205/berkut.git
 $ cd berkut
-$ npm install
+$ npm run bootstrap
 ```
