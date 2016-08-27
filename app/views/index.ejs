@@ -3,7 +3,10 @@
 <head>
     <%- include('common/_head') %>
     <script>
-        new BERKUT()
+        const berkut = new BERKUT()
+        document.addEventListener('DOMContentLoaded', () => {
+            berkut.setupControllerWindow()
+        })
     </script>
     <link rel="stylesheet" href="assets/styles/index.css">
     <title>BERKUT</title>

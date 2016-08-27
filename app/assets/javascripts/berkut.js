@@ -16,3 +16,9 @@ const BERKUT = function () {
     loadModule('bootstrap')
     loadModule('vue', 'Vue')
 }
+
+BERKUT.prototype = {
+    setupControllerWindow: function () {
+        new BERKUT.SearchBar()
+    }
+}
