@@ -20,5 +20,6 @@ const BERKUT = function () {
 BERKUT.prototype = {
     setupControllerWindow: function () {
         new BERKUT.SearchBar()
+        new BERKUT.Stack()
     }
 }
