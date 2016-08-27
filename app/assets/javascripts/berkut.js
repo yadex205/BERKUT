@@ -14,6 +14,7 @@ const BERKUT = function () {
     loadModule('jquery', 'jQuery')
     window.$ = window.jQuery
     loadModule('bootstrap')
+    loadModule('bootstrap-slider')
     loadModule('vue', 'Vue')
 }
 
