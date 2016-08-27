@@ -1,6 +1,7 @@
 const gulp = require('gulp')
 const ejs = require('gulp-ejs')
 const sass = require('gulp-sass')
+const concat = require('gulp-concat')
 const sourcemaps = require('gulp-sourcemaps')
 const markdown = require('gulp-markdown')
 const change = require('gulp-change')
@@ -26,7 +27,7 @@ const ejsSettings = { ext: '.html' }
 let isReload = false
 let appProcess = null
 
-gulp.task('default', ['html', 'css', 'md'], (cb) => {
+gulp.task('default', ['html', 'css', 'js', 'md'], (cb) => {
     const opts = require('./package.json').packagingOptions
     opts.platform = process.platform
     packager(opts, (err) => {
@@ -49,10 +50,11 @@ gulp.task('deploy_bower', () => {
         .pipe(gulp.dest('htdocs/vendor/font-awesome/fonts'))
 })
 
-gulp.task('live', ['html', 'css', 'md', 'electron'], () => {
+gulp.task('live', ['html', 'css', 'js', 'md', 'electron'], () => {
     livereload.listen()
     gulp.watch('app/views/**/*.ejs', ['html'])
     gulp.watch('app/assets/styles/**/*.s+(a|c)ss', ['css'])
+    gulp.watch('app/assets/javascripts/**/*.js', ['js'])
     gulp.watch('app/articles/**/*.md', ['md'])
     gulp.watch('lib/**/*.js', () => { livereload() })
     gulp.watch('index.js', () => {
@@ -94,6 +96,20 @@ gulp.task('css', () => {
         .pipe(sass())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('htdocs/assets/styles'))
+        .pipe(livereload())
+})
+
+gulp.task('js', () => {
+    const targets = [
+        'berkut.js',
+        'berkut/**/*.js'
+    ].map((filename) => { return `app/assets/javascripts/${filename}` })
+    return gulp.src(targets)
+        .pipe(plumber(plumberOptions))
+        .pipe(sourcemaps.init())
+        .pipe(concat('berkut.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('htdocs/assets/javascripts'))
         .pipe(livereload())
 })
 
