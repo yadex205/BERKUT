@@ -50,6 +50,8 @@ gulp.task('deploy_bower', () => {
         .pipe(gulp.dest('htdocs/vendor/font-awesome/fonts'))
     gulp.src('bower_components/bootstrap-slider/slider.css')
         .pipe(gulp.dest('htdocs/vendor/bootstrap-slider'))
+    gulp.src('bower_components/bootstrap/dist/css/bootstrap.min.css')
+        .pipe(gulp.dest('htdocs/vendor/bootstrap'))
 })
 
 gulp.task('live', ['html', 'css', 'js', 'md', 'electron'], () => {
