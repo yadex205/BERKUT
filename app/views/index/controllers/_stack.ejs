@@ -1,9 +1,17 @@
 <section id="stack" class="stack">
-  <component-layer />
+  <component-layer></component-layer>
+  <component-layer></component-layer>
+  <component-layer></component-layer>
+  <component-layer></component-layer>
+  <component-layer></component-layer>
+  <component-layer></component-layer>
 </section>
 
 <script id="template-layer" type="x-template">
-  <div class="layer active">
-    <canvas class="layer-preview"></canvas>
+  <div class="layer">
+    <div class="layer-preview-wrapper">
+      <canvas class="layer-preview"></canvas>
+      <input type="text" v-el:seekbar-factory />
+    </div>
   </div>
 </script>
