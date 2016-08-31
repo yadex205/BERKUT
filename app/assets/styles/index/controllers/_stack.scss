@@ -11,8 +11,29 @@
     padding: 4px;
     box-sizing: border-box;
 
+    @mixin slider {
+      .slider-track {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: 0;
+        background-image: none;
+        background-color: rgba($bg-color-normal, 0.9);
+        box-shadow: none;
+
+        .slider-selection {
+          border-radius: 0;
+          background-image: none;
+          box-shadow: none;
+        }
+      }
+    }
+
     .layer-preview-wrapper {
         position: relative;
+        float: left;
         width: 100px;
         height: 100%;
 
@@ -23,29 +44,32 @@
         }
         
         .slider {
+          @include slider;
           position: absolute;
           display: block;
           bottom: 0;
           width: 100%;
           height: 12px;
           margin: 0;
-
-          .slider-track {
-            top: 0;
-            height: 100%;
-            margin: 0;
-            border-radius: 0;
-            background-image: none;
-            background-color: rgba($bg-color-normal, 0.9);
-            box-shadow: none;
-
-            .slider-selection {
-              border-radius: 0;
-              background-image: none;
-              box-shadow: none;
-            }
-          }
         }
+    }
+
+    .opacity-selector-wrapper {
+      position: relative;
+      float: left;
+      height: 100%;
+      width: 24px;
+      margin: 0 4px;
+
+      .slider {
+        @include slider;
+        position: absolute;
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
 
     &.active {
