@@ -11,12 +11,26 @@
     padding: 4px;
     box-sizing: border-box;
 
+    &:nth-child(2n) {
+      background-color: rgba($bg-color-lighter, 0.4);
+    }
+
     @mixin component {
       position: relative;
       display: inline-block;
       height: 100%;
       float: left;
       margin-right: 4px;
+    }
+
+    @mixin head-label {
+      height: 20%;
+      border-radius: 6px 6px 0 0;
+      background-color: $bg-color-lighter;
+      color: $fg-color-light;
+      font-size: 9px;
+      line-height: 14px;
+      text-align: center;
     }
 
     @mixin slider {
@@ -39,9 +53,24 @@
       }
     }
 
+    @mixin button {
+      position: relative;
+      height: 35%;
+      background-color: $bg-color-normal;
+      color: $fg-color-darker;
+      font-size: 11px;
+      line-height: 200%;
+      cursor: pointer;
+
+      &.active {
+        background-color: $bg-inverse-normal;
+        color: $fg-inverse-normal;
+      }
+    }
+
     .layer-preview-wrapper {
       @include component;
-      width: 100px;
+      width: 104px;
 
         .layer-preview {
           width: 100%;
@@ -62,7 +91,7 @@
 
     .opacity-selector-wrapper {
       @include component;
-      width: 24px;
+      width: 32px;
 
       .slider {
         @include slider;
@@ -79,13 +108,8 @@
       @include component;
 
       .speed-adjuster-label {
+        @include head-label;
         width: 100%;
-        height: 20%;
-        background-color: $bg-color-lighter;
-        color: $fg-color-light;
-        font-size: 9px;
-        line-height: 14px;
-        text-align: center;
         letter-spacing: 2px;
       }
 
@@ -95,16 +119,12 @@
         height: 35%;
 
         .switch {
+          @include button;
           float: left;
           width: 40px;
           height: 100%;
           margin-right: 4px;
-          background-color: $bg-color-normal;
-          color: $fg-color-darker;
-          font-size: 11px;
-          line-height: 22px;
           text-align: center;
-          cursor: pointer;
 
           &:last-child {
             margin-right: 0;
@@ -126,13 +146,18 @@
         }
 
         .transformer {
+          @include button;
           width: 24px;
+          height: 100%;
           text-align: center;
-          line-height: 22px;
-          cursor: pointer;
 
           &.down {
             margin-right: 4px;
+            border-radius: 0 0 0 6px;
+          }
+
+          &.up {
+            border-radius: 0 0 6px 0;
           }
         }
 
@@ -156,8 +181,80 @@
       }
     }
 
+    .lr-selector {
+      @include component;
+      width: 36px;
+
+      .lr-selector-label {
+        @include head-label;
+      }
+
+      .left, .right {
+        @include button;
+        padding: 0 5px;
+        box-sizing: border-box;
+        font-size: 14px;
+        line-height: 160%;
+      }
+
+      .left {
+        top: 5%;
+      }
+
+      .right {
+        top: 10%;
+        border-radius: 0 0 6px 6px;
+        text-align: right;
+      }
+    }
+
+    .display-behavior-selector {
+      @include component;
+      width: 36px;
+
+      .display-behavior-selector-label {
+        @include head-label;
+      }
+
+      .solo {
+        @include button;
+        top: 5%;
+        text-align: center; 
+      }
+
+      .mute {
+        @include button;
+        top: 10%;
+        border-radius: 0 0 6px 6px;
+        text-align: center;
+      }
+    }
+
+    .deck-selector {
+      @include component;
+      width: 36px;
+      margin-right: 0;
+
+      .deck-selector-label {
+        @include head-label;
+      }
+
+      .a {
+        @include button;
+        top: 5%;
+        text-align: center;
+      }
+
+      .b {
+        @include button;
+        top: 10%;
+        border-radius: 0 0 6px 6px;
+        text-align: center;
+      }
+    }
+
     &.active {
-      background-color: $bg-inverse-normal;
+      background-color: rgba($bg-inverse-normal, 0.6);
     }
   }
 }
