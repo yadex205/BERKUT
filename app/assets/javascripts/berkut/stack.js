@@ -1,4 +1,8 @@
+/* global $, Vue, BERKUT */
+
 BERKUT.Stack = function () {
+    'use strict'
+
     const SEEKBAR_OPTIONS = {
         min: 0, max: 1, step: 0.01, value: 0, tooltip: 'hide'
     }
