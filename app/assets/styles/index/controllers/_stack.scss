@@ -24,7 +24,9 @@
     }
 
     @mixin head-label {
+      display: block;
       height: 20%;
+      width: 100%;
       background-color: $bg-color-lighter;
       color: $fg-color-light;
       font-size: 9px;
@@ -86,26 +88,31 @@
           height: 12px;
           margin: 0;
         }
-
-        .blend-mode-selector {
-          position: absolute;
-          top: 0;
-          right: 0;
-        }
     }
 
     .opacity-selector-wrapper {
       @include component;
       width: 32px;
 
+      .blend-mode-selector-wrapper {
+        @include head-label;
+        background-color: $bg-inverse-normal;
+        color: $fg-inverse-normal;
+        cursor: pointer;
+
+        .blend-mode-selector {
+          display: none;
+        }
+      }
+
       .slider {
         @include slider;
         position: absolute;
         display: block;
         left: 0;
-        top: 0;
+        top: 25%;
         width: 100%;
-        height: 100%;
+        height: 75%;
       }
     }
 

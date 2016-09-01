@@ -8,11 +8,14 @@
     <div class="layer-preview-wrapper">
       <canvas class="layer-preview"></canvas>
       <input type="text" v-el:seekbar-factory />
-      <select v-model="blendMode" class="blend-mode-selector">
-        <option v-for="mode in blendModesSet" v-bind:value="$key">{{mode}}</option>
-      </select>
     </div>
     <div class="opacity-selector-wrapper">
+      <label class="blend-mode-selector-wrapper">
+        {{blendModesSet[blendMode].short}}
+        <select v-model="blendMode" class="blend-mode-selector">
+          <option v-for="mode in blendModesSet" v-bind:value="$key">{{mode.name}}</option>
+        </select>
+      </label>
       <input type="text" v-el:opacity-selector-factory />
     </div>
     <div class="speed-adjuster">

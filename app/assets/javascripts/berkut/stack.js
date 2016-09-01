@@ -13,9 +13,9 @@ BERKUT.Stack = function () {
 
     // TODO: (yadex205) This definition will be move to another script which treats blending
     const BLEND_MODES = {
-        NORMAL: 'Normal',
-        ADD: 'Add',
-        SUBTRACT: 'Subtract'
+        NORMAL: { name: 'Normal', short: 'NORM' },
+        ADD: { name: 'Add', short: 'ADD' },
+        SUBTRACT: { name: 'Subtract', short: 'SUB' }
     }
 
     Vue.component('component-layer', Vue.extend({
