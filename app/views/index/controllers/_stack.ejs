@@ -25,9 +25,11 @@
     <div class="speed-adjuster">
       <div class="speed-adjuster-label">Speed Adjuster</div>
       <div class="mode-switcher">
-        <div class="switch">BEAT</div>
-        <div class="switch">RATE</div>
-        <div class="switch">BPM</div>
+        <div
+            v-for="mode in speedAdjustModesSet"
+            v-bind:class="{active: speedAdjustMode === $key}"
+            v-on:mousedown="speedAdjustMode = $key"
+            class="switch">{{mode | uppercase}}</div>
       </div>
       <div class="value-selector">
         <div class="transformer down">/2</div>

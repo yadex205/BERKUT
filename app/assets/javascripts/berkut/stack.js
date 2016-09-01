@@ -18,14 +18,20 @@ BERKUT.Stack = function () {
         SUBTRACT: { name: 'Subtract', short: 'SUB' }
     }
 
+    const SPEED_ADJUST_MODES = {
+        BEAT: 'Beat', RATE: 'Rate', BPM: 'BPM'
+    }
+
     Vue.component('component-layer', Vue.extend({
         template: '#template-layer',
         data: function () {
             return {
                 blendMode: Object.keys(BLEND_MODES)[0],
+                speedAdjustMode: 'RATE',
                 _seekbar: null,
                 _opacitySelector: null,
-                blendModesSet: BLEND_MODES
+                blendModesSet: BLEND_MODES,
+                speedAdjustModesSet: SPEED_ADJUST_MODES
             }
         },
         ready: function () {
