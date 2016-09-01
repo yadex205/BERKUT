@@ -11,13 +11,21 @@ BERKUT.Stack = function () {
         orientation: 'vertical', selection: 'after', reversed: true
     }
 
+    // TODO: (yadex205) This definition will be move to another script which treats blending
+    const BLEND_MODES = {
+        NORMAL: 'Normal',
+        ADD: 'Add',
+        SUBTRACT: 'Subtract'
+    }
+
     Vue.component('component-layer', Vue.extend({
         template: '#template-layer',
         data: function () {
             return {
-                blendMode: 'normal',
+                blendMode: Object.keys(BLEND_MODES)[0],
                 _seekbar: null,
-                _opacitySelector: null
+                _opacitySelector: null,
+                blendModesSet: BLEND_MODES
             }
         },
         ready: function () {
