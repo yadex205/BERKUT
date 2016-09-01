@@ -1,4 +1,4 @@
-.stack { 
+.stack {
   position: absolute;
   top: 4px;
   left: 4px;
@@ -25,7 +25,6 @@
 
     @mixin head-label {
       height: 20%;
-      border-radius: 6px 6px 0 0;
       background-color: $bg-color-lighter;
       color: $fg-color-light;
       font-size: 9px;
@@ -77,7 +76,7 @@
           height: 100%;
           background-color: $bg-color-darker;
         }
-        
+
         .slider {
           @include slider;
           position: absolute;
@@ -136,8 +135,8 @@
         position: relative;
         top: 10%;
         height: 35%;
-        
-        .transformer, .value-input-wrapper { 
+
+        .transformer, .value-input-wrapper {
           float: left;
           height: 100%;
           background-color: $bg-color-normal;
@@ -153,11 +152,6 @@
 
           &.down {
             margin-right: 4px;
-            border-radius: 0 0 0 6px;
-          }
-
-          &.up {
-            border-radius: 0 0 6px 0;
           }
         }
 
@@ -203,7 +197,6 @@
 
       .right {
         top: 10%;
-        border-radius: 0 0 6px 6px;
         text-align: right;
       }
     }
@@ -219,13 +212,12 @@
       .solo {
         @include button;
         top: 5%;
-        text-align: center; 
+        text-align: center;
       }
 
       .mute {
         @include button;
         top: 10%;
-        border-radius: 0 0 6px 6px;
         text-align: center;
       }
     }
@@ -248,7 +240,6 @@
       .b {
         @include button;
         top: 10%;
-        border-radius: 0 0 6px 6px;
         text-align: center;
       }
     }
