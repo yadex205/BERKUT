@@ -13,9 +13,16 @@ BERKUT.Stack = function () {
 
     Vue.component('component-layer', Vue.extend({
         template: '#template-layer',
+        data: function () {
+            return {
+                blendMode: 'normal',
+                seekbar: null,
+                opacitySelector: null
+            }
+        },
         ready: function () {
-            $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
-            $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
+            this.seekbar = $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
+            this.opacitySelector = $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
         }
     }))
 
