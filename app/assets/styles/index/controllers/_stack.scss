@@ -94,14 +94,48 @@
       @include component;
       width: 32px;
 
-      .blend-mode-selector-wrapper {
-        @include head-label;
-        background-color: $bg-inverse-normal;
-        color: $fg-inverse-normal;
-        cursor: pointer;
+      .blend-mode-selector {
+        height: 20%;
 
-        .blend-mode-selector {
-          display: none;
+        .trigger {
+          @include head-label;
+          height: 100%;
+          padding: 0;
+          border: 0;
+          outline: 0;
+          border-radius: 0;
+          background-color: $bg-inverse-normal;
+          -webkit-appearance: none;
+          color: $fg-inverse-normal;
+          cursor: pointer;
+        }
+
+        .dropdown-menu {
+          min-width: 0;
+          border: 0;
+          border-radius: 0;
+          background-color: $bg-color-darker;
+
+          .item {
+            color: $fg-color-dark;
+            font-size: 12px;
+            line-height: 100%;
+
+            .fa {
+              opacity: 0.0;
+            }
+
+            &.selected {
+              .fa {
+                opacity: 1.0;
+              }
+            }
+
+            &:hover {
+              background-color: $bg-inverse-normal;
+              color: $fg-inverse-normal;
+            }
+          }
         }
       }
 

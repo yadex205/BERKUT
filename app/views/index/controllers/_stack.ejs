@@ -10,12 +10,16 @@
       <input type="text" v-el:seekbar-factory />
     </div>
     <div class="opacity-selector-wrapper">
-      <label class="blend-mode-selector-wrapper">
-        {{blendModesSet[blendMode].short}}
-        <select v-model="blendMode" class="blend-mode-selector">
-          <option v-for="mode in blendModesSet" v-bind:value="$key">{{mode.name}}</option>
-        </select>
-      </label>
+      <div class="dropdown blend-mode-selector">
+        <button data-toggle="dropdown" class="trigger">{{blendModesSet[blendMode].short}}</button>
+        <ul class="dropdown-menu">
+          <li v-for="mode in blendModesSet">
+            <a v-bind:class="{ selected: blendMode === $key }" class="item" href="#" v-on:click="blendMode = $key">
+              <i class="fa-fw fa fa-check"></i> {{mode.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
       <input type="text" v-el:opacity-selector-factory />
     </div>
     <div class="speed-adjuster">
