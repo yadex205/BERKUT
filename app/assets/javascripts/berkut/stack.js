@@ -16,13 +16,13 @@ BERKUT.Stack = function () {
         data: function () {
             return {
                 blendMode: 'normal',
-                seekbar: null,
-                opacitySelector: null
+                _seekbar: null,
+                _opacitySelector: null
             }
         },
         ready: function () {
-            this.seekbar = $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
-            this.opacitySelector = $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
+            this._seekbar = $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
+            this._opacitySelector = $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
         }
     }))
 
