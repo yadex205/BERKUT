@@ -1,10 +1,6 @@
 <section id="stack" class="stack">
-  <component-layer></component-layer>
-  <component-layer></component-layer>
-  <component-layer></component-layer>
-  <component-layer></component-layer>
-  <component-layer></component-layer>
-  <component-layer></component-layer>
+  <component-layer
+    v-for="layer in layerSize"></component-layer>
 </section>
 
 <script id="template-layer" type="x-template">

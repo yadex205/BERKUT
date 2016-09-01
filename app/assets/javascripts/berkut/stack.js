@@ -27,6 +27,9 @@ BERKUT.Stack = function () {
     }))
 
     this._vue = new Vue({
-        el: '#stack'
+        el: '#stack',
+        data: {
+            layerSize: 6
+        }
     })
 }
