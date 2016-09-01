@@ -131,7 +131,8 @@
               }
             }
 
-            &:hover {
+            &:hover, &:focus {
+              outline: 0;
               background-color: $bg-inverse-normal;
               color: $fg-inverse-normal;
             }
