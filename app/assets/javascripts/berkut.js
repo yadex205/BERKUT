@@ -7,7 +7,7 @@ const BERKUT = function () {
                 window[defineName] = require(moduleName)
             } else {
                 require(moduleName)
-            }    
+            }
         }
     }
 
@@ -20,6 +20,7 @@ const BERKUT = function () {
 
 BERKUT.prototype = {
     setupControllerWindow: function () {
+        new BERKUT.CrossFader()
         new BERKUT.SearchBar()
         new BERKUT.Stack()
     }
