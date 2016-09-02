@@ -8,10 +8,14 @@ BERKUT.CrossFader = function () {
     this._vue = new Vue({
         el: '#cross-fader',
         data: {
-            crossFaderValue: 0.5
+            crossFaderValue: 0.5,
         },
         ready: function () {
-            $(this.$els.crossFaderFactory).slider(OPTIONS)
+            $(this.$els.crossFaderFactory)
+                .slider(OPTIONS)
+                .on('change', (event) => {
+                    this.crossFaderValue = event.value.newValue
+                })
         }
     })
 }
