@@ -70,8 +70,12 @@
     </div>
     <div class="deck-selector">
       <div class="deck-selector-label">DECK</div>
-      <div class="a">A</div>
-      <div class="b">B</div>
+      <div class="a"
+           v-bind:class="{active: deckPosition === 'a'}"
+           v-on:mousedown="deckPosition = (deckPosition !== 'a') ? 'a' : 'n'">A</div>
+      <div class="b"
+           v-bind:class="{active: deckPosition === 'b'}"
+           v-on:mousedown="deckPosition = (deckPosition !== 'b') ? 'b' : 'n'">B</div>
     </div>
   </div>
 </script>
