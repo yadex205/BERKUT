@@ -32,7 +32,8 @@
             class="switch">{{mode | uppercase}}</div>
       </div>
       <div class="value-selector">
-        <div class="transformer down">/2</div>
+        <div class="transformer down"
+             v-on:click="speedValue[speedAdjustMode] /= 2">/2</div>
         <div class="value-input-wrapper">
           <input
               type="number"
@@ -43,7 +44,8 @@
               v-model="speedValue[speedAdjustMode]"
               class="value-input">
         </div>
-        <div class="transformer up">*2</div>
+        <div class="transformer up"
+             v-on:click="speedValue[speedAdjustMode] *= 2">*2</div>
       </div>
     </div>
     <div class="lr-selector">
