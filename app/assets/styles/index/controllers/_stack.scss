@@ -198,6 +198,10 @@
           height: 100%;
           text-align: center;
 
+          &:active {
+            @extend .active;
+          }
+
           &.down {
             margin-right: 4px;
           }
