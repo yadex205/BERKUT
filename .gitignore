@@ -1,0 +1,8 @@
+# Node.js, npm, bower
+/node_modules
+/bower_components
+npm-*.log
+
+# Project
+/htdocs
+/dist

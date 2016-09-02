@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('common/_head') %>
+    <script>
+        const berkut = new BERKUT()
+        document.addEventListener('DOMContentLoaded', () => {
+            berkut.setupControllerWindow()
+        })
+    </script>
+    <link rel="stylesheet" href="assets/styles/index.css">
+    <title>BERKUT</title>
+</head>
+<body>
+    <%- include('index/_controllers') %>
+    <%- include('index/_finder') %>
+    <%- include('index/_status_bar') %>
+</body>
+</html>

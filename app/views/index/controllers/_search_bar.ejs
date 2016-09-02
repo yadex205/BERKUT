@@ -1,0 +1,14 @@
+<section id="search-bar" class="search-bar">
+  <label
+    class="search-bar-wrapper"
+    v-bind:class="{ active: isFocused }">
+    <input
+      class="search-bar-input"
+      type="text"
+      v-bind="{ placeholder: isFocused ? '' :'Search media files...' }"
+      v-on:focus="isFocused = true" 
+      v-on:blur="isFocused = false"
+      v-model="query" />
+    <i class="fa fa-search search-bar-icon"></i>
+  </label>
+</section>
