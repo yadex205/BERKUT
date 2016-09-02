@@ -28,10 +28,14 @@ BERKUT.Stack = function () {
             return {
                 blendMode: Object.keys(BLEND_MODES)[0],
                 speedAdjustMode: 'RATE',
+                speedValue: { BEAT: 4, RATE: 1.0, BPM: 120 },
                 _seekbar: null,
                 _opacitySelector: null,
                 blendModesSet: BLEND_MODES,
-                speedAdjustModesSet: SPEED_ADJUST_MODES
+                speedAdjustModesSet: SPEED_ADJUST_MODES,
+                speedValueMin: { BEAT: 1, RATE: 0, BPM: 1},
+                speedValueMax: { BEAT: 64, RATE: 8, BPM: 320 },
+                speedValueStep: { BEAT: 1, RATE: 0.01, BPM: 1 },
             }
         },
         ready: function () {

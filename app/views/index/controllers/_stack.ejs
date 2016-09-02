@@ -34,7 +34,14 @@
       <div class="value-selector">
         <div class="transformer down">/2</div>
         <div class="value-input-wrapper">
-          <input type="text" class="value-input" value="1.000">
+          <input
+              type="number"
+              inputmode="numeric"
+              v-bind:min="speedValueMin[speedAdjustMode]"
+              v-bind:step="speedValueStep[speedAdjustMode]"
+              v-bind:max="speedValueMax[speedAdjustMode]"
+              v-model="speedValue[speedAdjustMode]"
+              class="value-input">
         </div>
         <div class="transformer up">*2</div>
       </div>
