@@ -48,8 +48,16 @@
     </div>
     <div class="lr-selector">
       <div class="lr-selector-label">L/R</div>
-      <div class="left"><i class="fa fa-chevron-circle-left"></i></div>
-      <div class="right"><i class="fa fa-chevron-circle-right"></i></div>
+      <div class="left"
+           v-bind:class="{active: lrPosition === 'L'}"
+           v-on:mousedown="lrPosition = (lrPosition !== 'L') ? 'L' : 'N'">
+        <i class="fa fa-chevron-circle-left"></i>
+      </div>
+      <div class="right"
+           v-bind:class="{active: lrPosition === 'R'}"
+           v-on:mousedown="lrPosition = (lrPosition !== 'R') ? 'R' : 'N'">
+        <i class="fa fa-chevron-circle-right"></i>
+      </div>
     </div>
     <div class="display-behavior-selector">
       <div class="display-behavior-selector-label">Disp.</div>
