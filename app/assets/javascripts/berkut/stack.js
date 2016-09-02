@@ -30,6 +30,7 @@ BERKUT.Stack = function () {
                 speedAdjustMode: 'RATE',
                 speedValue: { BEAT: 4, RATE: 1.0, BPM: 120 },
                 lrPosition: 'N',
+                displayMode: 'normal',
                 _seekbar: null,
                 _opacitySelector: null,
                 blendModesSet: BLEND_MODES,

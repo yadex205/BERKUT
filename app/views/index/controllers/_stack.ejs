@@ -61,8 +61,12 @@
     </div>
     <div class="display-behavior-selector">
       <div class="display-behavior-selector-label">DISP.</div>
-      <div class="solo">Solo</div>
-      <div class="mute">Mute</div>
+      <div class="solo"
+           v-bind:class="{active: displayMode === 'solo'}"
+           v-on:mousedown="displayMode = (displayMode !== 'solo') ? 'solo' : 'normal'">Solo</div>
+      <div class="mute"
+           v-bind:class="{active: displayMode === 'mute'}"
+           v-on:mousedown="displayMode = (displayMode !== 'mute') ? 'mute' : 'normal'">Mute</div>
     </div>
     <div class="deck-selector">
       <div class="deck-selector-label">DECK</div>
