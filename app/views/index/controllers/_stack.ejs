@@ -1,6 +1,8 @@
 <section id="stack" class="stack">
   <component-layer
-    v-for="layer in layerSize"></component-layer>
+      v-for="layer in layerSize"
+      :index="$index"
+  ></component-layer>
 </section>
 
 <script id="template-layer" type="text/template">
@@ -74,10 +76,10 @@
       <div class="deck-selector-label">DECK</div>
       <div class="a"
            v-bind:class="{active: deckPosition === 'a'}"
-           v-on:mousedown="deckPosition = (deckPosition !== 'a') ? 'a' : 'n'">A</div>
+           v-on:mousedown="switchDeck(deckPosition !== 'a' ? 'a' : 'n')">A</div>
       <div class="b"
            v-bind:class="{active: deckPosition === 'b'}"
-           v-on:mousedown="deckPosition = (deckPosition !== 'b') ? 'b' : 'n'">B</div>
+           v-on:mousedown="switchDeck(deckPosition !== 'b' ? 'b' : 'n')">B</div>
     </div>
   </div>
 </script>

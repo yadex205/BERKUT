@@ -24,6 +24,9 @@ BERKUT.Stack = function () {
 
     Vue.component('component-layer', Vue.extend({
         template: '#template-layer',
+        props: {
+            index: Number
+        },
         data: function () {
             return {
                 blendMode: Object.keys(BLEND_MODES)[0],
@@ -44,13 +47,47 @@ BERKUT.Stack = function () {
         ready: function () {
             this._seekbar = $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
             this._opacitySelector = $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
+        },
+        events: {
+            'deck-position:set': function (deck) {
+                this.deckPosition = deck
+            }
+        },
+        methods: {
+            switchDeck: function (deck) {
+                this.$parent.$emit('deck-position:request', this.index, deck)
+            }
         }
     }))
 
     this._vue = new Vue({
         el: '#stack',
         data: {
-            layerSize: 6
+            layerSize: 6,
+            layerIndexOfDeck: { a: -1, b: -1 }
+        },
+        events: {
+            'deck-position:request': function(index, deck) {
+                const decks = this.layerIndexOfDeck
+                if (deck === 'n') {
+                    if (decks.a === index) { this.layerIndexOfDeck.a = -1 }
+                    if (decks.b === index) { this.layerIndexOfDeck.b = -1 }
+                    this.$children[index].$emit('deck-position:set', 'n')
+                } else {
+                    if (decks.a === index) {
+                        this.layerIndexOfDeck.a = -1
+                        this.$children[index].$emit('deck-position:set', 'n')
+                    } else if (decks.b === index) {
+                        this.layerIndexOfDeck.b = -1
+                        this.$children[index].$emit('deck-position:set', 'n')
+                    }
+                    if (decks[deck] !== -1) {
+                        this.$children[decks[deck]].$emit('deck-position:set', 'n')
+                    }
+                    this.layerIndexOfDeck[deck] = index
+                    this.$children[index].$emit('deck-position:set', deck)
+                }
+            }
         }
     })
 }
