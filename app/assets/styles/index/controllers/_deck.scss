@@ -5,4 +5,30 @@
   right: 4px;
   height: 288px;
   background-color: $bg-color-light;
+
+  .deck {
+    position: relative;
+    width: calc(100% - 8px);
+    height: calc(50% - 6px);
+    margin: 4px 0 0 4px;;
+    background-color: $bg-color-dark;
+
+    .deck-label {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      right: 0;
+      background-color: $bg-color-light;
+      font-size: 16px;
+      font-weight: normal;
+      text-align: center;
+      line-height: 32px;
+    }
+
+    &.b {
+      .deck-label {
+        bottom: 0;
+      }
+    }
+  }
 }

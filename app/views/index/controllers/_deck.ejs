@@ -1,3 +1,7 @@
 <section class="deck-wrapper">
-
+  <% ['a', 'b'].forEach((deckname) => { %>
+  <div class="deck <%- deckname %>">
+    <div class="deck-label"><%- deckname.toUpperCase() %></div>
+  </div>
+  <% }) %>
 </section>
