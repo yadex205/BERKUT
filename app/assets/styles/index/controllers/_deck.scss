@@ -61,5 +61,15 @@
         background-color: $bg-inverse-normal;
       }
     }
+
+    .time {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      width: 96px;
+      font-size: 18px;
+      line-height: 18px;
+      text-align: center;
+    }
   }
 }
