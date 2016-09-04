@@ -1,4 +1,4 @@
-/* global $, Vue, BERKUT */
+/* global Vue, BERKUT */
 
 BERKUT.BPMSelector = function () {
     this._vue = new Vue({
