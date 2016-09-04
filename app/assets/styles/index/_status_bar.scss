@@ -7,5 +7,62 @@
   box-sizing: border-box;
   background-color: $bg-color-darker;
   color: $fg-color-darker;
+  font-size: 12px;
   line-height: 28px;
+
+  * {
+    -webkit-user-select: none;
+    cursor: default;
+  }
+
+  .logo {
+    position: absolute;
+    top: 0; left: calc(50% - 64px);
+    width: 128px;
+    text-align: center;
+  }
+
+  .meter-holder {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 8px;
+
+    .meter-label {
+      display: inline-block;
+      height: 20px;
+    }
+
+    .meter {
+      position: relative;
+      float: left;
+      margin-left: 12px;
+
+      .slider {
+        margin: 6px 0 0 0;
+        width: 96px;
+        height: 16px;
+        line-height: 0;
+        vertical-align: top;
+
+        .slider-track {
+          margin: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 0;
+          background-image: none;
+          background-color: $bg-color-normal;
+
+          .slider-selection {
+            border-radius: 0;
+          }
+        }
+
+        .slider-handle {
+          display: none;
+        }
+      }
+    }
+  }
 }

@@ -25,5 +25,6 @@ BERKUT.prototype = {
         new BERKUT.OutputPreview()
         new BERKUT.SearchBar()
         new BERKUT.Stack()
+        new BERKUT.StatusBar()
     }
 }
