@@ -8,8 +8,8 @@ let controllerWindow
 
 app.on('ready', () => {
     controllerWindow = new BrowserWindow({
-        width: 1024,
-        height: 720
+        width: 864,
+        height: 648
     })
     controllerWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
     controllerWindow.on('closed', () => { app.quit() })
