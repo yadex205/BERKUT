@@ -22,6 +22,7 @@ BERKUT.prototype = {
     setupControllerWindow: function () {
         new BERKUT.BPMSelector()
         new BERKUT.CrossFader()
+        new BERKUT.Finder()
         new BERKUT.OutputPreview()
         new BERKUT.SearchBar()
         new BERKUT.Stack()
