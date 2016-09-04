@@ -5,4 +5,20 @@
   width: 200px;
   height: 432px - (288px + 4px);
   background-color: $bg-color-light;
+
+  .output-preview-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: $bg-color-darker;
+  }
+
+  .fps-meter {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    padding: 2px 4px;
+    background-color: $bg-color-dark;
+    color: $fg-color-darker;
+    font-size: 12px;
+  }
 }
