@@ -20,6 +20,7 @@ const BERKUT = function () {
 
 BERKUT.prototype = {
     setupControllerWindow: function () {
+        new BERKUT.BPMSelector()
         new BERKUT.CrossFader()
         new BERKUT.SearchBar()
         new BERKUT.Stack()
