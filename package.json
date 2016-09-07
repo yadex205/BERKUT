@@ -20,7 +20,7 @@
   "homepage": "https://github.com/yadex205/berkut#readme",
   "private": true,
   "config": {
-    "target": "1.3.3",
+    "target": "1.3.5",
     "arch": "x64",
     "disturl": "https://atom.io/download/atom-shell",
     "runtime": "electron",
@@ -46,7 +46,7 @@
     "out": "dist"
   },
   "devDependencies": {
-    "electron": "1.3.3",
+    "electron": "1.3.5",
     "electron-packager": "^7.7.0",
     "graceful-fs": "^4.1.6",
     "gulp": "^3.9.1",
