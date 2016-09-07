@@ -18,6 +18,10 @@ const BERKUTCore = function () {
 }
 
 BERKUTCore.prototype = {
+    send: function (windowName, channel, ...args) {
+        if (!this.windows[windowName]) { return }
+        this.windows[windowName].webContents.send(channel, ...args)
+    },
     _init: function () {
         app.on('ready', () => {
             this.__createControllerWindow()
