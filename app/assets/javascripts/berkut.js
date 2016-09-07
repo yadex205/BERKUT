@@ -11,11 +11,14 @@ const BERKUT = function () {
         }
     }
 
+    loadModule('electron', 'electron')
     loadModule('jquery', 'jQuery')
     window.$ = window.jQuery
     loadModule('bootstrap')
     loadModule('bootstrap-slider')
     loadModule('vue', 'Vue')
+
+    window.ipc = window.electron.ipcRenderer
 }
 
 BERKUT.prototype = {
