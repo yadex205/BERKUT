@@ -7,7 +7,7 @@ const ipcMain = electron.ipcMain
 const PlayerManager = require('./lib/player_manager')
 
 const BERKUTCore = function () {
-    this.events = ipcMain
+    this.ipc = ipcMain
     this.windows = {
         controller: null
     }
@@ -24,12 +24,12 @@ BERKUTCore.prototype = {
         })
     },
     _events: function () {
-        this.events.on('player-manager:create', (event) => {
+        this.ipc.on('player-manager:create', (event) => {
             const id = this.playerManager.create()
             event.returnValue = id
         });
         ['play', 'pause', 'stop'].forEach((eventNameSuffix) => {
-            this.events.on(`player-manager:${eventNameSuffix}`, (event, ...args) => {
+            this.ipc.on(`player-manager:${eventNameSuffix}`, (event, ...args) => {
                 this.playerManager.emit(eventNameSuffix, ...args)
             })
         })
