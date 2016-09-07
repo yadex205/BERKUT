@@ -13,7 +13,6 @@ const BERKUTCore = function () {
     }
     this.playerManager = new PlayerManager(this)
 
-    this._events()
     this._init()
 }
 
@@ -22,20 +21,12 @@ BERKUTCore.prototype = {
         if (!this.windows[windowName]) { return }
         this.windows[windowName].webContents.send(channel, ...args)
     },
+    on: function (channel, callback) {
+        this.ipc.on(channel, callback)
+    },
     _init: function () {
         app.on('ready', () => {
             this.__createControllerWindow()
-        })
-    },
-    _events: function () {
-        this.ipc.on('player-manager:create', (event) => {
-            const id = this.playerManager.create()
-            event.returnValue = id
-        });
-        ['play', 'pause', 'stop'].forEach((eventNameSuffix) => {
-            this.ipc.on(`player-manager:${eventNameSuffix}`, (event, ...args) => {
-                this.playerManager.emit(eventNameSuffix, ...args)
-            })
         })
     },
     __createControllerWindow: function () {
