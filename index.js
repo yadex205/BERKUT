@@ -11,7 +11,7 @@ const BERKUTCore = function () {
     this.windows = {
         controller: null
     }
-    this.playerManager = new PlayerManager()
+    this.playerManager = new PlayerManager(this)
 
     this._events()
     this._init()
