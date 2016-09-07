@@ -1,4 +1,4 @@
-/* global $, Vue, BERKUT */
+/* global $, Vue, ipc, BERKUT */
 
 BERKUT.Stack = function () {
     'use strict'
@@ -37,6 +37,7 @@ BERKUT.Stack = function () {
                 deckPosition: 'n',
                 _seekbar: null,
                 _opacitySelector: null,
+                _playerId: null,
                 blendModesSet: BLEND_MODES,
                 speedAdjustModesSet: SPEED_ADJUST_MODES,
                 speedValueMin: { BEAT: 1, RATE: 0, BPM: 1},
@@ -47,6 +48,7 @@ BERKUT.Stack = function () {
         ready: function () {
             this._seekbar = $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
             this._opacitySelector = $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
+            this._playerId = ipc.sendSync('player-manager:create')
         },
         events: {
             'deck-position:set': function (deck) {

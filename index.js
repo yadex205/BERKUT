@@ -13,6 +13,7 @@ const BERKUTCore = function () {
     }
     this.playerManager = new PlayerManager()
 
+    this._events()
     this._init()
 }
 
