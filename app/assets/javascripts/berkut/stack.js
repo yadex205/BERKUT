@@ -60,7 +60,7 @@ BERKUT.Stack = function () {
             'deck:position-set': function (deck) {
                 this.deckPosition = deck
             },
-            'player:frame-ready': function (address) {
+            'player:frame-ready': function (address, length, width, height, uOffset, vOffset) {
                 // TODO: (yadex205) Draw frame to canvas
             },
         },
@@ -83,10 +83,10 @@ BERKUT.Stack = function () {
             layerIndexOfPlayerId: {}
         },
         ready: function () {
-            ipc.on('player-manager:on-frame-ready', (event, pid, playerId, address) => {
+            ipc.on('player-manager:on-frame-ready', (event, pid, playerId, address, length, width, height, uOffset, vOffset) => {
                 const index = this.layerIndexOfPlayerId[playerId]
                 if (index === undefined || index === null) { return }
-                this.$children[index].$emit('player:frame-ready', address)
+                this.$children[index].$emit('player:frame-ready', address, length, width, height, uOffset, vOffset)
             })
         },
         events: {
