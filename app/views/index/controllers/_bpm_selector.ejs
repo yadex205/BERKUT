@@ -1,0 +1,13 @@
+<section id="bpm-selector" class="bpm-selector">
+  <div class="transform">/2</div>
+  <input class="bpm-value" type="text" value="120"/>
+  <div class="transform">*2</div>
+  <div class="tap-button">TAP</div>
+  <ul class="indicator">
+    <% [4,3,2,1].forEach((index) => { %>
+      <li
+          class="indicator-bar"
+          v-bind:class="{on: beat >= <%- index %>}"></li>
+    <% }) %>
+  </ul>
+</section>

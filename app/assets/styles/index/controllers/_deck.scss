@@ -1,0 +1,75 @@
+.deck-wrapper {
+  position: absolute;
+  top: 4px;
+  left: $left-pane-width + 8px;
+  right: 4px;
+  height: 288px;
+  background-color: $bg-color-light;
+
+  .deck {
+    position: relative;
+    width: calc(100% - 8px);
+    height: calc(50% - 6px);
+    margin: 4px 0 0 4px;;
+    background-color: $bg-color-dark;
+
+    .deck-label {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      right: 0;
+      background-color: $bg-color-light;
+      font-size: 16px;
+      font-weight: normal;
+      text-align: center;
+      line-height: 32px;
+    }
+
+    &.b {
+      .deck-label {
+        bottom: 0;
+      }
+    }
+
+    .vinyl {
+      position: absolute;
+      width: 96px;
+      height: 96px;
+      bottom: 8px;
+      left: 8px;
+      border-radius: 48px;
+      overflow: hidden;
+      background-color: $bg-color-darker;
+
+      .circle {
+        position: absolute;
+        top: calc(50% - 26px);
+        left: calc(50% - 26px);
+        padding: 20px;
+        border: 6px solid $bg-inverse-normal;
+        border-radius: 100%;
+      }
+
+      .bar {
+        position: absolute;
+        top: calc(50% - 4px);
+        left: calc(50% - 4px);
+        right: -4px;
+        padding: 4px;
+        outline: 6px solid $bg-color-darker;
+        border-radius: 4px;
+        background-color: $bg-inverse-normal;
+      }
+    }
+
+    .time {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      width: 96px;
+      font-size: 18px;
+      line-height: 18px;
+      text-align: center;
+    }
+  }
+}

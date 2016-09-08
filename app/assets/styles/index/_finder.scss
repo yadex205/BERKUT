@@ -1,0 +1,17 @@
+.finder {
+  position: absolute;
+  top: 480px;
+  left: 4px;
+  right: 0;
+  bottom: 28px;
+  overflow-y: auto;
+
+  .item {
+    float: left;
+    width: calc(12.5% - 4px);
+    height: calc(50% - 4px);
+    max-height: 96px;
+    margin: 0 4px 4px 0;
+    background-color: $bg-color-lighter;
+  }
+}

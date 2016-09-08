@@ -1,66 +1,40 @@
 'use strict'
 
-if (process.platform === 'win32') {
-    process.env['VLC_PLUGIN_PATH'] = require('path').join(
-        __dirname,
-        'node_modules/wcjs-prebuilt/bin/plugins'
-    )
-}
-
 const electron = require('electron')
-const {app} = electron
-const {BrowserWindow} = electron
-const {ipcMain} = electron
-const useExperimentalCanvasFeature = false
+const app = electron.app
+const BrowserWindow = electron.BrowserWindow
+const ipcMain = electron.ipcMain
+const PlayerManager = require('./lib/player_manager')
 
-if (process.platform === 'darwin') {
-    app.commandLine.appendSwitch('enable-unsafe-es3-apis')
-}
-
-global.dashboardWindow
-let outputWindow
-
-function createWindow () {
-    global.dashboardWindow = new BrowserWindow({
-        width: 1024,
-        minWidth: 1024,
-        height: 700,
-        minHeight: 700,
-        webPreferences: {
-            experimentalCanvasFeatures: useExperimentalCanvasFeature
-        }
-    })
-    outputWindow = new BrowserWindow({
-        width: 960,
-        height: 540,
-        autoHideMenuBar: true,
-        webPreferences: {
-            experimentalCanvasFeatures: useExperimentalCanvasFeature
-        }
-    })
-
-    global.dashboardWindow.loadURL(`file://${__dirname}/htdocs/index.html`)
-    outputWindow.loadURL(`file://${__dirname}/htdocs/output.html`)
-    ipcMain.on('berkut-output:updated', (event, pid, address, width, height) => {
-        outputWindow.webContents.send('berkut-output:updated', pid, address, width, height)
-    })
-    app.on('closed', () => {
-        global.dashboardWindow = null
-        quit()
-    })
-}
-
-function quit() {
-    global.playerManager.reset(true)
-    app.quit()
-}
-
-app.on('ready', createWindow)
-
-app.on('window-all-closed', () => {
-    switch(process.platform) {
-    case 'darwin': quit()
+const BERKUTCore = function () {
+    this.ipc = ipcMain
+    this.windows = {
+        controller: null
     }
-})
+    this.playerManager = new PlayerManager(this)
 
-app.on('activate', (global.dashboardWindow === null) ? createWindow : ()=>{})
+    this._init()
+}
+
+BERKUTCore.prototype = {
+    send: function (windowName, channel, ...args) {
+        if (!this.windows[windowName]) { return }
+        this.windows[windowName].webContents.send(channel, process.pid,  ...args)
+    },
+    on: function (channel, callback) {
+        this.ipc.on(channel, callback)
+    },
+    _init: function () {
+        app.on('ready', () => {
+            this.__createControllerWindow()
+        })
+    },
+    __createControllerWindow: function () {
+        const win = new BrowserWindow({ width: 864, height: 648 })
+        win.loadURL(`file://${__dirname}/htdocs/index.html`)
+        win.on('closed', () => { app.quit() })
+        this.windows.controller = win
+    }
+}
+
+new BERKUTCore()

@@ -1,0 +1,9 @@
+.controllers {
+  @import 'controllers/stack';
+  @import 'controllers/cross_fader';
+  @import 'controllers/deck';
+  @import 'controllers/output_preview';
+  @import 'controllers/media_status';
+  @import 'controllers/bpm_selector';
+  @import 'controllers/search_bar';
+}

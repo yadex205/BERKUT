@@ -1,22 +1,8 @@
-# emacs
-*~
-\#*\#
-.\#*
-.tern-port
-
-# node.js
+# Node.js, npm, bower
 /node_modules
+/bower_components
 npm-*.log
 
-# bower
-/bower_components
-
-# project
+# Project
 /htdocs
-/vendor
-/tmp
-/cache
-/config
-
-# vscode
-/.vscode
+/dist

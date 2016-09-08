@@ -1,0 +1,85 @@
+<section id="stack" class="stack">
+  <component-layer
+      v-for="layer in layerSize"
+      :index="$index"
+  ></component-layer>
+</section>
+
+<script id="template-layer" type="text/template">
+  <div class="layer">
+    <div class="layer-preview-wrapper">
+      <canvas class="layer-preview"></canvas>
+      <input type="text" v-el:seekbar-factory />
+    </div>
+    <div class="opacity-selector-wrapper">
+      <div class="dropdown blend-mode-selector">
+        <button data-toggle="dropdown" class="trigger">{{blendModesSet[blendMode].short}}</button>
+        <ul class="dropdown-menu">
+          <li v-for="mode in blendModesSet">
+            <a v-bind:class="{ selected: blendMode === $key }" class="item" href="#" v-on:click="blendMode = $key">
+              <i class="fa-fw fa fa-check"></i> {{mode.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <input type="text" v-el:opacity-selector-factory />
+    </div>
+    <div class="speed-adjuster">
+      <div class="speed-adjuster-label">SPEED ADJUSTER</div>
+      <div class="mode-switcher">
+        <div
+            v-for="mode in speedAdjustModesSet"
+            v-bind:class="{active: speedAdjustMode === $key}"
+            v-on:mousedown="speedAdjustMode = $key"
+            class="switch">{{mode | uppercase}}</div>
+      </div>
+      <div class="value-selector">
+        <div class="transformer down"
+             v-on:click="speedValue[speedAdjustMode] /= 2">/2</div>
+        <div class="value-input-wrapper">
+          <input
+              type="number"
+              inputmode="numeric"
+              v-bind:min="speedValueMin[speedAdjustMode]"
+              v-bind:step="speedValueStep[speedAdjustMode]"
+              v-bind:max="speedValueMax[speedAdjustMode]"
+              v-model="speedValue[speedAdjustMode]"
+              class="value-input">
+        </div>
+        <div class="transformer up"
+             v-on:click="speedValue[speedAdjustMode] *= 2">*2</div>
+      </div>
+    </div>
+    <div class="lr-selector">
+      <div class="lr-selector-label">L / R</div>
+      <div class="left"
+           v-bind:class="{active: lrPosition === 'l'}"
+           v-on:mousedown="lrPosition = (lrPosition !== 'l') ? 'l' : 'n'">
+        <i class="fa fa-chevron-circle-left"></i>
+      </div>
+      <div class="right"
+           v-bind:class="{active: lrPosition === 'r'}"
+           v-on:mousedown="lrPosition = (lrPosition !== 'r') ? 'r' : 'n'">
+        <i class="fa fa-chevron-circle-right"></i>
+      </div>
+    </div>
+    <div class="display-behavior-selector">
+      <div class="display-behavior-selector-label">DISP.</div>
+      <div class="solo"
+           v-bind:class="{active: displayMode === 'solo'}"
+           v-on:mousedown="displayMode = (displayMode !== 'solo') ? 'solo' : 'normal'">Solo</div>
+      <div class="mute"
+           v-bind:class="{active: displayMode === 'mute'}"
+           v-on:mousedown="displayMode = (displayMode !== 'mute') ? 'mute' : 'normal'">Mute</div>
+    </div>
+    <div class="deck-selector">
+      <div class="deck-selector-label">DECK</div>
+      <div class="a"
+           v-bind:class="{active: deckPosition === 'a'}"
+           v-on:mousedown="switchDeck(deckPosition !== 'a' ? 'a' : 'n')">A</div>
+      <div class="b"
+           v-bind:class="{active: deckPosition === 'b'}"
+           v-on:mousedown="switchDeck(deckPosition !== 'b' ? 'b' : 'n')">B</div>
+    </div>
+  </div>
+</script>

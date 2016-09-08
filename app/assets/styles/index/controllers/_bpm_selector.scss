@@ -1,0 +1,75 @@
+.bpm-selector {
+  position: absolute;
+  top: 432px + 8px;
+  left: $left-pane-width + 8px;
+  width: 200px;
+  height: 36px;
+  background-color: $bg-color-dark;
+
+  @mixin component {
+    height: 100%;
+    float: left;
+    margin-right: 4px;
+    background-color: $bg-color-light;
+    -webkit-user-select: none;
+  }
+
+  @mixin button {
+    @include component;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+
+    &:active {
+      background-color: $bg-inverse-normal;
+      color: $fg-inverse-normal;
+    }
+  }
+
+  .transform {
+    @include button;
+    width: 32px;
+  }
+
+  .tap-button {
+    @include button;
+    width: 40px;
+    margin-right: 0;
+  }
+
+  .bpm-value {
+    @include component;
+    width: 48px;
+    padding: 4px;
+    border: 0;
+    outline: 0;
+    background-color: $bg-color-dark;
+    transition: background-color 0.5s, color 0.5s;
+
+    &:focus {
+      background-color: $bg-inverse-normal;
+      color: $fg-inverse-normal;
+    }
+  }
+
+  .indicator {
+    display: block;
+    float: left;
+    width: 36px;
+    margin: 0;
+    padding: 4px 4px 0 4px;
+
+    .indicator-bar {
+      display: block;
+      list-style-type: none;
+      width: 100%;
+      height: 4px;
+      margin-bottom: 4px;
+      background-color: $bg-color-normal;
+
+      &.on {
+        background-color: $bg-inverse-normal;
+      }
+    }
+  }
+}

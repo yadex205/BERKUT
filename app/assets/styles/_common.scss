@@ -1,0 +1,21 @@
+$bg-color-darker: #111;
+$bg-color-dark: #222;
+$bg-color-normal: #333;
+$bg-color-light: #444;
+$bg-color-lighter: #555;
+
+$fg-color-darker: #888;
+$fg-color-dark: #999;
+$fg-color-normal: #aaa;
+$fg-color-light: #bbb;
+$fg-color-lighter: #ccc;
+
+$bg-inverse-normal: aquamarine;
+$fg-inverse-normal: #333;
+
+body {
+  background-color: $bg-color-normal;
+  color: $fg-color-normal;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
