@@ -1,4 +1,4 @@
-/* global $, Vue, BERKUT */
+/* global $, Vue, ipc, BERKUT */
 
 BERKUT.Stack = function () {
     'use strict'
@@ -37,6 +37,7 @@ BERKUT.Stack = function () {
                 deckPosition: 'n',
                 _seekbar: null,
                 _opacitySelector: null,
+                _playerId: null,
                 blendModesSet: BLEND_MODES,
                 speedAdjustModesSet: SPEED_ADJUST_MODES,
                 speedValueMin: { BEAT: 1, RATE: 0, BPM: 1},
@@ -47,15 +48,23 @@ BERKUT.Stack = function () {
         ready: function () {
             this._seekbar = $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
             this._opacitySelector = $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
+            this.updatePlayerId(ipc.sendSync('player-manager:create'))
         },
         events: {
-            'deck-position:set': function (deck) {
+            'deck:position-set': function (deck) {
                 this.deckPosition = deck
-            }
+            },
+            'player:frame-ready': function (address) {
+                // TODO: (yadex205) Draw frame to canvas
+            },
         },
         methods: {
             switchDeck: function (deck) {
-                this.$parent.$emit('deck-position:request', this.index, deck)
+                this.$parent.$emit('deck:position-request', this.index, deck)
+            },
+            updatePlayerId: function (id) {
+                this._playerId = id
+                this.$parent.$emit('player:id-change', this.index, id)
             }
         }
     }))
@@ -64,29 +73,40 @@ BERKUT.Stack = function () {
         el: '#stack',
         data: {
             layerSize: 6,
-            layerIndexOfDeck: { a: -1, b: -1 }
+            layerIndexOfDeck: { a: -1, b: -1 },
+            layerIndexOfPlayerId: {}
+        },
+        ready: function () {
+            ipc.on('player-manager:on-frame-ready', (event, id, address) => {
+                const index = this.layerIndexOfPlayerId[id]
+                if (!index) { return }
+                this.$children[index].$emit('player:frame-ready', address)
+            })
         },
         events: {
-            'deck-position:request': function(index, deck) {
+            'deck:position-request': function(index, deck) {
                 const decks = this.layerIndexOfDeck
                 if (deck === 'n') {
                     if (decks.a === index) { this.layerIndexOfDeck.a = -1 }
                     if (decks.b === index) { this.layerIndexOfDeck.b = -1 }
-                    this.$children[index].$emit('deck-position:set', 'n')
+                    this.$children[index].$emit('deck:position-set', 'n')
                 } else {
                     if (decks.a === index) {
                         this.layerIndexOfDeck.a = -1
-                        this.$children[index].$emit('deck-position:set', 'n')
+                        this.$children[index].$emit('deck:position-set', 'n')
                     } else if (decks.b === index) {
                         this.layerIndexOfDeck.b = -1
-                        this.$children[index].$emit('deck-position:set', 'n')
+                        this.$children[index].$emit('deck:position-set', 'n')
                     }
                     if (decks[deck] !== -1) {
-                        this.$children[decks[deck]].$emit('deck-position:set', 'n')
+                        this.$children[decks[deck]].$emit('deck:position-set', 'n')
                     }
                     this.layerIndexOfDeck[deck] = index
-                    this.$children[index].$emit('deck-position:set', deck)
+                    this.$children[index].$emit('deck:position-set', deck)
                 }
+            },
+            'player:id-change': function(index, id) {
+                this.layerIndexOfPlayerId[id] = index
             }
         }
     })
