@@ -11,3 +11,14 @@ const mat4 YUV2RGB = mat4(
     1.1643828125, 2.017234375, 0, -1.081390625,
     0, 0, 0, 1
 );
+
+vec4 OPACITY = vec4(alpha, alpha, alpha, alpha);
+
+void main(void) {
+    gl_FragColor = vec4(
+        texture2D(YTexture, vTextureCoord).x,
+        texture2D(UTexture, vTextureCoord).x,
+        texture2D(VTexture, vTextureCoord).x,
+        1
+    ) * YUV2RGB * OPACITY;
+}
