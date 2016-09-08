@@ -51,7 +51,7 @@ BERKUT.Stack = function () {
             this.updatePlayerId(ipc.sendSync('player-manager:create'))
         },
         events: {
-            'deck-position:set': function (deck) {
+            'deck:position-set': function (deck) {
                 this.deckPosition = deck
             },
             'player:frame-ready': function (address) {
@@ -60,11 +60,11 @@ BERKUT.Stack = function () {
         },
         methods: {
             switchDeck: function (deck) {
-                this.$parent.$emit('deck-position:request', this.index, deck)
+                this.$parent.$emit('deck:position-request', this.index, deck)
             },
             updatePlayerId: function (id) {
                 this._playerId = id
-                this.$parent.$emit('player-id:change', this.index, id)
+                this.$parent.$emit('player:id-change', this.index, id)
             }
         }
     }))
@@ -84,28 +84,28 @@ BERKUT.Stack = function () {
             })
         },
         events: {
-            'deck-position:request': function(index, deck) {
+            'deck:position-request': function(index, deck) {
                 const decks = this.layerIndexOfDeck
                 if (deck === 'n') {
                     if (decks.a === index) { this.layerIndexOfDeck.a = -1 }
                     if (decks.b === index) { this.layerIndexOfDeck.b = -1 }
-                    this.$children[index].$emit('deck-position:set', 'n')
+                    this.$children[index].$emit('deck:position-set', 'n')
                 } else {
                     if (decks.a === index) {
                         this.layerIndexOfDeck.a = -1
-                        this.$children[index].$emit('deck-position:set', 'n')
+                        this.$children[index].$emit('deck:position-set', 'n')
                     } else if (decks.b === index) {
                         this.layerIndexOfDeck.b = -1
-                        this.$children[index].$emit('deck-position:set', 'n')
+                        this.$children[index].$emit('deck:position-set', 'n')
                     }
                     if (decks[deck] !== -1) {
-                        this.$children[decks[deck]].$emit('deck-position:set', 'n')
+                        this.$children[decks[deck]].$emit('deck:position-set', 'n')
                     }
                     this.layerIndexOfDeck[deck] = index
-                    this.$children[index].$emit('deck-position:set', deck)
+                    this.$children[index].$emit('deck:position-set', deck)
                 }
             },
-            'player-id:change': function(index, id) {
+            'player:id-change': function(index, id) {
                 this.layerIndexOfPlayerId[id] = index
             }
         }
