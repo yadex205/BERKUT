@@ -48,7 +48,7 @@ BERKUT.Stack = function () {
         ready: function () {
             this._seekbar = $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
             this._opacitySelector = $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
-            this._playerId = ipc.sendSync('player-manager:create')
+            this.updatePlayerId(ipc.sendSync('player-manager:create'))
         },
         events: {
             'deck-position:set': function (deck) {
@@ -58,6 +58,10 @@ BERKUT.Stack = function () {
         methods: {
             switchDeck: function (deck) {
                 this.$parent.$emit('deck-position:request', this.index, deck)
+            },
+            updatePlayerId: function (id) {
+                this._playerId = id
+                this.$parent.$emit('player-id:change', this.index, id)
             }
         }
     }))
@@ -66,7 +70,8 @@ BERKUT.Stack = function () {
         el: '#stack',
         data: {
             layerSize: 6,
-            layerIndexOfDeck: { a: -1, b: -1 }
+            layerIndexOfDeck: { a: -1, b: -1 },
+            playerIds: {}
         },
         ready: function () {
             ipc.on('player-manager:on-frame-ready', (event, id, address) => {
@@ -94,6 +99,9 @@ BERKUT.Stack = function () {
                     this.layerIndexOfDeck[deck] = index
                     this.$children[index].$emit('deck-position:set', deck)
                 }
+            },
+            'player-id:change': function(index, id) {
+                this.playerIds[index] = id
             }
         }
     })
