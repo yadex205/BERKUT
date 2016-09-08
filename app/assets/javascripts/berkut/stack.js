@@ -55,7 +55,7 @@ BERKUT.Stack = function () {
                 this.deckPosition = deck
             },
             'player:frame-ready': function (address) {
-                console.log(address)
+                // TODO: (yadex205) Draw frame to canvas
             },
         },
         methods: {
