@@ -3,6 +3,8 @@
 BERKUT.Stack = function () {
     'use strict'
 
+    const Renderer = require('../lib/renderer')
+
     const SEEKBAR_OPTIONS = {
         min: 0, max: 1, step: 0.01, value: 0, tooltip: 'hide'
     }
@@ -38,6 +40,7 @@ BERKUT.Stack = function () {
                 _seekbar: null,
                 _opacitySelector: null,
                 _playerId: null,
+                _renderer: null,
                 blendModesSet: BLEND_MODES,
                 speedAdjustModesSet: SPEED_ADJUST_MODES,
                 speedValueMin: { BEAT: 1, RATE: 0, BPM: 1},
@@ -48,7 +51,10 @@ BERKUT.Stack = function () {
         ready: function () {
             this._seekbar = $(this.$els.seekbarFactory).slider(SEEKBAR_OPTIONS)
             this._opacitySelector = $(this.$els.opacitySelectorFactory).slider(OPACITY_SELECTOR_OPTIONS)
+            this._renderer = new Renderer('i420', this.$els.preview)
+            this._renderer.setSize(128, 72)
             this.updatePlayerId(ipc.sendSync('player-manager:create'))
+            console.log(this._playerId)
         },
         events: {
             'deck:position-set': function (deck) {
@@ -77,9 +83,9 @@ BERKUT.Stack = function () {
             layerIndexOfPlayerId: {}
         },
         ready: function () {
-            ipc.on('player-manager:on-frame-ready', (event, id, address) => {
-                const index = this.layerIndexOfPlayerId[id]
-                if (!index) { return }
+            ipc.on('player-manager:on-frame-ready', (event, pid, playerId, address) => {
+                const index = this.layerIndexOfPlayerId[playerId]
+                if (index === undefined || index === null) { return }
                 this.$children[index].$emit('player:frame-ready', address)
             })
         },
