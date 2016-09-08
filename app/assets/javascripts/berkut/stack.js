@@ -53,7 +53,10 @@ BERKUT.Stack = function () {
         events: {
             'deck-position:set': function (deck) {
                 this.deckPosition = deck
-            }
+            },
+            'player:frame-ready': function (address) {
+                console.log(address)
+            },
         },
         methods: {
             switchDeck: function (deck) {
@@ -71,11 +74,13 @@ BERKUT.Stack = function () {
         data: {
             layerSize: 6,
             layerIndexOfDeck: { a: -1, b: -1 },
-            playerIds: {}
+            layerIndexOfPlayerId: {}
         },
         ready: function () {
             ipc.on('player-manager:on-frame-ready', (event, id, address) => {
-
+                const index = this.layerIndexOfPlayerId[id]
+                if (!index) { return }
+                this.$children[index].$emit('player:frame-ready', address)
             })
         },
         events: {
@@ -101,7 +106,7 @@ BERKUT.Stack = function () {
                 }
             },
             'player-id:change': function(index, id) {
-                this.playerIds[index] = id
+                this.layerIndexOfPlayerId[id] = index
             }
         }
     })
