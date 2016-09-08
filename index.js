@@ -18,7 +18,7 @@ const BERKUTCore = function () {
 
 BERKUTCore.prototype = {
     send: function (windowName, channel, ...args) {
-        if (!this.windows[windowName]) { return }
+        if (!this.windows[windowName] || this.windows[windowName].isDestroyed()) { return }
         this.windows[windowName].webContents.send(channel, process.pid,  ...args)
     },
     on: function (channel, callback) {
