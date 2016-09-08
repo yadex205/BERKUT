@@ -19,7 +19,7 @@ const BERKUTCore = function () {
 BERKUTCore.prototype = {
     send: function (windowName, channel, ...args) {
         if (!this.windows[windowName]) { return }
-        this.windows[windowName].webContents.send(channel, ...args)
+        this.windows[windowName].webContents.send(channel, process.pid,  ...args)
     },
     on: function (channel, callback) {
         this.ipc.on(channel, callback)
