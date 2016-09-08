@@ -68,6 +68,11 @@ BERKUT.Stack = function () {
             layerSize: 6,
             layerIndexOfDeck: { a: -1, b: -1 }
         },
+        ready: function () {
+            ipc.on('player-manager:on-frame-ready', (event, id, address) => {
+
+            })
+        },
         events: {
             'deck-position:request': function(index, deck) {
                 const decks = this.layerIndexOfDeck
