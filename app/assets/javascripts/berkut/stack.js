@@ -54,7 +54,6 @@ BERKUT.Stack = function () {
             this._renderer = new Renderer('i420', this.$els.preview)
             this._renderer.setSize(128, 72)
             this.updatePlayerId(ipc.sendSync('player-manager:create'))
-            console.log(this._playerId)
         },
         events: {
             'deck:position-set': function (deck) {
