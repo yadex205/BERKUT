@@ -6,3 +6,6 @@ npm-*.log
 # Project
 /htdocs
 /dist
+
+# built objects
+*.dylib
