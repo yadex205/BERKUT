@@ -1,12 +1,14 @@
-#include <stdio.h>
 #include <unistd.h>
-#include <mach/mach_init.h>
 #include <mach/mach.h>
 
-int read_process_memory
-(int pid, void* vm_address, uint32_t size, vm_offset_t* address) {
+int OpenProcess (int pid) {
   task_t task;
-  uint32_t read_size;
   task_for_pid(current_task(), pid, &task);
-  return vm_read(task, (vm_address_t) vm_address, size, address, &read_size);
+  return task;
+}
+
+int ReadProcessMemory
+(task_t task, vm_address_t address, vm_address_t data, vm_size_t size) {
+  vm_size_t read_size;
+  return vm_read_overwrite(task, address, size, data, &read_size);
 }
