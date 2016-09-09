@@ -16,10 +16,11 @@ const BERKUT = function () {
     window.$ = window.jQuery
     loadModule('bootstrap')
     loadModule('bootstrap-slider')
-    loadModule('vue', 'Vue')
     loadModule('ref', 'ref')
+    loadModule('vue', 'Vue')
 
     window.ipc = window.electron.ipcRenderer
+    window.memreader = require('../lib/memory_reader')
 }
 
 BERKUT.prototype = {
