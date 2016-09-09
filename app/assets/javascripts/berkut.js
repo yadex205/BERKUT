@@ -17,6 +17,7 @@ const BERKUT = function () {
     loadModule('bootstrap')
     loadModule('bootstrap-slider')
     loadModule('vue', 'Vue')
+    loadModule('ref', 'ref')
 
     window.ipc = window.electron.ipcRenderer
 }
